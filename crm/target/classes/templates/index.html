@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cotodel Login</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-color: #f4f4f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .form-control {
+      margin-bottom: 20px;
+    }
+    .btn-primary {
+      width: 100%;
+    }
+	
+	.carousel-line-indicators {
+	  display: flex;
+	  gap: 12px;
+	  justify-content: flex-start;
+	}
+
+	.carousel-line-indicators .line {
+	  width: 40px;
+	  height: 2px;
+	  background-color: #ffffff;
+	  opacity: 0.8;
+	  border-radius: 2px;
+	  margin-bottom: 10px;
+	}
+
+	.carousel-line-indicators .line.active {
+	  background-color: #2F945A;
+	  opacity: 1;
+	}
+
+  </style>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const carousel = document.getElementById('imageCarousel');
+    if (!carousel) return; // optional: fail safe
+
+    const indicators = document.querySelectorAll('.carousel-line-indicators .line');
+
+    indicators.forEach((line, index) => {
+      line.addEventListener('click', () => {
+        $('#imageCarousel').carousel(index);
+      });
+    });
+
+    carousel.addEventListener('slid.bs.carousel', () => {
+      const activeIndex = [...carousel.querySelectorAll('.carousel-item')]
+        .findIndex(item => item.classList.contains('active'));
+
+      document.querySelectorAll('.carousel-line-indicators').forEach(group => {
+        group.querySelectorAll('.line').forEach((line, idx) => {
+          line.classList.toggle('active', idx === activeIndex);
+        });
+      });
+    });
+  });
+  </script>
+<style>     .carousel-line-indicators {
+    display: flex;
+    gap: 8px;
+  }
+
+  .carousel-line-indicators .line {
+    height: 2px;
+    width: 20px;
+    background-color: #ccc;
+    border-radius: 2px;
+    transition: width 0.3s ease, background-color 0.3s ease;
+  }
+
+  .carousel-line-indicators .line.active {
+    width: 30px; /* horizontally bigger */
+    background-color: #2F945A;
+  }
+</style>
+
+</head>
+<body>
+  <div class="main-container">
+	<div class="logo-container">
+			  <img src="img/Cotodel Logo.svg" alt="Cotodel Logo" class="logo-img" />
+			</div>
+			<div class="image-section position-relative">
+			  <div id="imageCarousel" class="carousel slide h-100" data-ride="carousel">
+			    <div class="carousel-inner h-100">
+			      <div class="carousel-item active h-100" data-index="0">
+			        <img src="/img/Image 1_SignIn.webp" class="d-block w-100 h-100" alt="Slide 1" style="object-fit: cover;">
+			        <div class="carousel-caption d-none d-md-block text-left">
+			          <div class="carousel-line-indicators mb-2">
+			            <div class="line active" data-slide-to="0"></div>
+			            <div class="line" data-slide-to="1"></div>
+			          </div>
+			          <h3 style="font-weight: 700;"><span style="color: #2F945A;">Business expenses</span> made seamless like your <span style="color: #2F945A;">personal UPI spends</span></h3>
+			        </div>
+			      </div>
+
+			      <div class="carousel-item h-100" data-index="1">
+			        <img src="/img/corporate_women_login.webp" class="d-block w-100 h-100" alt="Slide 2" style="object-fit: cover;">
+			        <div class="carousel-caption d-none d-md-block text-left">
+			          <div class="carousel-line-indicators mb-2">
+			            <div class="line" data-slide-to="0"></div>
+			            <div class="line active" data-slide-to="1"></div>
+			          </div>
+			          <h3 style="font-weight: 700;"><span style="color: #2F945A;">Business expenses</span> made seamless like your <span style="color: #2F945A;">personal UPI spends</span></h3>
+			        </div>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+
+	
+	<div class="login-section">
+	
+	  <div class="login-body">
+		<form autocomplete="off" id="loginForm" name="loginForm">
+	    <h4 class="login-title">Get started with your phone number</h4>
+
+	    <div class="phone-input-container">
+	      <div class="phone-prefix">
+	        <img src="https://flagcdn.com/w40/in.png" alt="IN" class="flag-icon" />
+	        <span>+91</span>
+	      </div>
+		  <input class="form-control phone-input" placeholder="Enter Your Mobile No." type="text" id="mobile" name="mobile"
+        autocomplete="off" maxlength="10" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+	    </div>
+		<div class="error-msg" id="mobError" ></div>
+		<div  class="error-msg" id="errorOtp" ></div>	
+		
+
+	    <p class="helper-text">We will send an OTP on the mobile number entered.</p>
+		
+
+		<!-- Inside .login-section -->
+		<div class="login-body" id="login-body">
+		  <!-- Your phone input and login UI -->
+		  <!-- Replace LOGIN button -->
+		  <button class="btn login-btn" onclick="getOTP();"  id="optBtn" type="button" disabled >Send OTP</button>
+		</div>
+
+		<!-- OTP Form -->
+		<div id="otp-section" style="display:none;">
+		  <h4 class="login-title">Enter OTP</h4>
+		  <!--<p class="helper-text">OTP code has been sent to your phone <strong>xx405</strong></p>-->
+		  <span id="maskedMobileDisplay"></span>
+
+		  <div id="otpInputBox" >
+		  <div class="d-flex justify-content-between mb-3 " style="margin-top: 15px;">
+		    <input type="password" class="form-control text-center otp-input" maxlength="1" autocomplete="off" 
+			id="password1" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\.*)\./g, '$1');"name="password1">
+		    <input type="password" class="form-control text-center otp-input" maxlength="1" autocomplete="off"  
+			id="password2" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\.*)\./g, '$1');"name="password2">
+		    <input type="password" class="form-control text-center otp-input" maxlength="1" autocomplete="off"
+			id="password3" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\.*)\./g, '$1');"name="password3">
+		    <input type="password" class="form-control text-center otp-input" maxlength="1" autocomplete="off" 
+			id="password4" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\.*)\./g, '$1');"name="password4">
+		    <input type="password" class="form-control text-center otp-input" maxlength="1" autocomplete="off" 
+			id="password5" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\.*)\./g, '$1');"name="password5">
+		    <input type="password" class="form-control text-center otp-input" maxlength="1" autocomplete="off"  
+			id="password6" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\.*)\./g, '$1');"name="password6">
+			<input  class="form-control form-control-sm test" type="hidden" id="orderId" name="orderId" >
+																	
+			<div>
+																		
+			<input type="hidden" id="errorMessage" th:value="${message}" ></input>
+			<input type="hidden" id="mo" th:value="${mobile}" ></input>
+			<input type="hidden" id="orderid" th:value="${orderid}" ></input>
+				
+		   </div>		
+		   <span id="toggleOtpVisibility" onclick="toggleOtpVisibility()" class="eye-icon" role="button" aria-label="Toggle OTP visibility" tabindex="0">
+		      <i class="fas fa-eye"></i>
+		    </span>
+		      </div>
+		  </div>
+		  <div  class="error-msg" id="otpError" style="margin-top: -15px; margin-bottom: 20px;"></div>	
+   			
+		  <p id="otpCountdownText">
+		    You can resend the OTP after: 
+		    <span id="countdown" style="color: green;"></span> seconds
+		  </p>
+		  
+		  <p class="text-muted" id="resendOTPText" style="display: none; ">Didn’t receive the code? <a href="#" onclick="resendOTP()">Resend OTP</a></p>
+		  <!--<button class="btn login-btn">LOGIN</button>-->
+		  <button type="button"  style="display:none" onclick="submitAction()" id="verifyotpdiv" class="btn login-btn" disabled>LOGIN</button>
+		</div>
+		
+	    <div class="or-divider">
+		<!--	<span>or login with</span>-->
+		</div>
+
+	    <div class="social-buttons">
+		      <!--<button class="btn social-btn"><img src="https://img.icons8.com/color/24/google-logo.png" alt="Google" />
+				 Google</button>
+		      <button class="btn social-btn"><img src="img/repute-logo.png" alt="Repute" /> Repute</button>-->
+	    </div>
+	  </div>
+	</form>
+
+	  <hr class="footer-divider" />
+	<!--  <div class="login-footer">
+	    New to Cotodel? <a href="#">Register for Demo</a>
+	  </div>-->
+	  <div class="lds-spinner" id="loginLoader" style="display:none"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+
+	</div>
+  </div>
+ 
+  <link rel="stylesheet" href="css/custom.css">
+  <!-- Bootstrap core JavaScript-->
+      <script src="vendor/jquery/jquery.min.js"></script>
+      <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+      <!-- Core plugin JavaScript-->
+     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+      <!-- Custom scripts for all pages-->
+      <script src="js/sb-admin-2.min.js"></script>
+ 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script type="text/javascript" src="cotodel-js/mobileotp.js"></script>
+  
+  <script>
+    $('#imageCarousel').carousel({
+      interval: 10000, // 10 seconds per slide
+      ride: 'carousel'
+    });
+  </script>
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const mobileInput = document.getElementById("mobile");
+    const optBtn = document.getElementById("optBtn");
+
+    mobileInput.addEventListener("input", function () {
+      const isValid = /^[6-9]\d{9}$/.test(mobileInput.value);
+      optBtn.disabled = !isValid;
+    });
+  });
+  </script>
+  <script>
+	/* when user finishes entering otp then only enable login button*/
+	document.querySelectorAll('.otp-input').forEach(input => {
+	   input.addEventListener('input', checkOtpFilled);
+	 });
+
+	 function checkOtpFilled() {
+	   const inputs = document.querySelectorAll('.otp-input');
+	   const allFilled = Array.from(inputs).every(input => input.value.trim().length === 1);
+
+	   const verifyBtn = document.getElementById('verifyotpdiv');
+	   verifyBtn.disabled = !allFilled;
+	 }
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const otpInputs = document.querySelectorAll(".otp-input");
+   
+      otpInputs.forEach((input, index) => {
+        input.addEventListener("input", function () {
+          if (this.value.length === 1) {
+            const next = otpInputs[index + 1];
+            if (next) next.focus();
+          }
+        });
+   
+        input.addEventListener("keydown", function (e) {
+          if (e.key === "Backspace" && this.value === "") {
+            const prev = otpInputs[index - 1];
+            if (prev) prev.focus();
+          }
+        });
+      });
+    });
+    </script>
+	<script>	$( document ).ready(function() {
+
+		var error = document.getElementById("errorMessage").value;
+		var mo = document.getElementById("mo").value;
+		
+		var orderid = document.getElementById("orderid").value;
+		var maskedMobile = "XXXXXX" + mo.toString().slice(-4);
+		
+
+		
+		if(error==="Invalid Request !!"){
+	    document.getElementById("loginIdDiv").style.display="none";
+	    document.getElementById("optBtn").style.display="block";
+	    }
+		
+		else if(error==="Incorrect OTP ||"){
+			//hide otp button and helper text above it 
+			$("#optBtn").hide();
+			$(".helper-text").hide();
+			//show the otp section
+			$("#otp-section").show();
+			// apply the border in custom colour to 
+			$(".otp-input").addClass("error");
+			//show the otp msg
+			 $("#otpError").text("Invalid OTP. Please try again.");
+			  document.getElementById("maskedMobileDisplay").innerHTML = `OTP code has been sent to your phone ${maskedMobile}`;
+			//  $("#orderId").val(orderid);
+			        $("#verifyotpdiv").show();
+			  var expiryTime = localStorage.getItem("otpExpiryTime");
+			  var downloadTimer = setInterval(function () {
+			          var currentTime = Date.now();
+			          var timeleft = Math.floor((expiryTime - currentTime) / 1000);
+
+			          if (timeleft <= 0) {
+			              clearInterval(downloadTimer);
+						  document.getElementById("otpCountdownText").style.display = "none";
+			              localStorage.removeItem("otpExpiryTime");
+			              document.getElementById("countdown").innerHTML = " ";
+			              document.getElementById("resendOTPText").style.display = "block";
+			              document.getElementById("optBtn").disabled = false;
+			              document.getElementById("verifyotpdiv").style.display = "none";
+			          } else {
+			              var minutes = Math.floor(timeleft / 60);
+			              var seconds = timeleft % 60;
+			              document.getElementById("countdown").innerHTML =
+			                  (minutes < 10 ? "0" + minutes : minutes) + ":" +
+			                  (seconds < 10 ? "0" + seconds : seconds);
+			          }
+			      }, 1000);
+			  document.getElementById("mobile").value=mo;
+			  document.getElementById("orderId").value=orderid;
+			  document.getElementById("loginIdDiv").style.display="block";
+			  document.getElementById("optBtn").style.display = "none";
+			  document.getElementById("verifyotpdiv").style.display = "block";
+			 
+			 // window.location.href="/login";
+		}
+		else if(error==="No Role assigned to User. Please contact to Organisation Admin !!"){
+			document.getElementById("loginIdDiv").style.display="none";
+		    document.getElementById("optBtn").style.display="block";
+		}else{
+			
+		}
+		//clear otp boxes
+		//$(".otp-input").val('');
+	});</script>
+   <script>	function getOTP() {
+	//clear otp boxes
+	//$(".otp-input").val('');
+
+		console.log("get otp called");
+	    var regMobile = /^[6-9]\d{9}$/gi;
+	    var userName = document.getElementById("mobile").value;
+
+	    if (userName == "") {
+	        document.getElementById("mobile").focus();
+	        document.getElementById("mobError").innerHTML = "Please Enter Mobile Number";
+	        return false;
+	    } else if (userName.length < 10) {
+	        document.getElementById("mobError").innerHTML = "Please Enter Valid Mobile Number";
+	        document.getElementById("mob").focus();
+	        return false;
+	    } else if (!userName.match(regMobile)) {
+	        document.getElementById("mobError").innerHTML = "Please Enter Valid Mobile Number";
+	        document.getElementById("mob").focus();
+	        return false;
+	    }
+
+	    document.getElementById("optBtn").disabled = true;
+	    document.getElementById("mobError").innerHTML = "";
+	    document.getElementById("loginLoader").style.display = "flex";
+		
+	 
+	    $.ajax({
+	        type: "POST",
+	        url: "/smsOtpSender",
+	        dataType: 'json',
+	        data: { "mobile": userName },
+	        success: function (data) {
+	            var obj = data;
+	            document.getElementById("loginLoader").style.display = "none";
+
+	            if (obj.status === true) {
+					document.getElementById('login-body').style.display = 'none';
+				    document.getElementById('otp-section').style.display = 'block';
+
+				    document.querySelector('.or-divider').style.display = 'none';
+				    document.querySelector('.social-buttons').style.display = 'none';
+				    
+				    
+					document.querySelector('.helper-text').style.display = 'none';
+									
+					// Mask the mobile number (show only last 4 digits)
+					var maskedMobile = "XXXXXX" + userName.toString().slice(-4);
+					document.getElementById("maskedMobileDisplay").innerHTML = `OTP code has been sent to your phone ${maskedMobile}`;
+
+	                $('#errorOtp').hide('slow');
+	                $('#loginIdDiv').hide('slow');
+					document.getElementById("verifyotpdiv").style.display = "block";
+					var timeleft = 60; // 3 minutes in seconds
+					   var downloadTimer = setInterval(function () {
+					       var minutes = Math.floor(timeleft / 60); // Calculate minutes
+					       var seconds = timeleft % 60; // Calculate remaining seconds
+
+					       // Update countdown display in "MM:SS" format
+					       document.getElementById("countdown").innerHTML = 
+					           (minutes < 10 ? "0" + minutes : minutes) + ":" + 
+					           (seconds < 10 ? "0" + seconds : seconds);
+
+					       timeleft -= 1;
+						   localStorage.setItem("otpExpiryTime", Date.now() + seconds * 1000);   
+						   document.getElementById("optBtn").style.display = "none";
+						   document.getElementById("orderId").value = obj['orderId'];
+						   
+						   
+					       if (timeleft < 0) {
+							clearInterval(downloadTimer);
+							document.getElementById("otpCountdownText").style.display = "none";
+	                        document.getElementById("countdown").innerHTML = " ";
+							document.getElementById("resendOTPText").style.display = "block";
+	                     
+	                        document.getElementById("optBtn").disabled = true;
+							document.getElementById("optBtn").style.display = "none";
+	                        document.getElementById("verifyotpdiv").style.display = "none";
+							
+					       }
+					   }, 1000); 
+
+	                $('#loginIdDiv').show('slow');
+	            } else if (obj.status===false) {
+	                $('#errorOtp').html(obj.message);
+	                $('#successmessage').hide('slow');
+	                document.getElementById("optBtn").style.display = "block";
+	                document.getElementById("optBtn").disabled = false;
+	                $('#successerror').hide('slow');
+	            } else {
+	                $('#errorOtp').html("OTP Failed");
+	                document.getElementById("optBtn").disabled = false;
+	                $('#successmessage').hide('slow');
+	                document.getElementById("optBtn").style.display = "block";
+	                $('#successerror').hide('slow');
+	            }
+	        },
+	        error: function (e) {
+	            alert('Error: ' + e);
+	        }
+	    });
+	}</script>
+	
+<script>	function resendOTP() {
+		
+	    console.log("resend otp clicked");
+		document.getElementById("password1").value = "";
+		document.getElementById("password2").value = "";
+		document.getElementById("password3").value = "";
+		document.getElementById("password4").value = "";
+		document.getElementById("password5").value = "";
+		document.getElementById("password6").value = "";
+	    var regMobile = /^[6-9]\d{9}$/gi;
+	    var userName = document.getElementById("mobile").value;
+	    var orderId = document.getElementById("orderId").value;
+
+	    if (userName == "") {
+	        document.getElementById("mobile").focus();
+	        document.getElementById("mobError").innerHTML = "Please Enter Mobile Number";
+	        return false;
+	    } else if (userName.length < 10) {
+	        document.getElementById("mobError").innerHTML = "Please Enter Valid Mobile Number";
+	        document.getElementById("mobile").focus();
+	        return false;
+	    } else if (!userName.match(regMobile)) {
+	        document.getElementById("mobError").innerHTML = "Please Enter Valid Mobile Number";
+	        document.getElementById("mob").focus();
+	        return false;
+	    }
+
+	    document.getElementById("optBtn").disabled = true;
+	    document.getElementById("mobError").innerHTML = "";
+	    document.getElementById("resendOTPText").style.display = "none"; // Hide Resend OTP link
+	    document.getElementById("loginLoader").style.display = "flex";
+		document.getElementById("verifyotpdiv").style.display = "block";
+		document.getElementById("otpCountdownText").style.display = "block";
+
+	    $.ajax({
+	        type: "POST",
+	        url: "/smsOtpResender",
+	        dataType: 'json',
+	        data: { "mobile": userName, "orderId": orderId },
+	        success: function (data) {
+	            var obj = data;
+	            document.getElementById("loginLoader").style.display = "none";
+
+	            if (obj['status'] == true) {
+					
+					var maskedMobile = "XXXXXX" + userName.toString().slice(-4);
+					document.getElementById("maskedMobileDisplay").innerHTML = `Enter the OTP send to ${maskedMobile}`;
+	                $('#errorOtp').hide('slow');
+	               // document.getElementById("countdown").innerHTML = "00:60"; // Reset countdown
+	               // startCountdown(); // Restart the countdown logic
+				   var timeleft = 60; // 3 minutes in seconds
+				   var downloadTimer = setInterval(function () {
+				       var minutes = Math.floor(timeleft / 60); // Calculate minutes
+				       var seconds = timeleft % 60; // Calculate remaining seconds
+
+				       // Update countdown display in "MM:SS" format
+				       document.getElementById("countdown").innerHTML = 
+				           (minutes < 10 ? "0" + minutes : minutes) + ":" + 
+				           (seconds < 10 ? "0" + seconds : seconds);
+
+				       timeleft -= 1;
+					   localStorage.setItem("otpExpiryTime", Date.now() + seconds * 1000);   
+					   document.getElementById("optBtn").style.display = "none";
+					   document.getElementById("orderId").value = obj['orderId'];
+					   document.getElementById("verifyotpdiv").style.display = "block";
+
+				       if (timeleft < 0) {
+						clearInterval(downloadTimer);
+						document.getElementById("otpCountdownText").style.display = "none";
+	                       document.getElementById("countdown").innerHTML = " ";
+						document.getElementById("resendOTPText").style.display = "block";
+	                    
+	                       document.getElementById("optBtn").disabled = true;
+						document.getElementById("optBtn").style.display = "none";
+	                       document.getElementById("verifyotpdiv").style.display = "none";
+				       }
+				   }, 1000); 
+
+	            } else {
+	                $('#errorOtp').html(obj['msg']);
+	                document.getElementById("resendOTPText").style.display = "block";
+	                document.getElementById("optBtn").disabled = true;
+					document.getElementById("verifyotpdiv").style.display = "none";
+					document.getElementById("otpCountdownText").style.display = "none";
+	            }
+	        },
+	        error: function (e) {
+	            alert('Error: ' + e);
+	        }
+	    });
+	}</script>
+  <script>
+  				  function showOtpForm() {
+					
+  				    document.getElementById('login-body').style.display = 'none';
+  				    document.getElementById('otp-section').style.display = 'block';
+
+  				    document.querySelector('.or-divider').style.display = 'none';
+  				    document.querySelector('.social-buttons').style.display = 'none';
+  				    
+  				    
+  					document.querySelector('.helper-text').style.display = 'none';
+					
+					
+  				  }
+  				</script>
+				<script>				function toggleOtpVisibility() {
+				    const toggleIcon = document.getElementById('toggleOtpVisibility').querySelector('i');
+				    const otpInputs = document.querySelectorAll('#otpInputBox input.otp-input');
+
+				    const isPasswordVisible = toggleIcon.classList.contains("fa-eye");
+
+				    otpInputs.forEach(input => {
+				        input.type = isPasswordVisible ? "text" : "password";
+				    });
+
+				    toggleIcon.classList.toggle("fa-eye");
+				    toggleIcon.classList.toggle("fa-eye-slash");
+				}
+</script>
+</body>
+</html>
