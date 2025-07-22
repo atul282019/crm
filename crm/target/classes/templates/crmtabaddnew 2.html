@@ -89,203 +89,25 @@
                 <!-- End of Topbar -->
 
                  <!-- Begin Page Content -->
-				 <div class="upi-voucher-wrap">
-				   <div>
-				     <div>
-				       <!-- Flex container for nav, search, and button -->
-				       <div class="d-flex justify-content-between align-items-center flex-wrap ">
+                	<div class="upi-voucher-wrap">
+									
 
-				         <!-- Nav tabs -->
-						 <ul class="nav nav-underline" id="dashboardTabs" role="tablist">
-						   <li class="nav-item">
-						     <a class="nav-link active" data-toggle="tab" href="#useronboarding" role="tab">User Onboarding</a>
-						   </li>
-						   <li class="nav-item">
-						     <a class="nav-link" data-toggle="tab" href="#assignedclients" role="tab">Assigned Clients</a>
-						   </li>
-						   <!-- Hidden tab link for Add New -->
-						   <li class="nav-item d-none">
-						     <a class="nav-link" id="addNewTab" data-toggle="tab" href="#addNew" role="tab">Add New</a>
-						   </li>
-						 </ul>
-
-				         <!-- Search box (centered by flex space-between) -->
-						 <div style="width: 250px; height: 44px; border-radius: 10px; padding: 10px; border: 1px solid #EDEDF0;" 
-						         class="d-flex align-items-center ms-2">
-						      <img src="img/search.svg" alt="Search" style="margin-right: 6px;">
-						      <input type="text" id="searchInput" placeholder="Search..." 
-						             style="border: none; outline: none; width: 100%;">
-						    </div>
-
-
-				         <!-- Add New button -->
-						 <button class="btn btn-custom" onclick="window.location.href='crmtabaddnew'">
-						   <i class="bi bi-plus-lg"></i> Add New +
-						 </button>
-
-
-
-				       </div>
-				     </div>
-				   </div>
-				 </div>
-
-										   
+                                    <div >
+										<div >
+											
+										   <ul class="nav nav-underline" id="dashboardTabs" role="tablist">
+									 <li class="nav-item">
+	 									       <a class="nav-link active" data-toggle="tab" href="#addNew" role="tab">Add New</a>
+	 									     </li>
+											
+										   </ul>
+										  
 										   <hr class="mt-0">
 
 										   <div class="tab-content mt-3">
-											<!--useronboarding tab-->
-											<div class="tab-pane fade show active" id="useronboarding" role="tabpanel">
-											<div class="table-responsive" >
-											   <table class="table table-reimbursements mb-0" id="vouchersTableList" style="border: 1px solid #EAF4EF; border-radius: 10px;font-size: 13px;">
-												<thead>
-	                                                <tr>	
-	                                               		
-	                                                    <th onclick="sortTable(1)">Client <img src="img/Sorting-updown.svg" alt="sorting"></th>
-	                                                    <th onclick="sortTable(2)">Contact Name</th>
-														<th onclick="sortTable(3)">Contact Number </th>
-	                                                    <th onclick="sortTable(4)">Solution </th>
-														<th onclick="sortTable(5)">Status </th>
-														<th onclick="sortTable(6)">Last Action<img src="img/Sorting-updown.svg" alt="sorting"> </th>
-														<th onclick="sortTable(7)">Follow-Up Date<img src="img/Sorting-updown.svg" alt="sorting"> </th>
-														<th onclick="sortTable(8)">Lead Type </th>
-														<th onclick="sortTable(9)">Assigned To </th>
-														<th onclick="sortTable(10)" ></th>
-	                                                   
-	                                                </tr>
-	                                            </thead>
-												<tbody class="table-bordered">
-									               <tr>
-													<td>
-													  <a href="/companyprofile" class="client-link">Cotodel</a>
-													</td>
-
-
-													 <td> Vidit</td>
-													 <td> +91XXXXXXXXXX</td>
-													 <td>Fleet<br>0-50</td>
-													 <td>Demo Scheduled</td>
-													 <td class="text-left">12/7/2025</td>
-													 <td class="text-left">18/07/2025</td>
-													 <td>Hot</td>
-													 <td>Vidit</td>
-													 <td class="text-center">
-	  												 <button class="btn p-0" type="button" data-toggle="canvas" data-target="#bs-canvas-right" aria-expanded="true" aria-controls="bs-canvas-right" onclick="viewData(this)" title="Profile"><i class="fas fa-ellipsis-v fa-sm"></i></button>
-	  												 </td>	
-												     </tr>
-													 
-													  <tr>
-														<td>
-														  <a href="companyprofile.html" class="client-link" target="_blank">Infosys</a>
-														</td>
-
-	 												 <td>Rahul</td>
-	 												 <td>+91XXXXXXXXXX </td>
-	 												 <td>Corporate<br>50-100</td>
-													 <td>Demo Completed</td>
-	 												 <td class="text-left">11/7/2025</td>
-	 												 <td class="text-left">25/07/2025</td>
-													 <td>Medium</td>
-													 <td>Aviral </td>
-	 												 <td class="text-center">
-	 												 <button class="btn p-0" type="button" data-toggle="canvas" data-target="#bs-canvas-right" aria-expanded="true" aria-controls="bs-canvas-right" onclick="viewData(this)" title="Profile"><i class="fas fa-ellipsis-v fa-sm"></i></button>
-	 												 </td>			
-                                              </tr>
-											  
-											  <tr>
-														<td>
-														  <a href="companyprofile.html" class="client-link" target="_blank">XYZ Pvt ltd</a>
-														</td>
-		
-													 <td>Mehul</td>
-													 <td>+91XXXXXXXXXX </td>
-													 <td>Corporate<br>50-100</td>
-													 <td>Demo Completed</td>
-													 <td class="text-left">11/7/2025</td>
-													 <td class="text-left">30/07/2025</td>
-													 <td>Cold</td>
-													 <td>Vidit </td>
-													 <td class="text-center">
-													 <button class="btn p-0" type="button" data-toggle="canvas" data-target="#bs-canvas-right" aria-expanded="true" aria-controls="bs-canvas-right" onclick="viewData(this)" title="Profile"><i class="fas fa-ellipsis-v fa-sm"></i></button>
-													 </td>			
-		                                        </tr>
-                                                   
-                                                </tbody>
-											   </table>
-											 </div>
-
-
-											 
-											</div>
-
-											 
-											<!-- assignedclients tab-->
-										     <div class="tab-pane fade" id="assignedclients" role="tabpanel">
-												<div class="table-responsive" >
-											   <table class="table table-reimbursements mb-0" id="vouchersTableList" style="border: 1px solid #EAF4EF; border-radius: 10px;font-size: 13px;">
-												<thead>
-	                                                <tr>	
-	                                               		
-	                                                    <th onclick="sortTable(1)">Client Name </th>
-	                                                    <th onclick="sortTable(2)">Contact Name </th>
-														<th onclick="sortTable(3)">Contact Number </th>
-	                                                    <th onclick="sortTable(4)">Solution </th>
-														<th onclick="sortTable(5)">Assigned To </th>
-														<th onclick="sortTable(6)" ></th>
-	                                                </tr>
-	                                            </thead>
-												<tbody class="table-bordered">
-									               <tr>
-													<td>
-													  <a href="/companyprofile" class="client-link">Cotodel</a>
-													</td>
-
-
-													<td> Vidit</td>
-													 <td> +91XXXXXXXXXX</td>
-													 <td>Fleet<br>0-50</td>
-													 <td class="text-left">Vidit</td>
-													 <td class="text-center">
-		  												<button class="btn p-0" type="button" data-toggle="canvas" data-target="#bs-canvas-right" aria-expanded="true" aria-controls="bs-canvas-right" onclick="viewData(this)" title="Profile"><i class="fas fa-ellipsis-v fa-sm"></i></button>
-		  												 </td> 	
-													 	
-												     </tr>
-													 
-													  <tr>
-														<td>
-														  <a href="companyprofile.html" class="client-link" target="_blank">Infosys</a>
-														</td>
-
-														<td>Rahul</td>
-		 												 <td>+91XXXXXXXXXX </td>
-		 												 <td>Corporate<br>50-100</td>
-	 												 <td class="text-left">Aviral</td>
-	 												 <td class="text-center">
-	 												 <button class="btn p-0" type="button" data-toggle="canvas" data-target="#bs-canvas-right" aria-expanded="true" aria-controls="bs-canvas-right" onclick="viewData(this)" title="Profile"><i class="fas fa-ellipsis-v fa-sm"></i></button>
-	 												 </td>			
-													 </tr>
-													 
-													 <tr>
- 														<td>
- 														  <a href="companyprofile.html" class="client-link" target="_blank">XYZ Pvt Ltd</a>
- 														</td>
-
- 														<td>Mehul</td>
- 		 												 <td>+91XXXXXXXXXX </td>
- 		 												 <td>Corporate<br>50-100</td>
- 	 												 <td class="text-left">Vidit</td>
- 	 												 <td class="text-center">
- 	 												 <button class="btn p-0" type="button" data-toggle="canvas" data-target="#bs-canvas-right" aria-expanded="true" aria-controls="bs-canvas-right" onclick="viewData(this)" title="Profile"><i class="fas fa-ellipsis-v fa-sm"></i></button>
- 	 												 </td>			
- 													 </tr>
-                                                   
-                                                </tbody>
-											   </table>
-											 </div>
-										
-										     </div>
+											
 											 <!-- addNew tab-->
-									     <div class="tab-pane fade" id="addNew" role="tabpanel">
+											 <div class="tab-pane fade show active" id="addNew" role="tabpanel">
 											<div class="table-responsive" >
 												<table class="table table-reimbursements selectvouchers-table" id="sourceTable">
 									            <thead>
@@ -401,117 +223,7 @@
         <!-- End of Content Wrapper -->
 
     </div>
-    <!-- End of Page Wrapper -->
-
-	<div id="bs-canvas-right" class="bs-canvas bs-canvas-right position-fixed bg-white h-100 p-3" >
-  <!-- Close Button -->
-		  <button type="button" class="bs-canvas-close float-right btn-close" aria-label="Close" style="font-size: 24px;">&times;</button>
-		
-		  <!-- Company Info -->
-		  <div class="company-info-box mt-4">
-		    <h5 class="fw-bold">Company Name</h5>
-		    <div class="text-muted mt-3" style="font-size: 14px;">
-		      <div><strong>Contact Name</strong> Arsalan</div>
-		      <div><strong>Phone</strong> +91 98122882752</div>
-		      <div><strong>Email</strong> Arsalan@example.com</div>
-		    </div>
-		  </div>
-		
-		  <!-- Assign Dropdown -->
-		  <div class="form-group mt-4">
-		    <select class="form-control">
-		      <option selected disabled>Assigned To</option>
-		      <option>Vidit</option>
-		      <option>Arsalan</option>
-		      <option>Neha</option>
-		    </select>
-		  </div>
-		
-		  <!-- Action History -->
-		  <h6 class="mt-4 fw-bold">Action History</h6>
-		  <div class="d-flex gap-2 mb-2">
-		    <select class="form-control w-50">
-		      <option selected disabled>Select Status</option>
-		      <option>Demo Booked</option>
-		      <option>Demo Completed</option>
-		    </select>
-		    <input type="date" class="form-control w-50" />
-		  </div>
-		 
-		  <!-- Remark History -->
-		  	  
-		  	  <div class="d-flex gap-2 mb-2">
-		  	    <input class="form-control w-50" placeholder="Contact Person">
-		  	    <input class="form-control w-50" placeholder="Department">
-		  	  </div>
-		  	  <textarea class="form-control mb-3" placeholder="Enter Remarks"></textarea>
-		  <button class="btn w-100" style="background-color: #3979FF; color: white;">SUBMIT</button>
-		
-		  <!-- Action Cards -->
-		  <div class="history-card bg-light p-3 mt-3 rounded">
-		    <div class="d-flex justify-content-between">
-		      <div>
-		        <div class="small text-muted">Date</div>
-		        <div class="mb-2">25/10/2024</div>
-		      </div>
-		      <div class="text-end">
-		        <div class="small text-muted">Status</div>
-		        <div class="mb-2">Demo Scheduled</div>
-		      </div>
-		    </div>
-		    <div class="small text-muted">Remarks</div>
-		    <div class="mb-1">Good Project</div>
-		  </div>
-		
-		  <div class="history-card bg-light p-3 mt-3 rounded">
-		    <div class="d-flex justify-content-between">
-		      <div>
-		        <div class="small text-muted">Date</div>
-		        <div class="mb-2">25/10/2024</div>
-		      </div>
-		      <div class="text-end">
-		        <div class="small text-muted">Status</div>
-		        <div class="mb-2">Demo Scheduled</div>
-		      </div>
-		    </div>
-		    <div class="small text-muted">Remarks</div>
-		    <div class="mb-1">Good Project</div>
-		  </div>
-		
-		 
-		  <!--<button class="btn w-100" style="background-color: #3979FF; color: white;">SUBMIT</button>-->
-		
-		  <!-- Remarks Cards -->
-		  <div class="history-card bg-light p-3 mt-3 rounded">
-		    <div class="row mb-1">
-		      <div class="col-3 text-muted small">Date</div>
-		      <div class="col-6 text-muted small text-center">Contact Person</div>
-		      <div class="col-3 text-muted small text-end">Dept</div>
-		    </div>
-		    <div class="row mb-2">
-		      <div class="col-3">25/10/2024</div>
-		      <div class="col-6 text-center">Ramesh Kumar</div>
-		      <div class="col-3 text-end">IT</div>
-		    </div>
-		    <div class="small text-muted">Remarks</div>
-		    <div>Good Conversation</div>
-		  </div>
-		
-		  <div class="history-card bg-light p-3 mt-3 rounded">
-		      <div class="row mb-1">
-		        <div class="col-3 text-muted small">Date</div>
-		        <div class="col-6 text-muted small text-center">Contact Person</div>
-		        <div class="col-3 text-muted small text-end">Dept</div>
-		      </div>
-		      <div class="row mb-2">
-		        <div class="col-3">25/10/2024</div>
-		        <div class="col-6 text-center">Ramesh Kumar</div>
-		        <div class="col-3 text-end">IT</div>
-		      </div>
-		      <div class="small text-muted">Remarks</div>
-		      <div>Good Conversation</div>
-    </div>
-</div>
+    
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
@@ -675,8 +387,6 @@
 			                    bsOverlay.addClass('show');
 			                return false;
 			            });
-						
-						
 			            
 			            $('.bs-canvas-close, .bs-canvas-overlay').on('click', function(){
 			                var elm;
@@ -753,7 +463,6 @@
 		            });
 		        });
 		 }
-		 
 		</script>
 		
 		
@@ -761,12 +470,6 @@
 
 
     <style>
-		.d-flex.gap-2 > * {
-				  margin-right: 8px;
-				}
-				.d-flex.gap-2 > *:last-child {
-				  margin-right: 0;
-				}
 		#employeeTable td:nth-child(5),
 		   #employeeTable td:nth-child(6) {
 		       text-align: center;

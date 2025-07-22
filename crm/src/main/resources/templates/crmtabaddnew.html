@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	
+ <th:block th:include="fragments/headerlibs.html :: headerlibs"></th:block> 
+
+<body id="page-top">
+
+    <div class="bs-canvas-overlay bg-dark position-fixed w-100 h-100"></div>
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div th:insert="fragments/sidenav.html :: sidevav"></div>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                
+
+				<nav class="navbar navbar-expand navbar-light bg-white topbar static-top">
+
+				                   <!-- Topbar Navbar -->
+				                   <ul class="navbar-nav top-nav">
+
+				                       <!-- Nav Item - User Information -->
+				                     <!--  <li class="nav-item">
+				                           <a class="nav-link active" href="#">
+				                               <span class="mr-2 small">Dashboard</span>
+				                               <i class="fas fa-ellipsis-v fa-sm fa-fw"></i>
+				                           </a>
+				                       </li>
+				                       <li class="nav-item">
+				                           <a class="nav-link" href="#">
+				                               <span class="mr-2 small">Employee Payroll</span>
+				                               <i class="fas fa-ellipsis-v fa-sm fa-fw"></i>
+				                           </a>
+				                       </li>-->
+
+				                   </ul>
+
+								   <!-- Right Icons + Profile -->
+								   			    <ul class="navbar-nav d-flex flex-row align-items-center mb-0">
+								   			      <!-- Wallet Icon -->
+								   			     <!-- <li class="nav-item mr-3">
+								   			        <a href="/settings/wallet" role="button">
+								   			          <img src="img/Wallet-icon.png" alt="Wallet" class="nav-icon-img" >
+								   			        </a>
+								   			      </li>-->
+								   				  <li class="nav-item mr-3">
+								     			        <a href="/cotowallet" role="button">
+								     			          <img src="img/Wallet-icon.png" alt="Wallet" class="nav-icon-img" >
+								     			        </a>
+								     			      </li>
+								   			      <!-- Notification Icon -->
+								   			      <li class="nav-item mr-3">
+								   			        <a href="#" role="button">
+								   			          <img src="img/Notification-icon.png" alt="Notification" class="nav-icon-img">
+								   			        </a>
+								   			      </li>
+
+								   			      <!-- Profile Dropdown -->
+								   			      <li class="nav-item dropdown no-arrow">
+								   			        <a class="nav-link dropdown-toggle p-0" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								   			          <img class="img-profile rounded-circle" src="img/undraw_profile.svg" alt="User" style="width: 32px; height: 32px;">
+								   			        </a>
+								   			        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+								   			          <a class="dropdown-item" href="/ProfileInfo">
+								   			            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> Profile
+								   			          </a>
+								   			       <!--   <a class="dropdown-item" href="#">
+								   			            <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i> Settings
+								   			          </a>-->
+								   			          <div class="dropdown-divider"></div>
+								   			          <a class="dropdown-item" href="/logout">
+								   			            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Logout
+								   			          </a>
+								   			        </div>
+								   			      </li>
+								   			    </ul>		
+				           </nav>
+                <!-- End of Topbar -->
+
+                 <!-- Begin Page Content -->
+				 <div class="d-flex justify-content-center align-items-start min-vh-100 pt-2">
+				 <div class="col-12 col-md-5">
+				 	                <div class="logoNewForm1 ml-md-auto mx-auto">
+				 	                    <div class="logoNewFormtop">
+				 	                        <h5 class="form-title">Register a company with Cotodel!</h5>
+				 							
+				 	                        <form action="" id="fleetRegistration" name="fleetRegistration">
+				 	                            <!-- Form Fields -->
+				 								<div class="floating-group">
+				 								  <input type="text" id="username" class="form-control" placeholder=" " autocomplete="off" required>
+				 								  <label for="username">Full Name</label>
+				 								  <div id="usernameError1" class="error-msg"></div>
+				 								</div>
+				 	                            
+				 								<div class="floating-group">
+				 									  <input type="email" id="email" class="form-control" placeholder=" " autocomplete="off" required>
+				 									  <label for="email">Work Email Address</label>
+				 									  <div id="emailError1" class="error-msg"></div>
+				 									</div>
+				 	                            
+				 									<div class="form-group">
+				 										<div class="phone-input-container">
+				 											      <div class="phone-prefix">
+				 											        <img src="https://flagcdn.com/w40/in.png" alt="IN" class="flag-icon">
+				 											        <span>+91</span>
+				 											      </div>
+				 												  <input class="form-control phone-input" style="margin-top: 11.5px;" placeholder="00000 00000" type="text" id="mobile" name="mobile" autocomplete="off" maxlength="10" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" fdprocessedid="hbzy1q">
+				 											    </div>
+				 												<div id="mobileError1" class="error-msg"></div>
+				 		                                <!--<input type="tel" class="form-control" placeholder="+91 00000 00000" pattern="[0-9]{10}" required>-->
+				 		                            </div>
+				 	                            
+				 									<div class="floating-group">
+				 									  <input type="text" id="orgname" class="form-control" placeholder=" " autocomplete="off" required>
+				 									  <label for="orgname">Company Name</label>
+				 									  <div id="orgnameError1" class="error-msg"></div>
+				 									</div>
+													
+													<!--<div class="floating-group mt-3">
+													  <select id="companyType" class="form-control" required>
+													    <option value="" >Select Company type</option>
+													    <option value="Fleet">Fleet</option>
+													    <option value="Corporate">Corporate</option>
+													  </select>
+													  <label for="companyType">Company Type</label>
+													  <div id="companyTypeError" class="error-msg"></div>
+													</div>-->
+
+													<div class="did-floating-label-content mr-2">
+													    <select class="did-floating-select" id="location">
+													        <option value="">Select Company type</option>
+															<option value="Fleet">Fleet</option>
+														    <option value="Corporate">Corporate</option>
+													    </select>
+													    
+													</div>
+													<div class="mb-4 ">
+									                  <label class="form-label d-block">Company Size</label>
+									                  <div class="form-check-group">
+									                      <div class="form-check">
+									                          <input class="form-check-input" type="radio" name="companySize" id="size1" value="Less than 20 Vehicles" required>
+									                          <label class="form-check-label" for="size1">Less than 20 </label>
+									                      </div>
+									                      <div class="form-check">
+									                          <input class="form-check-input" type="radio" name="companySize" id="size2" value="20 to 50 Vehicles">
+									                          <label class="form-check-label" for="size2">20 to 50 </label>
+									                      </div>
+									                      <div class="form-check">
+									                          <input class="form-check-input" type="radio" name="companySize" id="size3" value="50 to 100 Vehicles">
+									                          <label class="form-check-label" for="size3">50 to 100 </label>
+									                      </div>
+														  <div class="form-check">
+									                          <input class="form-check-input" type="radio" name="companySize" id="size3" value="More than 100 Vehicles">
+									                          <label class="form-check-label" for="size3">More than 100</label>
+									                      </div>
+									                  </div>
+									              </div>
+
+				 	                            <!-- Checkbox Group 
+				 								<div class="form-group checkbox-group" style="color: #232323;  margin-top: 20px;">
+				 								    <div class="form-check d-flex align-items-start">
+				 								        <input type="checkbox" id="terms" class="mt-1" required>
+				 								        <label for="terms">
+				 								            I agree to the 
+				 								            <a href="/privacypolicy" style="color: #367AFF;" target="_blank">privacy policy</a> and 
+				 								            <a href="/termsconditions" style="color: #367AFF;" target="_blank">terms of use</a>
+				 								        </label>
+				 										<div id="privacyCheckError1" class="error-msg"></div>
+				 								    </div>  -->
+				 								   <!--  <div class="form-check">
+				 								        <input type="checkbox" id="whatsapp">
+				 								        <label for="whatsapp">Connect with me on WhatsApp for onboarding</label>
+				 								    </div>-->
+				 								</div>
+				 								<div id="otmsgdiv" style="display:none" class="alert alert-success text-center">
+				 						            	<div id="otsuccmsg"></div>   
+				 						            </div>
+				 						            
+				 						            <div id="otfailmsgDiv" style="display:none" class="alert alert-danger text-center">
+				 						            	<div id="otfailmsg"></div>
+				 						            </div>	  
+													<button type="button" class="btn btn-register" id="backBtn" onclick="window.location.href='/dashboard'">Back</button>						
+				 	                            <button type="button" class="btn btn-register" id="registerBtn" onclick="userRegistration()">SUBMIT DETAILS</button>
+				 	                        </form>
+				 								
+				 	                    </div>
+				 						
+				 	                    
+				 	                </div>
+				 	            </div>
+					<div class="lds-spinner" id="signinLoader" style="display: none">
+																		<div></div>
+																		<div></div>
+																		<div></div>
+																		<div></div>
+																		<div></div>
+																		<div></div>
+																		<div></div>
+																		<div></div>
+																		<div></div>
+																		<div></div>
+																		<div></div>
+																		<div></div>
+																	</div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+	
+	<style>
+				body.modal-open {
+				    overflow: hidden !important; /* force no page scroll */
+				}
+				
+				
+				/* Reduce form element spacing */
+				.form-group {
+				    margin-bottom: 0.75rem;
+				}
+
+			.form-control {
+			    height: 40px;
+			    border: 1px solid #C7C8D1;
+			    border-radius: 8px;
+			    margin-bottom: 0.75rem;
+			    padding: 0.75rem 1rem;
+			}
+
+			
+
+			.radio-group {
+			    margin: 1.5rem 0;
+			}
+
+			.radio-group label {
+			    display: block;
+			    margin-bottom: 0.75rem;
+			    font-weight: 500;
+			}
+
+			.radio-option {
+			    margin-bottom: 0.75rem;
+			}
+
+			.radio-option input[type="radio"] {
+			    accent-color: #367AFF;
+			    margin-right: 0.75rem;
+			}
+
+			.form-check {
+			    margin-bottom: 1rem;
+			}
+
+			
+			.form-check-input[type="radio"] {
+			    margin-right: 10px;
+			    transform: scale(1.1);
+			}
+
+			/* Adjust checkbox alignment */
+			.form-check-input[type="checkbox"] {
+			    margin-left: 0;
+			    margin-right: 10px;
+			}
+			
+			.checkbox-group .form-check-label {
+			    margin-left: 5rem; /* Reduced spacing between checkbox and text */
+			}
+			.checkbox-group .form-check {
+			    margin-left: -8px; /* Adjust this value as needed */
+			}
+			.form-check-group .form-check:last-child {
+			    margin-bottom: 0.25rem;
+			}
+			
+			</style>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="js/demo/datatables-demo.js"></script>
+    <script type="text/javascript" src="cotodel-js/registerotp.js"></script>
+ <script>
+	function deleteRow(button) {
+	    const tableBody = document.getElementById("voucherTableBody");
+	    const rows = tableBody.querySelectorAll("tr");
+
+	    if (rows.length <= 1) {
+	        alert("Cannot delete the first row.");
+	        return;
+	    }
+
+	    const row = button.parentElement.parentElement;
+	    tableBody.removeChild(row);
+	}
+		function addNewVoucher(event) {
+		  event.preventDefault();
+		  const tableBody = document.getElementById('voucherTableBody');
+
+		  const newRow = document.createElement('tr');
+		  const today = new Date().toISOString().split("T")[0];
+
+		  newRow.innerHTML = `
+		  <tr>
+		  						                    <td>
+		  						                        <div class="autocomp-input-wrap table-input">
+		  						                            <input type="text" class="autocomp-input" id="search" oninput="userSearchAndPopulate(this)"
+		  						                                placeholder="Enter Name" autocomplete="off">
+		  						                            <div id="autocomplete-suggestions" class="autocomplete-dropdown">
+		  														
+		  													</div>
+		  						                        </div>
+		  						                    </td>
+		  											<td>
+		  											  <input type="text" 
+		  											         class="table-input" 
+		  											         placeholder="Contact Name" 
+		  											         id="ContactName" 
+		  											         
+		  											         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1'); ">
+		  											</td>
+		  											<td>
+		  						                        <select class="GeneralSelect ">
+		  						                            <option value="Fleet">Fleet</option>
+		  						                            <option value="Corporate" selected>Corporate</option>
+		  						                        </select>
+		  						                    </td>
+		  						                    <td>
+		  						                        <select class="GeneralSelect">
+		  						                            <option value="0-10"selected>0-10</option>
+		  						                            <option value="10-50" >10-50</option>
+		  													<option value="100" >100</option>
+		  													<option value="100+" >100+</option>
+		  						                        </select>
+		  						                    </td>
+		  											<td>
+		  											  <input type="text" 
+		  											         class="table-input" 
+		  											         placeholder="Enter Status" 
+		  											         id="Status" 
+		  											         
+		  											         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1'); ">
+		  											</td>
+		  											<td>
+		  										  <input type="text" 
+		  										         class="table-input" 
+		  										         placeholder="Assigne name" 
+		  										         id="Assigne name" 
+		  										         
+		  										         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1'); ">
+		  										</td>
+		  						                 
+		  											
+		  						                    <td>
+		  						                        <a href="#" onclick="deleteRow(this)"><img src="img/delete.svg" alt=""></a>
+		  						                    </td>
+		  						                </tr>
+		  										
+		  						          
+		  `;
+
+		  tableBody.appendChild(newRow);
+		}
+
+</script>
+
+    <script>
+        jQuery(document).ready(function($){
+            var bsOverlay = $('.bs-canvas-overlay');
+            $('[data-toggle="canvas"]').on('click', function(){
+                var ctrl = $(this), 
+                    elm = ctrl.is('button') ? ctrl.data('target') : ctrl.attr('href');
+                $(elm).addClass('mr-0');
+                $(elm + ' .bs-canvas-close').attr('aria-expanded', "true");
+                $('[data-target="' + elm + '"], a[href="' + elm + '"]').attr('aria-expanded', "true");
+                if(bsOverlay.length)
+                    bsOverlay.addClass('show');
+                return false;
+            });
+            
+            $('.bs-canvas-close, .bs-canvas-overlay').on('click', function(){
+                var elm;
+                if($(this).hasClass('bs-canvas-close')) {
+                    elm = $(this).closest('.bs-canvas');
+                    $('[data-target="' + elm + '"], a[href="' + elm + '"]').attr('aria-expanded', "false");
+                } else {
+                    elm = $('.bs-canvas')
+                    $('[data-toggle="canvas"]').attr('aria-expanded', "false");	
+                }
+                elm.removeClass('mr-0');
+                $('.bs-canvas-close', elm).attr('aria-expanded', "false");
+                if(bsOverlay.length)
+                    bsOverlay.removeClass('show');
+                return false;
+            });
+        });
+		function viewData(value){
+				
+				 var row = jQuery(value).closest('tr');
+				 
+				 //var id = row[0].children[0].innerHTML;
+				 //var userDetailsId= row[0].children[1].innerHTML;
+				 var id = row.find('input[name="id"]').val();
+				    var userDetailsId = row.find('input[name="userDetailsId"]').val();
+
+				    // Debugging output
+				    console.log("Extracted ID:", id, "Extracted userDetailsId:", userDetailsId);
+				    
+				    //alert("id = " + id + " userDetailsId = " + userDetailsId);
+				 pupolateData(id,userDetailsId);
+				
+				 jQuery(document).ready(function($){
+			            var bsOverlay = $('.bs-canvas-overlay');
+			            $('[data-toggle="canvas"]').on('click', function(){
+			                var ctrl = $(this), 
+			                    elm = ctrl.is('button') ? ctrl.data('target') : ctrl.attr('href');
+			                $(elm).addClass('mr-0');
+			                $(elm + ' .bs-canvas-close').attr('aria-expanded', "true");
+			                $('[data-target="' + elm + '"], a[href="' + elm + '"]').attr('aria-expanded', "true");
+			                if(bsOverlay.length)
+			                    bsOverlay.addClass('show');
+			                return false;
+			            });
+			            
+			            $('.bs-canvas-close, .bs-canvas-overlay').on('click', function(){
+			                var elm;
+			                if($(this).hasClass('bs-canvas-close')) {
+			                    elm = $(this).closest('.bs-canvas');
+			                    $('[data-target="' + elm + '"], a[href="' + elm + '"]').attr('aria-expanded', "false");
+			                } else {
+			                    elm = $('.bs-canvas')
+			                    $('[data-toggle="canvas"]').attr('aria-expanded', "false");	
+			                }
+			                elm.removeClass('mr-0');
+			                $('.bs-canvas-close', elm).attr('aria-expanded', "false");
+			                if(bsOverlay.length)
+			                    bsOverlay.removeClass('show');
+			                return false;
+			            });
+			        });
+			 }
+        </script>
+        
+	<script>
+		    $(document).ready(function(){
+		    	
+		    	 $('li.active').removeClass('active').removeAttr('aria-current'); 
+				  $('a[href="' + location.pathname + '"]').closest('li').addClass('active').attr('aria-current', 'page');   
+				  
+		        $(".innernav").click(function(){
+		            $(".dropdownNav").addClass("active");
+		        });
+		    });
+		    
+		 function viewData(value){
+			
+			 var row = jQuery(value).closest('tr');
+			 
+			 //var id = row[0].children[0].innerHTML;
+			 //var userDetailsId= row[0].children[1].innerHTML;
+			 var id = row.find('input[name="id"]').val();
+			    var userDetailsId = row.find('input[name="userDetailsId"]').val();
+
+			    // Debugging output
+			    console.log("Extracted ID:", id, "Extracted userDetailsId:", userDetailsId);
+			    
+			    //alert("id = " + id + " userDetailsId = " + userDetailsId);
+			 //pupolateData(id,userDetailsId);
+			
+			 jQuery(document).ready(function($){
+		            var bsOverlay = $('.bs-canvas-overlay');
+		            $('[data-toggle="canvas"]').on('click', function(){
+		                var ctrl = $(this), 
+		                    elm = ctrl.is('button') ? ctrl.data('target') : ctrl.attr('href');
+		                $(elm).addClass('mr-0');
+		                $(elm + ' .bs-canvas-close').attr('aria-expanded', "true");
+		                $('[data-target="' + elm + '"], a[href="' + elm + '"]').attr('aria-expanded', "true");
+		                if(bsOverlay.length)
+		                    bsOverlay.addClass('show');
+		                return false;
+		            });
+		            
+		            $('.bs-canvas-close, .bs-canvas-overlay').on('click', function(){
+		                var elm;
+		                if($(this).hasClass('bs-canvas-close')) {
+		                    elm = $(this).closest('.bs-canvas');
+		                    $('[data-target="' + elm + '"], a[href="' + elm + '"]').attr('aria-expanded', "false");
+		                } else {
+		                    elm = $('.bs-canvas')
+		                    $('[data-toggle="canvas"]').attr('aria-expanded', "false");	
+		                }
+		                elm.removeClass('mr-0');
+		                $('.bs-canvas-close', elm).attr('aria-expanded', "false");
+		                if(bsOverlay.length)
+		                    bsOverlay.removeClass('show');
+		                return false;
+		            });
+		        });
+		 }
+		</script>
+		
+		
+		
+
+
+    <style>
+		#employeeTable td:nth-child(5),
+		   #employeeTable td:nth-child(6) {
+		       text-align: center;
+		   }
+		   
+
+
+
+	</style>
+  
+</body>
+
+</html>

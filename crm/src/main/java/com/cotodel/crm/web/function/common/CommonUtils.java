@@ -16,4 +16,7 @@ public interface CommonUtils {
 	public static String  saveReputeIdTokenData = "/userServices/Api/add/saveRepute";
 	public static String registerReputeUserDetail = "/userServices/Api/add/saveReputeDetails";
 	public static String getReputeToken = "/userServices/Api/get/reputeToken";
+	
+	//register user url 
+	public static String registerUserUrl = "/userServices/Api/add/saveEmployerOnBoardingDetails";
 }

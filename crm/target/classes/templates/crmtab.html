@@ -89,48 +89,27 @@
                 <!-- End of Topbar -->
 
                  <!-- Begin Page Content -->
-				 <div class="upi-voucher-wrap">
-				   <div>
-				     <div>
-				       <!-- Flex container for nav, search, and button -->
-				       <div class="d-flex justify-content-between align-items-center flex-wrap ">
+                	<div class="upi-voucher-wrap">
+									
 
-				         <!-- Nav tabs -->
-						 <ul class="nav nav-underline" id="dashboardTabs" role="tablist">
-						   <li class="nav-item">
-						     <a class="nav-link active" data-toggle="tab" href="#useronboarding" role="tab">User Onboarding</a>
-						   </li>
-						   <li class="nav-item">
-						     <a class="nav-link" data-toggle="tab" href="#assignedclients" role="tab">Assigned Clients</a>
-						   </li>
-						   <!-- Hidden tab link for Add New -->
-						   <li class="nav-item d-none">
-						     <a class="nav-link" id="addNewTab" data-toggle="tab" href="#addNew" role="tab">Add New</a>
-						   </li>
-						 </ul>
-
-				         <!-- Search box (centered by flex space-between) -->
-						 <div style="width: 250px; height: 44px; border-radius: 10px; padding: 10px; border: 1px solid #EDEDF0;" 
-						         class="d-flex align-items-center ms-2">
-						      <img src="img/search.svg" alt="Search" style="margin-right: 6px;">
-						      <input type="text" id="searchInput" placeholder="Search..." 
-						             style="border: none; outline: none; width: 100%;">
-						    </div>
-
-
-				         <!-- Add New button -->
-						 <button class="btn btn-custom" onclick="window.location.href='crmtabaddnew'">
-						   <i class="bi bi-plus-lg"></i> Add New +
-						 </button>
-
-
-
-				       </div>
-				     </div>
-				   </div>
-				 </div>
-
-										   
+                                    <div >
+										<div >
+											
+										   <ul class="nav nav-underline" id="dashboardTabs" role="tablist">
+										    
+										    
+										     <li class="nav-item">
+										       <a class="nav-link active" data-toggle="tab" href="#useronboarding" role="tab">User Onboarding</a>
+										     </li>
+											 <li class="nav-item">
+	 									       <a class="nav-link" data-toggle="tab" href="#assignedclients" role="tab">Assigned Clients</a>
+	 									     </li>
+											 <li class="nav-item">
+	 									       <a class="nav-link" data-toggle="tab" href="#addNew" role="tab">Add New</a>
+	 									     </li>
+											
+										   </ul>
+										  
 										   <hr class="mt-0">
 
 										   <div class="tab-content mt-3">
@@ -141,16 +120,13 @@
 												<thead>
 	                                                <tr>	
 	                                               		
-	                                                    <th onclick="sortTable(1)">Client <img src="img/Sorting-updown.svg" alt="sorting"></th>
-	                                                    <th onclick="sortTable(2)">Contact Name</th>
-														<th onclick="sortTable(3)">Contact Number </th>
-	                                                    <th onclick="sortTable(4)">Solution </th>
+	                                                    <th onclick="sortTable(1)">Client Name </th>
+	                                                    <th onclick="sortTable(2)">Contact Name </th>
+	                                                    <th onclick="sortTable(3)">Type </th>
+	                                                    <th onclick="sortTable(4)">Size </th>
 														<th onclick="sortTable(5)">Status </th>
-														<th onclick="sortTable(6)">Last Action<img src="img/Sorting-updown.svg" alt="sorting"> </th>
-														<th onclick="sortTable(7)">Follow-Up Date<img src="img/Sorting-updown.svg" alt="sorting"> </th>
-														<th onclick="sortTable(8)">Lead Type </th>
-														<th onclick="sortTable(9)">Assigned To </th>
-														<th onclick="sortTable(10)" ></th>
+														<th onclick="sortTable(5)">Assigned To </th>
+														<th onclick="sortTable(6)" ></th>
 	                                                   
 	                                                </tr>
 	                                            </thead>
@@ -161,14 +137,11 @@
 													</td>
 
 
-													 <td> Vidit</td>
-													 <td> +91XXXXXXXXXX</td>
-													 <td>Fleet<br>0-50</td>
-													 <td>Demo Scheduled</td>
-													 <td class="text-left">12/7/2025</td>
-													 <td class="text-left">18/07/2025</td>
-													 <td>Hot</td>
-													 <td>Vidit</td>
+													 <td> Arsalan</td>
+													 <td>Fleet </td>
+													 <td>1000</td>
+													 <td class="text-left">Demo Completed</td>
+													 <td class="text-left">Vidit</td>
 													 <td class="text-center">
 	  												 <button class="btn p-0" type="button" data-toggle="canvas" data-target="#bs-canvas-right" aria-expanded="true" aria-controls="bs-canvas-right" onclick="viewData(this)" title="Profile"><i class="fas fa-ellipsis-v fa-sm"></i></button>
 	  												 </td>	
@@ -179,36 +152,15 @@
 														  <a href="companyprofile.html" class="client-link" target="_blank">Infosys</a>
 														</td>
 
-	 												 <td>Rahul</td>
-	 												 <td>+91XXXXXXXXXX </td>
-	 												 <td>Corporate<br>50-100</td>
-													 <td>Demo Completed</td>
-	 												 <td class="text-left">11/7/2025</td>
-	 												 <td class="text-left">25/07/2025</td>
-													 <td>Medium</td>
-													 <td>Aviral </td>
+	 												 <td> Sanjay Singh</td>
+	 												 <td>Corporate </td>
+	 												 <td>8500</td>
+	 												 <td class="text-left">Demo Booked</td>
+	 												 <td class="text-left">Aviral</td>
 	 												 <td class="text-center">
 	 												 <button class="btn p-0" type="button" data-toggle="canvas" data-target="#bs-canvas-right" aria-expanded="true" aria-controls="bs-canvas-right" onclick="viewData(this)" title="Profile"><i class="fas fa-ellipsis-v fa-sm"></i></button>
 	 												 </td>			
-                                              </tr>
-											  
-											  <tr>
-														<td>
-														  <a href="companyprofile.html" class="client-link" target="_blank">XYZ Pvt ltd</a>
-														</td>
-		
-													 <td>Mehul</td>
-													 <td>+91XXXXXXXXXX </td>
-													 <td>Corporate<br>50-100</td>
-													 <td>Demo Completed</td>
-													 <td class="text-left">11/7/2025</td>
-													 <td class="text-left">30/07/2025</td>
-													 <td>Cold</td>
-													 <td>Vidit </td>
-													 <td class="text-center">
-													 <button class="btn p-0" type="button" data-toggle="canvas" data-target="#bs-canvas-right" aria-expanded="true" aria-controls="bs-canvas-right" onclick="viewData(this)" title="Profile"><i class="fas fa-ellipsis-v fa-sm"></i></button>
-													 </td>			
-		                                        </tr>
+                                              
                                                    
                                                 </tbody>
 											   </table>
@@ -228,10 +180,12 @@
 	                                               		
 	                                                    <th onclick="sortTable(1)">Client Name </th>
 	                                                    <th onclick="sortTable(2)">Contact Name </th>
-														<th onclick="sortTable(3)">Contact Number </th>
-	                                                    <th onclick="sortTable(4)">Solution </th>
+	                                                    <th onclick="sortTable(3)">Type </th>
+	                                                    <th onclick="sortTable(4)">Size </th>
+														<th onclick="sortTable(5)">Status </th>
 														<th onclick="sortTable(5)">Assigned To </th>
 														<th onclick="sortTable(6)" ></th>
+	                                                   
 	                                                </tr>
 	                                            </thead>
 												<tbody class="table-bordered">
@@ -241,14 +195,14 @@
 													</td>
 
 
-													<td> Vidit</td>
-													 <td> +91XXXXXXXXXX</td>
-													 <td>Fleet<br>0-50</td>
+													 <td> Arsalan</td>
+													 <td>Fleet </td>
+													 <td>1000</td>
+													 <td class="text-left">Demo Completed</td>
 													 <td class="text-left">Vidit</td>
 													 <td class="text-center">
-		  												<button class="btn p-0" type="button" data-toggle="canvas" data-target="#bs-canvas-right" aria-expanded="true" aria-controls="bs-canvas-right" onclick="viewData(this)" title="Profile"><i class="fas fa-ellipsis-v fa-sm"></i></button>
-		  												 </td> 	
-													 	
+	  												 <button class="btn p-0" type="button" data-toggle="canvas" data-target="#bs-canvas-right" aria-expanded="true" aria-controls="bs-canvas-right" onclick="viewData(this)" title="Profile"><i class="fas fa-ellipsis-v fa-sm"></i></button>
+	  												 </td>	
 												     </tr>
 													 
 													  <tr>
@@ -256,28 +210,15 @@
 														  <a href="companyprofile.html" class="client-link" target="_blank">Infosys</a>
 														</td>
 
-														<td>Rahul</td>
-		 												 <td>+91XXXXXXXXXX </td>
-		 												 <td>Corporate<br>50-100</td>
+	 												 <td> Sanjay Singh</td>
+	 												 <td>Corporate </td>
+	 												 <td>8500</td>
+	 												 <td class="text-left">Demo Booked</td>
 	 												 <td class="text-left">Aviral</td>
 	 												 <td class="text-center">
 	 												 <button class="btn p-0" type="button" data-toggle="canvas" data-target="#bs-canvas-right" aria-expanded="true" aria-controls="bs-canvas-right" onclick="viewData(this)" title="Profile"><i class="fas fa-ellipsis-v fa-sm"></i></button>
 	 												 </td>			
-													 </tr>
-													 
-													 <tr>
- 														<td>
- 														  <a href="companyprofile.html" class="client-link" target="_blank">XYZ Pvt Ltd</a>
- 														</td>
-
- 														<td>Mehul</td>
- 		 												 <td>+91XXXXXXXXXX </td>
- 		 												 <td>Corporate<br>50-100</td>
- 	 												 <td class="text-left">Vidit</td>
- 	 												 <td class="text-center">
- 	 												 <button class="btn p-0" type="button" data-toggle="canvas" data-target="#bs-canvas-right" aria-expanded="true" aria-controls="bs-canvas-right" onclick="viewData(this)" title="Profile"><i class="fas fa-ellipsis-v fa-sm"></i></button>
- 	 												 </td>			
- 													 </tr>
+                                              
                                                    
                                                 </tbody>
 											   </table>
@@ -409,7 +350,7 @@
 		
 		  <!-- Company Info -->
 		  <div class="company-info-box mt-4">
-		    <h5 class="fw-bold">Company Name</h5>
+		    <h5 class="fw-bold">Company LOGO</h5>
 		    <div class="text-muted mt-3" style="font-size: 14px;">
 		      <div><strong>Contact Name</strong> Arsalan</div>
 		      <div><strong>Phone</strong> +91 98122882752</div>
@@ -437,14 +378,7 @@
 		    </select>
 		    <input type="date" class="form-control w-50" />
 		  </div>
-		 
-		  <!-- Remark History -->
-		  	  
-		  	  <div class="d-flex gap-2 mb-2">
-		  	    <input class="form-control w-50" placeholder="Contact Person">
-		  	    <input class="form-control w-50" placeholder="Department">
-		  	  </div>
-		  	  <textarea class="form-control mb-3" placeholder="Enter Remarks"></textarea>
+		  <textarea class="form-control mb-3" placeholder="Enter Remarks"></textarea>
 		  <button class="btn w-100" style="background-color: #3979FF; color: white;">SUBMIT</button>
 		
 		  <!-- Action Cards -->
@@ -478,8 +412,14 @@
 		    <div class="mb-1">Good Project</div>
 		  </div>
 		
-		 
-		  <!--<button class="btn w-100" style="background-color: #3979FF; color: white;">SUBMIT</button>-->
+		  <!-- Remark History -->
+		  <h6 class="mt-4 fw-bold">Remark History</h6>
+		  <div class="d-flex gap-2 mb-2">
+		    <input class="form-control w-50" placeholder="Contact Person">
+		    <input class="form-control w-50" placeholder="Department">
+		  </div>
+		  <textarea class="form-control mb-3" placeholder="Enter Remarks"></textarea>
+		  <button class="btn w-100" style="background-color: #3979FF; color: white;">SUBMIT</button>
 		
 		  <!-- Remarks Cards -->
 		  <div class="history-card bg-light p-3 mt-3 rounded">
@@ -512,6 +452,7 @@
 		      <div>Good Conversation</div>
     </div>
 </div>
+
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
@@ -675,8 +616,6 @@
 			                    bsOverlay.addClass('show');
 			                return false;
 			            });
-						
-						
 			            
 			            $('.bs-canvas-close, .bs-canvas-overlay').on('click', function(){
 			                var elm;
@@ -753,20 +692,40 @@
 		            });
 		        });
 		 }
-		 
 		</script>
 		
 		
 		
+		<style>
+			.d-flex.gap-2 > * {
+			  margin-right: 8px;
+			}
+			.d-flex.gap-2 > *:last-child {
+			  margin-right: 0;
+			}
 
+		  .history-card {
+		    background-color: #f8f9fa;
+		    border-radius: 10px;
+		    padding: 16px;
+		    font-size: 14px;
+		    color: #333;
+		  }
 
+		  .history-card .text-muted {
+		    font-size: 12px;
+		    color: #6c757d;
+		  }
+
+		  .history-card div {
+		    line-height: 1.4;
+		  }
+
+		  .history-card + .history-card {
+		    margin-top: 0.75rem; /* mt-2 */
+		  }
+</style>
     <style>
-		.d-flex.gap-2 > * {
-				  margin-right: 8px;
-				}
-				.d-flex.gap-2 > *:last-child {
-				  margin-right: 0;
-				}
 		#employeeTable td:nth-child(5),
 		   #employeeTable td:nth-child(6) {
 		       text-align: center;

@@ -2,15 +2,18 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	
  <th:block th:include="fragments/headerlibs.html :: headerlibs"></th:block> 
 
-<body id="page-top" >
+<body id="page-top">
+
+    <div class="bs-canvas-overlay bg-dark position-fixed w-100 h-100"></div>
 
     <!-- Page Wrapper -->
     <div id="wrapper">
 
         <!-- Sidebar -->
-       <div th:insert="fragments/sidenav.html :: sidevav"></div>
+        <div th:insert="fragments/sidenav.html :: sidevav"></div>
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -20,380 +23,500 @@
             <div id="content">
 
                 <!-- Topbar -->
+                
+
 				<nav class="navbar navbar-expand navbar-light bg-white topbar static-top">
 
-                   <!-- Topbar Navbar -->
-                   <ul class="navbar-nav top-nav">
+				                   <!-- Topbar Navbar -->
+				                   <ul class="navbar-nav top-nav">
 
-                       <!-- Nav Item - User Information -->
-                       <li class="nav-item">
-                           <a class="nav-link active" href="#">
-                               <span class="mr-2 small">Dashboard</span>
-                               <i class="fas fa-ellipsis-v fa-sm fa-fw"></i>
-                           </a>
-                       </li>
-                       <li class="nav-item">
-                           <a class="nav-link" href="#">
-                               <span class="mr-2 small">Home</span>
-                               <i class="fas fa-ellipsis-v fa-sm fa-fw"></i>
-                           </a>
-                       </li>
+				                       <!-- Nav Item - User Information -->
+				                     <!--  <li class="nav-item">
+				                           <a class="nav-link active" href="#">
+				                               <span class="mr-2 small">Dashboard</span>
+				                               <i class="fas fa-ellipsis-v fa-sm fa-fw"></i>
+				                           </a>
+				                       </li>
+				                       <li class="nav-item">
+				                           <a class="nav-link" href="#">
+				                               <span class="mr-2 small">Employee Payroll</span>
+				                               <i class="fas fa-ellipsis-v fa-sm fa-fw"></i>
+				                           </a>
+				                       </li>-->
 
-                   </ul>
+				                   </ul>
 
-				   <!-- Right Icons + Profile -->
-	   			    <ul class="navbar-nav d-flex flex-row align-items-center mb-0">
-	   			      <!-- Wallet Icon -->
-	   			     
-	   				  <li class="nav-item mr-3">
-	     			        <a href="#" role="button">
-	     			          <img src="img/Wallet-icon.png" alt="Wallet" class="nav-icon-img" >
-	     			        </a>
-	     			      </li>
-	   			      <!-- Notification Icon -->
-	   			      <li class="nav-item mr-3">
-	   			        <a href="#" role="button">
-	   			          <img src="img/Notification-icon.png" alt="Notification" class="nav-icon-img">
-	   			        </a>
-	   			      </li>
+								   <!-- Right Icons + Profile -->
+								   			    <ul class="navbar-nav d-flex flex-row align-items-center mb-0">
+								   			      <!-- Wallet Icon -->
+								   			     <!-- <li class="nav-item mr-3">
+								   			        <a href="/settings/wallet" role="button">
+								   			          <img src="img/Wallet-icon.png" alt="Wallet" class="nav-icon-img" >
+								   			        </a>
+								   			      </li>-->
+								   				  <li class="nav-item mr-3">
+								     			        <a href="/cotowallet" role="button">
+								     			          <img src="img/Wallet-icon.png" alt="Wallet" class="nav-icon-img" >
+								     			        </a>
+								     			      </li>
+								   			      <!-- Notification Icon -->
+								   			      <li class="nav-item mr-3">
+								   			        <a href="#" role="button">
+								   			          <img src="img/Notification-icon.png" alt="Notification" class="nav-icon-img">
+								   			        </a>
+								   			      </li>
 
-	   			      <!-- Profile Dropdown -->
-	   			      <li class="nav-item dropdown no-arrow">
-	   			        <a class="nav-link dropdown-toggle p-0" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	   			          <img class="img-profile rounded-circle" src="img/undraw_profile.svg" alt="User" style="width: 32px; height: 32px;">
-	   			        </a>
-	   			        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-	   			          <a class="dropdown-item" href="profileInfo">
-	   			            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> Profile
-	   			          </a>
-	   			      
-	   			          <div class="dropdown-divider"></div>
-	   			          <a class="dropdown-item" href="/logout">
-	   			            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Logout
-	   			          </a>
-	   			        </div>
-	   			      </li>
-	   			    </ul>		
-	             </nav>
+								   			      <!-- Profile Dropdown -->
+								   			      <li class="nav-item dropdown no-arrow">
+								   			        <a class="nav-link dropdown-toggle p-0" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								   			          <img class="img-profile rounded-circle" src="img/undraw_profile.svg" alt="User" style="width: 32px; height: 32px;">
+								   			        </a>
+								   			        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+								   			          <a class="dropdown-item" href="/ProfileInfo">
+								   			            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> Profile
+								   			          </a>
+								   			       <!--   <a class="dropdown-item" href="#">
+								   			            <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i> Settings
+								   			          </a>-->
+								   			          <div class="dropdown-divider"></div>
+								   			          <a class="dropdown-item" href="/logout">
+								   			            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Logout
+								   			          </a>
+								   			        </div>
+								   			      </li>
+								   			    </ul>		
+				           </nav>
                 <!-- End of Topbar -->
 
-                <!-- Begin Page Content -->
-				<div th:switch="${session.user_role}">
-                <div class="container-fluid p-0 p-md-1">
-					<input type="hidden" class="form-input" id="employerId" name="employerId" th:value="${id}">
-                     <div class="row px-2">
-						
-                        <div class="col-12" th:case="9">
-							
-                            <div class="mt-4 bg-white p-3" >
-                            <div class="row">
-                                 <div class="col-12 col-sm-4 organisation-wrap" >
-                                    <h3>Let’s set up your organisation!</h3>
-                                   <div class="w3-border">
-										  <div class="w3-green" id="profile" style="height:20px; background-color:#096" ></div>
-										</div>
-                                    <p><span id="profileComplete">0</span> of 3 completed</p>
-                                </div>
-								
-                                <div class="col-12 col-sm-8">
+                 <!-- Begin Page Content -->
+				 <div class="upi-voucher-wrap">
+				   <div>
+				     <div>
+				       <!-- Flex container for nav, search, and button -->
+				       <div class="d-flex justify-content-between align-items-center flex-wrap ">
 
-                                    <div class="details-wrap">
-                                        <div class="basic-details-wrap">
-                                            <h4>Basic Details</h4>
-                                            <div class="time">COMPLETED</div>                                            
-                                        </div>
-                                    </div>
+				         <!-- Nav tabs -->
+						 <ul class="nav nav-underline" id="dashboardTabs" role="tablist">
+						   <li class="nav-item">
+						     <a class="nav-link active" data-toggle="tab" href="#useronboarding" role="tab">User Onboarding</a>
+						   </li>
+						   <li class="nav-item">
+						     <a class="nav-link" data-toggle="tab" href="#assignedclients" role="tab">Assigned Clients</a>
+						   </li>
+						   <!-- Hidden tab link for Add New -->
+						   <li class="nav-item d-none">
+						     <a class="nav-link" id="addNewTab" data-toggle="tab" href="#addNew" role="tab">Add New</a>
+						   </li>
+						 </ul>
 
-                                    <div class="details-wrap">
-                                        <div class="basic-details-wrap mb-2">
-                                            <h4>Compliance and people</h4>
-                                            <div class="time">3 steps | 5 mins</div>
-                                        </div>
-                                            <div class="basic-details-input">
-                                                <span>1</span>
-                                                <p>Setup Compliance</p>
-                                            	<div id="btnsetupStart"><a class="btn btn-primary" id="anchorStart"  href="#">Start</a></div>
-                                            </div>
+				         <!-- Search box (centered by flex space-between) -->
+						 <div style="width: 250px; height: 44px; border-radius: 10px; padding: 10px; border: 1px solid #EDEDF0;" 
+						         class="d-flex align-items-center ms-2">
+						      <img src="img/search.svg" alt="Search" style="margin-right: 6px;">
+						      <input type="text" id="searchInput" placeholder="Search..." 
+						             style="border: none; outline: none; width: 100%;">
+						    </div>
 
-                                            <div class="basic-details-input no-bg mb-0">
-                                                <span>2</span>
-                                                <p>Add employee and contractors</p>
-                                                <a th:href="@{/employeeOnBoarding}"><i class="fas fa-angle-right"></i></a>
-                                            </div>
-											
-											<div class="basic-details-input">
-                                               <span>3</span>
-                                               <p>Director Onboarding</p>
-                                             	<a class="btn btn-primary" href="#">Start</a>
-                                           </div>
-                                       
-                                    </div>                                    
-									<input type="hidden" class="form-input" id="employerId" name="employerId" th:value="${id}">
-                                    <div class="details-wrap mb-0">
-                                        <div class="basic-details-wrap">
-                                            <h4>KYC verification</h4>
-                                            <div class="time">2 steps | 10 mins</div>                                            
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-						</div>
-						<div class="col-12" th:case="1">
-													
-        <div class="mt-4 bg-white p-3" >
-        <div class="row">
-             <div class="col-12 col-sm-4 organisation-wrap" >
-                <h3>Let’s set up your organisation!</h3>
-               <div class="w3-border">
-					  <div class="w3-green" id="profile1" style="height:20px; background-color:#096" ></div>
-					</div>
-                <p><span id="profileComplete1">0</span> of 3 completed</p>
-            </div>
-			
-            <div class="col-12 col-sm-8">
 
-                <div class="details-wrap">
-                    <div class="basic-details-wrap">
-                        <h4>Basic Details</h4>
-                        <div class="time">COMPLETED</div>                                            
-                    </div>
-                </div>
+				         <!-- Add New button -->
+						 <button class="btn btn-custom" onclick="window.location.href='crmtabaddnew'">
+						   <i class="bi bi-plus-lg"></i> Add New +
+						 </button>
 
-                <div class="details-wrap">
-                    <div class="basic-details-wrap mb-2">
-                        <h4>Compliance and people</h4>
-                        <div class="time">3 steps | 5 mins</div>
-                    </div>
-                        <div class="basic-details-input">
-                            <span>1</span>
-                            <p>Setup Compliance</p>
-							<div id="btnsetupStart1"><a class="btn btn-primary" id="anchorStart1"   href="#">Start</a></div>
-                        </div>
 
-                        <div class="basic-details-input no-bg mb-0">
-                            <span>2</span>
-                            <p>Add employee and contractors</p>
-                            <a href="#"><i class="fas fa-angle-right"></i></a>
-                        </div>
-						<div class="basic-details-input">
-                           <span>3</span>
-                           <p>Director Onboarding</p>
-                         <a class="btn btn-primary"  th:if="${session.user_role == 9 || session.user_role == 1}" th:href="@{/directorOnboarding}">Start</a>
-                       </div>
-                   
-                </div>                                    
-				<input type="hidden" class="form-input" id="employerId" name="employerId" th:value="${id}">
-                <div class="details-wrap mb-0">
-                    <div class="basic-details-wrap">
-                        <h4>KYC verification</h4>
-                        <div class="time">2 steps | 10 mins</div>                                            
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
-	</div>
-						
-	<div class="col-12" th:case="3">
-
-		<div class="upi-voucher-wrap mb-2" >
-       
-
-         <div id="linkedAccount" >
-             <div class="linkedAccount-wrap m-0">
-                 <div class="linkedAccount-wrap-left-btn">
-                     <img src="img/allbank.svg" alt="">
-                     <span>All Linked Bank Accounts</span>
-                 </div>
-                 <div class="linkedAccount-wrap-right">
-                     <span>Funds Marked for Active UPI Vouchers <img
-                             src="img/e-rupi-seeklogo.png" alt=""></span>
-                     <div class="funds-mark"><div id="totalVoucher"></div>&nbsp; Vouchers &#8377;<strong id="totalvoucherValue">&#8377;0.00</strong></div>
-					<div class="infoo mx-2"><a href="#" id="btnforinfomodal"><img
-					 src="img/infoo.svg" width="34px" alt=""></a></div>
-                     <button class="fundmarked" id="fundmarked">
-                         <a href="#"><img src="img/fund-expand.svg" alt=""></a>
-                     </button>
-                 </div>
-             </div>
-
-             <div class="activeupivcmarked" id="myDiv" style="display: block;">
-                 <div class="row">
-                     <div class="col-12 col-md-3" id="bankListData">
-                         <div class="left-activeupivcmarked active">
-                             <div class="img-bank">
-                                 <img src="img/allbankblk.svg" alt="">
-                             </div>
-                             <span>All Banks</span>
-
-                         </div>
-
-                     </div>
-
-                     <div class="col-12 col-md-9">
-                         <div class="table-responsive mt-2">
-                             <table class="table table-bordered">
-                                 <thead>
-                                     <tr>
-                                         <th>Total Vouchers Issued (A)</th>
-                                         <th id="totalIssueCount"></th>
-                                         <th id="totalIssueAmount"></th>
-                                     </tr>
-                                 </thead>
-                                 <tbody>
-                                     <tr>
-                                         <td>Redeemed Vouchers (B)</td>
-                                         <td id="redemVCount"></td>
-                                         <td id="redemVAmount"></td>
-                                     </tr>
-                                     <tr>
-                                         <td>Expired & Revoked Vouchers (C)</td>
-                                         <td id="expRevokeCount"></td>
-                                         <td id="expRevokeAmount"></td>
-                                     </tr>
-                                     <tr class="lasttr">
-                                         <td>Active Vouchers (D)</td>
-                                         <td id="activeCount"></td>
-                                         <td id="activeAmount"></td>
-                                     </tr>
-                                 </tbody>
-                             </table>
-                         </div>
-                     </div>
-                 </div>
-             </div>
-         </div>
-		</div>
-	
-	</div>
-<div class="col-12" th:case="12">
-							
-                            <div class="mt-4 bg-white p-3" >
-                            <div class="row">
-                                 <div class="col-12 col-sm-4 organisation-wrap" >
-                                    <h3>Let’s set up your organisation!</h3>
-                                   <div class="w3-border">
-										  <div class="w3-green" id="profile" style="height:20px; background-color:#096" ></div>
-										</div>
-                                    <p><span id="profileComplete">0</span> of 3 completed</p>
-                                </div>
-								
-                                <div class="col-12 col-sm-8">
-
-                                    <div class="details-wrap">
-                                        <div class="basic-details-wrap">
-                                            <h4>Basic Details</h4>
-                                            <div class="time">COMPLETED</div>                                            
-                                        </div>
-                                    </div>
-
-                                    <div class="details-wrap">
-                                        <div class="basic-details-wrap mb-2">
-                                            <h4>Compliance and people</h4>
-                                            <div class="time">3 steps | 5 mins</div>
-                                        </div>
-                                            <div class="basic-details-input">
-                                                <span>1</span>
-                                                <p>Setup Compliance</p>
-                                             <div id="btnsetupStart"><a class="btn btn-primary" id="anchorStart" th:href="#">Start</a></div>
-                                            </div>
-
-                                            <div class="basic-details-input no-bg mb-0">
-                                                <span>2</span>
-                                                <p>Add employee and contractors</p>
-                                                <a href="#"><i class="fas fa-angle-right"></i></a>
-                                            </div>
-										
-											<div class="basic-details-input">
-                                               <span>3</span>
-                                               <p>Director Onboarding</p>
-                                           
-											<a class="btn btn-primary"   href="#">Start</a>
-                                           </div>
-                                       
-                                    </div>                                    
-									<input type="hidden" class="form-input" id="employerId" name="employerId" th:value="${id}">
-                                    <div class="details-wrap mb-0">
-                                        <div class="basic-details-wrap">
-                                            <h4>KYC verification</h4>
-                                            <div class="time">2 steps | 10 mins</div>                                            
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-						
-						</div>
-					<div class="col-12" th:case="*">
-					<div class="container-fluid p-0 p-md-1">
-				
-				<div class="col-12">
-                      <div class="mt-4  p-3" >
-                      <div class="row">
-                           <div class="col-12 col-sm-4 organisation-wrap" >
-                              <h3></h3>
-                             <div class="w3-border">
-								 
-                              <p></p>
-                          </div>
-						
-                      </div>
-                  </div>
-                  </div>
-
-				  <div class="mt-4  p-3" >
-                      <div class="row">
-                           <div class="col-12 col-sm-4 organisation-wrap" >
-                              <h3></h3>
-                             <div class="w3-border">
-								<h4></h4>
-                              <p></p>
-                          </div>
-						
-                      </div>
-                  </div>
-                  </div>
-				  <div class="mt-4  p-3" >
-                  <div class="row">
-                       <div class="col-12 col-sm-4 organisation-wrap" >
-                          <h3></h3>
-                         <div class="w3-border">
-							 
-                          <p></p>
-                      </div>
-					
-                	  </div>
-	              </div>
-	              </div>
-					                     
+				       </div>
+				     </div>
+				   </div>
 				 </div>
-			        	
-				
-	           </div>
-               
-             </div>
-			 
-        </div>
-        <!-- /.container-fluid -->
-		
 
-    </div>
-    <!-- End of Main Content -->
-	
-		</div><!-- ending switchcase-->
-</div>
+										   
+										   <hr class="mt-0">
+
+										   <div class="tab-content mt-3">
+											<!--useronboarding tab-->
+											<div class="tab-pane fade show active" id="useronboarding" role="tabpanel">
+											<div class="table-responsive" >
+											   <table class="table table-reimbursements mb-0" id="vouchersTableList" style="border: 1px solid #EAF4EF; border-radius: 10px;font-size: 13px;">
+												<thead>
+	                                                <tr>	
+	                                               		
+	                                                    <th onclick="sortTable(1)">Client <img src="img/Sorting-updown.svg" alt="sorting"></th>
+	                                                    <th onclick="sortTable(2)">Contact Name</th>
+														<th onclick="sortTable(3)">Contact Number </th>
+	                                                    <th onclick="sortTable(4)">Solution </th>
+														<th onclick="sortTable(5)">Status </th>
+														<th onclick="sortTable(6)">Last Action<img src="img/Sorting-updown.svg" alt="sorting"> </th>
+														<th onclick="sortTable(7)">Follow-Up Date<img src="img/Sorting-updown.svg" alt="sorting"> </th>
+														<th onclick="sortTable(8)">Lead Type </th>
+														<th onclick="sortTable(9)">Assigned To </th>
+														<th onclick="sortTable(10)" ></th>
+	                                                   
+	                                                </tr>
+	                                            </thead>
+												<tbody class="table-bordered">
+									               <tr>
+													<td>
+													  <a href="/companyprofile" class="client-link">Cotodel</a>
+													</td>
+
+
+													 <td> Vidit</td>
+													 <td> +91XXXXXXXXXX</td>
+													 <td>Fleet<br>0-50</td>
+													 <td>Demo Scheduled</td>
+													 <td class="text-left">12/7/2025</td>
+													 <td class="text-left">18/07/2025</td>
+													 <td>Hot</td>
+													 <td>Vidit</td>
+													 <td class="text-center">
+	  												 <button class="btn p-0" type="button" data-toggle="canvas" data-target="#bs-canvas-right" aria-expanded="true" aria-controls="bs-canvas-right" onclick="viewData(this)" title="Profile"><i class="fas fa-ellipsis-v fa-sm"></i></button>
+	  												 </td>	
+												     </tr>
+													 
+													  <tr>
+														<td>
+														  <a href="companyprofile.html" class="client-link" target="_blank">Infosys</a>
+														</td>
+
+	 												 <td>Rahul</td>
+	 												 <td>+91XXXXXXXXXX </td>
+	 												 <td>Corporate<br>50-100</td>
+													 <td>Demo Completed</td>
+	 												 <td class="text-left">11/7/2025</td>
+	 												 <td class="text-left">25/07/2025</td>
+													 <td>Medium</td>
+													 <td>Aviral </td>
+	 												 <td class="text-center">
+	 												 <button class="btn p-0" type="button" data-toggle="canvas" data-target="#bs-canvas-right" aria-expanded="true" aria-controls="bs-canvas-right" onclick="viewData(this)" title="Profile"><i class="fas fa-ellipsis-v fa-sm"></i></button>
+	 												 </td>			
+                                              </tr>
+											  
+											  <tr>
+														<td>
+														  <a href="companyprofile.html" class="client-link" target="_blank">XYZ Pvt ltd</a>
+														</td>
+		
+													 <td>Mehul</td>
+													 <td>+91XXXXXXXXXX </td>
+													 <td>Corporate<br>50-100</td>
+													 <td>Demo Completed</td>
+													 <td class="text-left">11/7/2025</td>
+													 <td class="text-left">30/07/2025</td>
+													 <td>Cold</td>
+													 <td>Vidit </td>
+													 <td class="text-center">
+													 <button class="btn p-0" type="button" data-toggle="canvas" data-target="#bs-canvas-right" aria-expanded="true" aria-controls="bs-canvas-right" onclick="viewData(this)" title="Profile"><i class="fas fa-ellipsis-v fa-sm"></i></button>
+													 </td>			
+		                                        </tr>
+                                                   
+                                                </tbody>
+											   </table>
+											 </div>
+
+
+											 
+											</div>
+
+											 
+											<!-- assignedclients tab-->
+										     <div class="tab-pane fade" id="assignedclients" role="tabpanel">
+												<div class="table-responsive" >
+											   <table class="table table-reimbursements mb-0" id="vouchersTableList" style="border: 1px solid #EAF4EF; border-radius: 10px;font-size: 13px;">
+												<thead>
+	                                                <tr>	
+	                                               		
+	                                                    <th onclick="sortTable(1)">Client Name </th>
+	                                                    <th onclick="sortTable(2)">Contact Name </th>
+														<th onclick="sortTable(3)">Contact Number </th>
+	                                                    <th onclick="sortTable(4)">Solution </th>
+														<th onclick="sortTable(5)">Assigned To </th>
+														<th onclick="sortTable(6)" ></th>
+	                                                </tr>
+	                                            </thead>
+												<tbody class="table-bordered">
+									               <tr>
+													<td>
+													  <a href="/companyprofile" class="client-link">Cotodel</a>
+													</td>
+
+
+													<td> Vidit</td>
+													 <td> +91XXXXXXXXXX</td>
+													 <td>Fleet<br>0-50</td>
+													 <td class="text-left">Vidit</td>
+													 <td class="text-center">
+		  												<button class="btn p-0" type="button" data-toggle="canvas" data-target="#bs-canvas-right" aria-expanded="true" aria-controls="bs-canvas-right" onclick="viewData(this)" title="Profile"><i class="fas fa-ellipsis-v fa-sm"></i></button>
+		  												 </td> 	
+													 	
+												     </tr>
+													 
+													  <tr>
+														<td>
+														  <a href="companyprofile.html" class="client-link" target="_blank">Infosys</a>
+														</td>
+
+														<td>Rahul</td>
+		 												 <td>+91XXXXXXXXXX </td>
+		 												 <td>Corporate<br>50-100</td>
+	 												 <td class="text-left">Aviral</td>
+	 												 <td class="text-center">
+	 												 <button class="btn p-0" type="button" data-toggle="canvas" data-target="#bs-canvas-right" aria-expanded="true" aria-controls="bs-canvas-right" onclick="viewData(this)" title="Profile"><i class="fas fa-ellipsis-v fa-sm"></i></button>
+	 												 </td>			
+													 </tr>
+													 
+													 <tr>
+ 														<td>
+ 														  <a href="companyprofile.html" class="client-link" target="_blank">XYZ Pvt Ltd</a>
+ 														</td>
+
+ 														<td>Mehul</td>
+ 		 												 <td>+91XXXXXXXXXX </td>
+ 		 												 <td>Corporate<br>50-100</td>
+ 	 												 <td class="text-left">Vidit</td>
+ 	 												 <td class="text-center">
+ 	 												 <button class="btn p-0" type="button" data-toggle="canvas" data-target="#bs-canvas-right" aria-expanded="true" aria-controls="bs-canvas-right" onclick="viewData(this)" title="Profile"><i class="fas fa-ellipsis-v fa-sm"></i></button>
+ 	 												 </td>			
+ 													 </tr>
+                                                   
+                                                </tbody>
+											   </table>
+											 </div>
+										
+										     </div>
+											 <!-- addNew tab-->
+									     <div class="tab-pane fade" id="addNew" role="tabpanel">
+											<div class="table-responsive" >
+												<table class="table table-reimbursements selectvouchers-table" id="sourceTable">
+									            <thead>
+									                <tr>
+
+													   <th onclick="sortTable(1)">Client Name </th>
+													   <th onclick="sortTable(2)">Contact Name </th>
+													   <th onclick="sortTable(3)">Type </th>
+													   <th onclick="sortTable(4)">Size </th>
+														<th onclick="sortTable(5)">Status </th>
+														<th onclick="sortTable(5)">Assigned To </th>
+									                    <th></th>
+									                </tr>
+									            </thead>
+									            <tbody id="voucherTableBody">
+									               <tr>
+									                    <td>
+									                        <div class="autocomp-input-wrap table-input">
+									                            <input type="text" class="autocomp-input" id="search" oninput="userSearchAndPopulate(this)"
+									                                placeholder="Enter Name" autocomplete="off">
+									                            <div id="autocomplete-suggestions" class="autocomplete-dropdown">
+																	
+																</div>
+									                        </div>
+									                    </td>
+														<td>
+														  <input type="text" 
+														         class="table-input" 
+														         placeholder="Contact Name" 
+														         id="ContactName" 
+														         
+														         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1'); ">
+														</td>
+														<td>
+									                        <select class="GeneralSelect ">
+									                            <option value="Fleet">Fleet</option>
+									                            <option value="Corporate" selected>Corporate</option>
+									                        </select>
+									                    </td>
+									                    <td>
+									                        <select class="GeneralSelect">
+									                            <option value="0-10"selected>0-10</option>
+									                            <option value="10-50" >10-50</option>
+																<option value="100" >100</option>
+																<option value="100+" >100+</option>
+									                        </select>
+									                    </td>
+														<td>
+														  <input type="text" 
+														         class="table-input" 
+														         placeholder="Enter Status" 
+														         id="Status" 
+														         
+														         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1'); ">
+														</td>
+														<td>
+													  <input type="text" 
+													         class="table-input" 
+													         placeholder="Assigne name" 
+													         id="Assigne name" 
+													         
+													         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1'); ">
+													</td>
+									                 
+														
+									                    <td>
+									                        <a href="#" onclick="deleteRow(this)"><img src="img/delete.svg" alt=""></a>
+									                    </td>
+									                </tr>
+													
+									            </tbody>
+												<tr class="text-center">
+												  <td colspan="8" style="background: #EAF4EF; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
+												    <a href="#" style="color: #2F945A; font-weight: 700;" onclick="addNewVoucher(event)">+ Add New </a>
+												  </td>
+												</tr>
+									        </table>
+										 </div>
+										 <div class="w-100 my-3 text-right">
+			 						        <button class="btn btn-border-primary"
+			 						            onclick="window.location.href='/crmtab';">Back</button>
+			 						        <button type="button" class="btn btn-primary"id="continueButton1" onclick="singleVoucherValidation()">Save</button>
+			 						    </div>	
+									     </div>
+
+
+										   </div>
+										 </div>
+                                        
+                                    </div>
+                                </div>
+					<div class="lds-spinner" id="signinLoader" style="display: none">
+																		<div></div>
+																		<div></div>
+																		<div></div>
+																		<div></div>
+																		<div></div>
+																		<div></div>
+																		<div></div>
+																		<div></div>
+																		<div></div>
+																		<div></div>
+																		<div></div>
+																		<div></div>
+																	</div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+        </div>
         <!-- End of Content Wrapper -->
 
     </div>
     <!-- End of Page Wrapper -->
 
+	<div id="bs-canvas-right" class="bs-canvas bs-canvas-right position-fixed bg-white h-100 p-3" >
+  <!-- Close Button -->
+		  <button type="button" class="bs-canvas-close float-right btn-close" aria-label="Close" style="font-size: 24px;">&times;</button>
+		
+		  <!-- Company Info -->
+		  <div class="company-info-box mt-4">
+		    <h5 class="fw-bold">Company Name</h5>
+		    <div class="text-muted mt-3" style="font-size: 14px;">
+		      <div><strong>Contact Name</strong> Arsalan</div>
+		      <div><strong>Phone</strong> +91 98122882752</div>
+		      <div><strong>Email</strong> Arsalan@example.com</div>
+		    </div>
+		  </div>
+		
+		  <!-- Assign Dropdown -->
+		  <div class="form-group mt-4">
+		    <select class="form-control">
+		      <option selected disabled>Assigned To</option>
+		      <option>Vidit</option>
+		      <option>Arsalan</option>
+		      <option>Neha</option>
+		    </select>
+		  </div>
+		
+		  <!-- Action History -->
+		  <h6 class="mt-4 fw-bold">Action History</h6>
+		  <div class="d-flex gap-2 mb-2">
+		    <select class="form-control w-50">
+		      <option selected disabled>Select Status</option>
+		      <option>Demo Booked</option>
+		      <option>Demo Completed</option>
+		    </select>
+		    <input type="date" class="form-control w-50" />
+		  </div>
+		 
+		  <!-- Remark History -->
+		  	  
+		  	  <div class="d-flex gap-2 mb-2">
+		  	    <input class="form-control w-50" placeholder="Contact Person">
+		  	    <input class="form-control w-50" placeholder="Department">
+		  	  </div>
+		  	  <textarea class="form-control mb-3" placeholder="Enter Remarks"></textarea>
+		  <button class="btn w-100" style="background-color: #3979FF; color: white;">SUBMIT</button>
+		
+		  <!-- Action Cards -->
+		  <div class="history-card bg-light p-3 mt-3 rounded">
+		    <div class="d-flex justify-content-between">
+		      <div>
+		        <div class="small text-muted">Date</div>
+		        <div class="mb-2">25/10/2024</div>
+		      </div>
+		      <div class="text-end">
+		        <div class="small text-muted">Status</div>
+		        <div class="mb-2">Demo Scheduled</div>
+		      </div>
+		    </div>
+		    <div class="small text-muted">Remarks</div>
+		    <div class="mb-1">Good Project</div>
+		  </div>
+		
+		  <div class="history-card bg-light p-3 mt-3 rounded">
+		    <div class="d-flex justify-content-between">
+		      <div>
+		        <div class="small text-muted">Date</div>
+		        <div class="mb-2">25/10/2024</div>
+		      </div>
+		      <div class="text-end">
+		        <div class="small text-muted">Status</div>
+		        <div class="mb-2">Demo Scheduled</div>
+		      </div>
+		    </div>
+		    <div class="small text-muted">Remarks</div>
+		    <div class="mb-1">Good Project</div>
+		  </div>
+		
+		 
+		  <!--<button class="btn w-100" style="background-color: #3979FF; color: white;">SUBMIT</button>-->
+		
+		  <!-- Remarks Cards -->
+		  <div class="history-card bg-light p-3 mt-3 rounded">
+		    <div class="row mb-1">
+		      <div class="col-3 text-muted small">Date</div>
+		      <div class="col-6 text-muted small text-center">Contact Person</div>
+		      <div class="col-3 text-muted small text-end">Dept</div>
+		    </div>
+		    <div class="row mb-2">
+		      <div class="col-3">25/10/2024</div>
+		      <div class="col-6 text-center">Ramesh Kumar</div>
+		      <div class="col-3 text-end">IT</div>
+		    </div>
+		    <div class="small text-muted">Remarks</div>
+		    <div>Good Conversation</div>
+		  </div>
+		
+		  <div class="history-card bg-light p-3 mt-3 rounded">
+		      <div class="row mb-1">
+		        <div class="col-3 text-muted small">Date</div>
+		        <div class="col-6 text-muted small text-center">Contact Person</div>
+		        <div class="col-3 text-muted small text-end">Dept</div>
+		      </div>
+		      <div class="row mb-2">
+		        <div class="col-3">25/10/2024</div>
+		        <div class="col-6 text-center">Ramesh Kumar</div>
+		        <div class="col-3 text-end">IT</div>
+		      </div>
+		      <div class="small text-muted">Remarks</div>
+		      <div>Good Conversation</div>
+    </div>
+</div>
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
-	
+
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -410,17 +533,249 @@
 
     <!-- Page level custom scripts -->
     <script src="js/demo/datatables-demo.js"></script>
-	
-    <script>
-    $(document).ready(function(){
-   	 $(".innernav").click(function(){
-           $(".dropdownNav").addClass("active");
-       });
-   	 $('li.active').removeClass('active').removeAttr('aria-current'); 
-   	  $('a[href="' + location.pathname + '"]').closest('li').addClass('active').attr('aria-current', 'page');   
-   });
-    </script>
+    <script type="text/javascript" src="cotodel-js/crmtab.js"></script>
+ <script>
+	function deleteRow(button) {
+	    const tableBody = document.getElementById("voucherTableBody");
+	    const rows = tableBody.querySelectorAll("tr");
 
+	    if (rows.length <= 1) {
+	        alert("Cannot delete the first row.");
+	        return;
+	    }
+
+	    const row = button.parentElement.parentElement;
+	    tableBody.removeChild(row);
+	}
+		function addNewVoucher(event) {
+		  event.preventDefault();
+		  const tableBody = document.getElementById('voucherTableBody');
+
+		  const newRow = document.createElement('tr');
+		  const today = new Date().toISOString().split("T")[0];
+
+		  newRow.innerHTML = `
+		  <tr>
+		  						                    <td>
+		  						                        <div class="autocomp-input-wrap table-input">
+		  						                            <input type="text" class="autocomp-input" id="search" oninput="userSearchAndPopulate(this)"
+		  						                                placeholder="Enter Name" autocomplete="off">
+		  						                            <div id="autocomplete-suggestions" class="autocomplete-dropdown">
+		  														
+		  													</div>
+		  						                        </div>
+		  						                    </td>
+		  											<td>
+		  											  <input type="text" 
+		  											         class="table-input" 
+		  											         placeholder="Contact Name" 
+		  											         id="ContactName" 
+		  											         
+		  											         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1'); ">
+		  											</td>
+		  											<td>
+		  						                        <select class="GeneralSelect ">
+		  						                            <option value="Fleet">Fleet</option>
+		  						                            <option value="Corporate" selected>Corporate</option>
+		  						                        </select>
+		  						                    </td>
+		  						                    <td>
+		  						                        <select class="GeneralSelect">
+		  						                            <option value="0-10"selected>0-10</option>
+		  						                            <option value="10-50" >10-50</option>
+		  													<option value="100" >100</option>
+		  													<option value="100+" >100+</option>
+		  						                        </select>
+		  						                    </td>
+		  											<td>
+		  											  <input type="text" 
+		  											         class="table-input" 
+		  											         placeholder="Enter Status" 
+		  											         id="Status" 
+		  											         
+		  											         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1'); ">
+		  											</td>
+		  											<td>
+		  										  <input type="text" 
+		  										         class="table-input" 
+		  										         placeholder="Assigne name" 
+		  										         id="Assigne name" 
+		  										         
+		  										         oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1'); ">
+		  										</td>
+		  						                 
+		  											
+		  						                    <td>
+		  						                        <a href="#" onclick="deleteRow(this)"><img src="img/delete.svg" alt=""></a>
+		  						                    </td>
+		  						                </tr>
+		  										
+		  						          
+		  `;
+
+		  tableBody.appendChild(newRow);
+		}
+
+</script>
+
+    <script>
+        jQuery(document).ready(function($){
+            var bsOverlay = $('.bs-canvas-overlay');
+            $('[data-toggle="canvas"]').on('click', function(){
+                var ctrl = $(this), 
+                    elm = ctrl.is('button') ? ctrl.data('target') : ctrl.attr('href');
+                $(elm).addClass('mr-0');
+                $(elm + ' .bs-canvas-close').attr('aria-expanded', "true");
+                $('[data-target="' + elm + '"], a[href="' + elm + '"]').attr('aria-expanded', "true");
+                if(bsOverlay.length)
+                    bsOverlay.addClass('show');
+                return false;
+            });
+            
+            $('.bs-canvas-close, .bs-canvas-overlay').on('click', function(){
+                var elm;
+                if($(this).hasClass('bs-canvas-close')) {
+                    elm = $(this).closest('.bs-canvas');
+                    $('[data-target="' + elm + '"], a[href="' + elm + '"]').attr('aria-expanded', "false");
+                } else {
+                    elm = $('.bs-canvas')
+                    $('[data-toggle="canvas"]').attr('aria-expanded', "false");	
+                }
+                elm.removeClass('mr-0');
+                $('.bs-canvas-close', elm).attr('aria-expanded', "false");
+                if(bsOverlay.length)
+                    bsOverlay.removeClass('show');
+                return false;
+            });
+        });
+		function viewData(value){
+				
+				 var row = jQuery(value).closest('tr');
+				 
+				 //var id = row[0].children[0].innerHTML;
+				 //var userDetailsId= row[0].children[1].innerHTML;
+				 var id = row.find('input[name="id"]').val();
+				    var userDetailsId = row.find('input[name="userDetailsId"]').val();
+
+				    // Debugging output
+				    console.log("Extracted ID:", id, "Extracted userDetailsId:", userDetailsId);
+				    
+				    //alert("id = " + id + " userDetailsId = " + userDetailsId);
+				 pupolateData(id,userDetailsId);
+				
+				 jQuery(document).ready(function($){
+			            var bsOverlay = $('.bs-canvas-overlay');
+			            $('[data-toggle="canvas"]').on('click', function(){
+			                var ctrl = $(this), 
+			                    elm = ctrl.is('button') ? ctrl.data('target') : ctrl.attr('href');
+			                $(elm).addClass('mr-0');
+			                $(elm + ' .bs-canvas-close').attr('aria-expanded', "true");
+			                $('[data-target="' + elm + '"], a[href="' + elm + '"]').attr('aria-expanded', "true");
+			                if(bsOverlay.length)
+			                    bsOverlay.addClass('show');
+			                return false;
+			            });
+						
+						
+			            
+			            $('.bs-canvas-close, .bs-canvas-overlay').on('click', function(){
+			                var elm;
+			                if($(this).hasClass('bs-canvas-close')) {
+			                    elm = $(this).closest('.bs-canvas');
+			                    $('[data-target="' + elm + '"], a[href="' + elm + '"]').attr('aria-expanded', "false");
+			                } else {
+			                    elm = $('.bs-canvas')
+			                    $('[data-toggle="canvas"]').attr('aria-expanded', "false");	
+			                }
+			                elm.removeClass('mr-0');
+			                $('.bs-canvas-close', elm).attr('aria-expanded', "false");
+			                if(bsOverlay.length)
+			                    bsOverlay.removeClass('show');
+			                return false;
+			            });
+			        });
+			 }
+        </script>
+        
+	<script>
+		    $(document).ready(function(){
+		    	
+		    	 $('li.active').removeClass('active').removeAttr('aria-current'); 
+				  $('a[href="' + location.pathname + '"]').closest('li').addClass('active').attr('aria-current', 'page');   
+				  
+		        $(".innernav").click(function(){
+		            $(".dropdownNav").addClass("active");
+		        });
+		    });
+		    
+		 function viewData(value){
+			
+			 var row = jQuery(value).closest('tr');
+			 
+			 //var id = row[0].children[0].innerHTML;
+			 //var userDetailsId= row[0].children[1].innerHTML;
+			 var id = row.find('input[name="id"]').val();
+			    var userDetailsId = row.find('input[name="userDetailsId"]').val();
+
+			    // Debugging output
+			    console.log("Extracted ID:", id, "Extracted userDetailsId:", userDetailsId);
+			    
+			    //alert("id = " + id + " userDetailsId = " + userDetailsId);
+			 //pupolateData(id,userDetailsId);
+			
+			 jQuery(document).ready(function($){
+		            var bsOverlay = $('.bs-canvas-overlay');
+		            $('[data-toggle="canvas"]').on('click', function(){
+		                var ctrl = $(this), 
+		                    elm = ctrl.is('button') ? ctrl.data('target') : ctrl.attr('href');
+		                $(elm).addClass('mr-0');
+		                $(elm + ' .bs-canvas-close').attr('aria-expanded', "true");
+		                $('[data-target="' + elm + '"], a[href="' + elm + '"]').attr('aria-expanded', "true");
+		                if(bsOverlay.length)
+		                    bsOverlay.addClass('show');
+		                return false;
+		            });
+		            
+		            $('.bs-canvas-close, .bs-canvas-overlay').on('click', function(){
+		                var elm;
+		                if($(this).hasClass('bs-canvas-close')) {
+		                    elm = $(this).closest('.bs-canvas');
+		                    $('[data-target="' + elm + '"], a[href="' + elm + '"]').attr('aria-expanded', "false");
+		                } else {
+		                    elm = $('.bs-canvas')
+		                    $('[data-toggle="canvas"]').attr('aria-expanded', "false");	
+		                }
+		                elm.removeClass('mr-0');
+		                $('.bs-canvas-close', elm).attr('aria-expanded', "false");
+		                if(bsOverlay.length)
+		                    bsOverlay.removeClass('show');
+		                return false;
+		            });
+		        });
+		 }
+		 
+		</script>
+		
+		
+		
+
+
+    <style>
+		.d-flex.gap-2 > * {
+				  margin-right: 8px;
+				}
+				.d-flex.gap-2 > *:last-child {
+				  margin-right: 0;
+				}
+		#employeeTable td:nth-child(5),
+		   #employeeTable td:nth-child(6) {
+		       text-align: center;
+		   }
+		 
+
+
+	</style>
+  
 </body>
 
 </html>

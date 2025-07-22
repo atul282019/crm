@@ -1187,7 +1187,7 @@ input:focus {
     z-index: 1110;
     overflow-x: hidden;
     overflow-y: auto;
-    width: 330px;
+    width: 400px;
 }
 
 .bs-canvas-left {
@@ -1197,7 +1197,7 @@ input:focus {
 
 .bs-canvas-right {
     right: 0;
-    margin-right: -330px;
+    margin-right: -400px;
 }
 
 .bs-canvas-right button.close {
