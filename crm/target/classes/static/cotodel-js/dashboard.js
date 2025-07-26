@@ -1,3 +1,98 @@
+async function getEmployerList() {
+	//const orgId = document.getElementById('employerId').value;
+    $.ajax({
+        type: "GET",
+        url: "/getEmployerList",
+		data: {
+			/* "orgId":orgId,
+				"limit":"Yes"*/
+		 },
+        beforeSend: function(xhr) {
+            //xhr.setRequestHeader(header, token);
+        },
+        success: function(data) {
+            newData = data;
+            console.log("getEmployerList data", newData);
+            var data1 = jQuery.parseJSON(newData);
+            var data2 = data1.data;
+         
+            var table = $('#TotalEmplist').DataTable({
+                destroy: true,
+                "responsive": true,
+                searching: false,
+                bInfo: false,
+                paging: false,
+                "lengthChange": true,
+                "autoWidth": false,
+                "pagingType": "full_numbers",
+                "pageLength": 50,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+                "language": {
+					"emptyTable": 'No vehicles have been mapped with the platform yet. Please proceed to the <a href="/vehiclemanagement">Vehicle Management</a> section to onboard vehicles from your fleet.'
+						},
+                
+                // Use the filtered data instead of original data
+                "aaData": data2,
+                "aoColumns": [
+                    { "mData": "organizationName" },
+                    { "mData": "vehicleNumber" },
+                    { "mData": "mobile" },
+					{ "mData": "companyType" },
+					{"mData":"companySize"},
+				
+                ],
+				createdRow: function (row, data1, dataIndex) 
+                {
+             	var vehicleType = data1.vehicleType;
+                 if(vehicleType=="SUV / MUV")
+                 {
+				 var imgTag = '<img src="img/car-icon.png" alt="" class="mr-2">'+vehicleType;
+                 $(row).find('td:eq(0)').html(imgTag);
+                 }
+                 else if(vehicleType=="Sedan")
+                 {
+				 var imgTag = ' <img src="img/car-icon.png" alt="Truck Icon" style="height:24px; width:24px; margin-right:4px;">'+vehicleType;
+				 $(row).find('td:eq(0)').html(imgTag);
+                 }
+                 
+                 else if(vehicleType=="Truck")
+                 {
+					var imgTag = ' <img src="img/truck-icon.png" alt="Truck Icon" style="height:24px; width:24px; margin-right:4px;">'+vehicleType;
+					 $(row).find('td:eq(0)').html(imgTag);
+                 }
+                 
+                 else if(vehicleType=="Mini Truck")
+                 {
+				 var imgTag = '<img src="img/truck-icon.png" alt="" class="mr-2">'+vehicleType;
+                 $(row).find('td:eq(0)').html(imgTag);
+                 }
+                 else if(vehicleType=="Hatchback")
+                 {
+				 var imgTag = '<img src="img/car-icon.png" alt="" class="mr-2">'+vehicleType;
+				 $(row).find('td:eq(0)').html(imgTag);
+                 }
+                 else if(vehicleType=="Two-Wheeler")
+                 {
+				 var imgTag = '<img src="img/two-wheeler-icon.webp" alt="" class="mr-2" style="height:24px; width:24px;">'+vehicleType;
+                  $(row).find('td:eq(0)').html(imgTag);
+                 }
+				 else if(vehicleType=="Amb./Spl. Purp")
+                 {
+				 var imgTag = '<img src="img/ambulance.webp" alt="" class="mr-2" style="height:24px; width:24px;">'+vehicleType;
+                  $(row).find('td:eq(0)').html(imgTag);
+                 }
+				 else{
+					var imgTag = '<img src="img/car-icon.png" alt="" class="mr-2">'+vehicleType;
+					 $(row).find('td:eq(0)').html(imgTag);
+				 }				
+              }
+		});									
+        },
+        error: function(e) {
+            alert('Failed to fetch JSON data' + e);
+        }
+    });
+}
 
 
 let voucherData = []; // Global to hold response

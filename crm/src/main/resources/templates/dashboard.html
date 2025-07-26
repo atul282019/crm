@@ -5,7 +5,7 @@
 	
  <th:block th:include="fragments/headerlibs.html :: headerlibs"></th:block> 
 
-<body id="page-top">
+<body id="page-top" onload="getEmployerList()">
 
     <div class="bs-canvas-overlay bg-dark position-fixed w-100 h-100"></div>
 
@@ -137,7 +137,7 @@
 											<!--useronboarding tab-->
 											<div class="tab-pane fade show active" id="useronboarding" role="tabpanel">
 											<div class="table-responsive" >
-											   <table class="table table-reimbursements mb-0" id="vouchersTableList" style="border: 1px solid #EAF4EF; border-radius: 10px;font-size: 13px;">
+											   <table class="table table-reimbursements mb-0" id="TotalEmplist" style="border: 1px solid #EAF4EF; border-radius: 10px;font-size: 13px;">
 												<thead>
 	                                                <tr>	
 	                                               		
@@ -533,7 +533,7 @@
 
     <!-- Page level custom scripts -->
     <script src="js/demo/datatables-demo.js"></script>
-    <script type="text/javascript" src="cotodel-js/crmtab.js"></script>
+    <script type="text/javascript" src="cotodel-js/dashboard.js"></script>
  <script>
 	function deleteRow(button) {
 	    const tableBody = document.getElementById("voucherTableBody");

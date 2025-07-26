@@ -19,4 +19,7 @@ public interface CommonUtils {
 	
 	//register user url 
 	public static String registerUserUrl = "/userServices/Api/add/saveEmployerOnBoardingDetails";
+	//get company details
+	public static String getEmployerList = "/userServices/Api/get/getEmployerList";
+	
 }
