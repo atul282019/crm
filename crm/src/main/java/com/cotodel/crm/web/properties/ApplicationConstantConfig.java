@@ -25,6 +25,8 @@ public class ApplicationConstantConfig {
 	@Value("${master.service.base.url}")
 	public String masterServiceBaseUrl;
 	
+	@Value("${crm.service.base.url}")
+	public String crmServiceBaseUrl;
 	
 	@Value("${api.signature.keystore.public.path}")
 	public String apiSignaturePublicPath;

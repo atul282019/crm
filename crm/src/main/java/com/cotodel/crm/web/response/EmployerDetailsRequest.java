@@ -1,5 +1,7 @@
 package com.cotodel.crm.web.response;
 
+import java.time.LocalDateTime;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -38,11 +40,21 @@ public class EmployerDetailsRequest {
 	private String mobile;	
 	private String email;
 	private String name;
-	private boolean erupistatus;
-	private String companySize;
-	private String privacyCheck;
-	private String whatsupCheck;
+	private boolean erupistatus ;
+	private String companySize ;
+	private String privacyCheck;	
+	private String whatsupCheck;	
 	private String captcha;
+	private String companyId;	
+	private String hrmsId;
+	private String organizationType;
 	private String companyType;
+	private String activityStatus;		
+	private String followupDate;	
+	private String leadType;	
+	private String assignedToMob;	
+	private String assignedToName;	
+	private String updateDate;	
+	private String updateby;
 }
  

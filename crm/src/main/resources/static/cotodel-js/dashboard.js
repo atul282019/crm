@@ -1,12 +1,243 @@
-async function getEmployerList() {
-	//const orgId = document.getElementById('employerId').value;
+/*function getstatusMaster() {
+    $.ajax({
+        type: "GET",
+        url: "/getstatusMaster",
+        data: {
+            // "orgId": employerId,
+            // "employeeId": employeeId
+        },
+        success: function(data) {
+            console.log("/getstatusMaster", data);
+            $("#activityStatus option").remove();
+
+            var obj = jQuery.parseJSON(data);
+            var statusList = obj.data;
+
+            if (!Array.isArray(statusList)) return;
+
+            var x = document.getElementById("activityStatus");
+
+            // Add default option
+            var defaultOption = document.createElement("option");
+            defaultOption.text = "Select Status";
+            defaultOption.value = "";
+            x.add(defaultOption);
+
+            // Add options from status data
+            statusList.forEach(function(status) {
+                var option = document.createElement("option");
+                option.text = status.statusDesc;
+                option.value = status.id;
+                x.add(option);
+            });
+        },
+        error: function(e) {
+            alert('Error: ' + e);
+        }
+    });
+}*/
+function getstatusMaster() {
+  $.ajax({
+    type: "GET",
+    url: "/getstatusMaster",
+    success: function (data) {
+      $("#activityStatus option").remove();
+      const obj = jQuery.parseJSON(data);
+      const statusList = obj.data;
+      const x = document.getElementById("activityStatus");
+
+      const defaultOption = document.createElement("option");
+      defaultOption.text = "Select Status";
+      defaultOption.value = "";
+      x.add(defaultOption);
+
+      statusList.forEach(function (status) {
+        const option = document.createElement("option");
+        option.text = status.statusDesc;
+        option.value = status.id;
+        option.setAttribute("data-status-code", status.statusCode); // store statusCode
+        x.add(option);
+      });
+    },
+    error: function (e) {
+      alert("Error: " + e);
+    },
+  });
+}
+function getActivityTransactionlist(Id) {
+  $.ajax({
+    type: "GET",
+    url: "/getActivityTransactionlist",
+    data: { "orgId": Id },
+    success: function (data) {
+      const obj = jQuery.parseJSON(data);
+      const statusList = obj.data;
+      console.log("getActivityTransactionlist()", obj);
+
+      const container = $('#remarksHistoryContainer');
+      container.empty(); // clear existing cards
+
+      if (Array.isArray(statusList) && statusList.length > 0) {
+		
+        statusList.forEach(item => {
+			const itemDate = formatDate(item.creationdate); // Format item date
+          const card = `
+		  <div class="history-card bg-light p-3 mt-3 rounded">
+		    <!-- Header row -->
+		    <div class="row mb-1">
+		      <div class="col-3 text-muted small">Date</div>
+		      <div class="col-6 text-muted small text-center">Contact Person</div>
+		      <div class="col-3 text-muted small text-end">Dept</div>
+		    </div>
+
+		    <!-- First data row -->
+		    <div class="row mb-2">
+		      <div class="col-3">${itemDate || '-'}</div>
+		      <div class="col-6 text-center">${item.createdby || '-'}</div>
+		      <div class="col-3 text-end">${item.deptName || '-'}</div>
+		    </div>
+
+		    <!-- Second header row -->
+		    <div class="row mb-1">
+		      <div class="col-4 text-muted small">Mobile</div>
+		      <div class="col-4 text-muted small text-end">Remarks</div>
+		    </div>
+
+		    <!-- Second data row -->
+		    <div class="row mb-2">
+		      <div class="col-4">${item.assignedToMob || '-'}</div>
+		      <div class="col-4 text-end">${item.remarks || '-'}</div>
+		    </div>
+		  </div>
+
+          `;
+          container.append(card);
+        });
+      } else {
+        container.html('<div class="text-muted mt-3">No remark history found.</div>');
+      }
+    },
+    error: function (e) {
+      alert("Error: " + e);
+    },
+  });
+}
+
+function addemplActivityTransaction() {
+	//const employerId = document.getElementById("employerId").value;
+	const Id = document.getElementById("Id").value;
+	const employerCode = document.getElementById("employerCode").value;
+	const selectedStatusCode = document.getElementById("selectedStatusCode").value;
+	const ContactPersonNumb = document.getElementById("ContactPersonNumb").value;
+	const remarksText = document.getElementById("remarksText").value;
+	const createdby = document.getElementById("createdBy").value;
+	const Department = document.getElementById("Department").value;
+	const assignedTo = document.getElementById("assignedTo").value;
+	const leadType = document.getElementById("leadType").value;
+	 const activityStatusSelect = document.getElementById("activityStatus");
+	 const activityStatus = activityStatusSelect.options[activityStatusSelect.selectedIndex].text;
+	
+	
+	if (assignedTo === "" ) 
+	{
+	        document.getElementById("commonError").textContent = "Please select assignedTo";
+	        return false;
+    }
+	if (leadType === "" ) 
+		{
+		        document.getElementById("commonError").textContent = "Please select leadType";
+		        return false;
+	    }
+	if (activityStatus === "" ||activityStatus ==="Select Status") 
+		{
+		        document.getElementById("commonError").textContent = "Please select Status";
+		        return false;
+	    }
+  $.ajax({
+    type: "POST",
+    url: "/addemplActivityTransaction",
+    data: { //"orgId": employerId,
+			"orgId":Id,
+			"employerCode":employerCode,
+			"activityStatusCode":selectedStatusCode,
+			"assignedToMob":ContactPersonNumb,
+			"remarks":remarksText,
+			"createdby":createdby,
+			"deptName":Department,
+		
+	},
+    success: function(response) {
+      try {
+        response = JSON.parse(response);
+
+        if (response.status === true) {
+          updateEmployerDetailsByCrm();
+        }
+
+      } catch (error) {
+        console.error("Error parsing JSON:", error);
+      }
+    },
+    error: function(e) {
+      alert('Error: ' + e);
+    }
+  });
+}
+function updateEmployerDetailsByCrm() {
+	//const employerId = document.getElementById("employerId").value;
+	const Id = document.getElementById("Id").value;
+	const updateby = document.getElementById("createdBy").value;
+   const assignedTo = document.getElementById("assignedTo").value;
+   const leadType = document.getElementById("leadType").value;
+   const activityStatusSelect = document.getElementById("activityStatus");
+   const activityStatus = activityStatusSelect.options[activityStatusSelect.selectedIndex].text;
+   const ContactPersonNumb = document.getElementById("ContactPersonNumb").value;
+   /*const Department = document.getElementById("Department").value;
+   const contactPersonName = document.getElementById("ContactPersonName").value;
+   const remarksText = document.getElementById("remarksText").value;*/
+   const followupDate = document.getElementById("followupDate").value;
+  
+  $.ajax({
+    type: "POST",
+    url: "/updateEmployerDetailsByCrm",
+    data: { //"orgId": employerId,
+			"id":Id,
+			"assignedToName":assignedTo,
+			"leadType":leadType,
+			"activityStatus":activityStatus,
+			"assignedToMob":ContactPersonNumb,
+			//"Department":Department,
+			//"contactPersonName":contactPersonName,
+			//"remarks":remarksText,
+			"updateby":updateby,
+			"followupDate":followupDate,
+			
+		
+	},
+    success: function(response) {
+      try {
+        response = JSON.parse(response);
+
+        if (response.status === true) {
+			setTimeout(function() {
+								       window.location.href="/dashboard";
+								   }, 1500); // 1500ms = 1.5 seconds
+        }
+
+      } catch (error) {
+        console.error("Error parsing JSON:", error);
+      }
+    },
+    error: function(e) {
+      alert('Error: ' , e);
+    }
+  });
+}
+async function getEmployerList1() {
     $.ajax({
         type: "GET",
         url: "/getEmployerList",
-		data: {
-			/* "orgId":orgId,
-				"limit":"Yes"*/
-		 },
+        data: {},
         beforeSend: function(xhr) {
             //xhr.setRequestHeader(header, token);
         },
@@ -15,8 +246,15 @@ async function getEmployerList() {
             console.log("getEmployerList data", newData);
             var data1 = jQuery.parseJSON(newData);
             var data2 = data1.data;
-         
-            var table = $('#TotalEmplist').DataTable({
+
+            // Filter only those rows with "Agreement signed"
+            var filteredData = data2.filter(function(row) {
+                return row.activityStatus === "Agreement Signed";
+            });
+
+            console.log("Filtered Data", filteredData);
+
+            var table = $('#signedclientTableList').DataTable({
                 destroy: true,
                 "responsive": true,
                 searching: false,
@@ -28,71 +266,157 @@ async function getEmployerList() {
                 "pageLength": 50,
                 "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
                 "language": {
-					"emptyTable": 'No vehicles have been mapped with the platform yet. Please proceed to the <a href="/vehiclemanagement">Vehicle Management</a> section to onboard vehicles from your fleet.'
-						},
-                
-                // Use the filtered data instead of original data
-                "aaData": data2,
+                    "emptyTable": 'No vehicles have been mapped with the platform yet. Please proceed to the <a href="/vehiclemanagement">Vehicle Management</a> section to onboard vehicles from your fleet.'
+                },
+                "aaData": filteredData,
                 "aoColumns": [
-                    { "mData": "organizationName" },
-                    { "mData": "vehicleNumber" },
+                    {
+                        "mData": null,
+                        "mRender": function (data, type, row) {
+                            const orgId = encodeURIComponent(row.organizationId || '');
+                            const orgName = row.organizationName || '';
+                            return `<a href="/companyprofile" class="text-primary">${orgName}</a>`;
+                        }
+                    },
+                    { "mData": "name" },
                     { "mData": "mobile" },
-					{ "mData": "companyType" },
-					{"mData":"companySize"},
-				
+                    {
+                        "mData": null,
+                        "mRender": function (data, type, row) {
+                            return `<div>${row.companyType || ''}<br>${row.companySize || ''}</div>`;
+                        }
+                    },
+                   
+                    { "mData": "assignedToName" },
+                    {
+                        "mData": null,
+                        "className": "text-center",
+                        "orderable": false,
+                        "mRender": function (data, type, row) {
+                            const rowData = encodeURIComponent(JSON.stringify(row));
+                            return `<button class="btn p-0" type="button" data-toggle="canvas"
+                                        data-target="#bs-canvas-right" aria-expanded="true"
+                                        onclick="viewData('${rowData}')" title="Profile">
+                                        <i class="fas fa-ellipsis-v fa-sm"></i>
+                                    </button>`;
+                        }
+                    }
                 ],
-				createdRow: function (row, data1, dataIndex) 
-                {
-             	var vehicleType = data1.vehicleType;
-                 if(vehicleType=="SUV / MUV")
-                 {
-				 var imgTag = '<img src="img/car-icon.png" alt="" class="mr-2">'+vehicleType;
-                 $(row).find('td:eq(0)').html(imgTag);
-                 }
-                 else if(vehicleType=="Sedan")
-                 {
-				 var imgTag = ' <img src="img/car-icon.png" alt="Truck Icon" style="height:24px; width:24px; margin-right:4px;">'+vehicleType;
-				 $(row).find('td:eq(0)').html(imgTag);
-                 }
-                 
-                 else if(vehicleType=="Truck")
-                 {
-					var imgTag = ' <img src="img/truck-icon.png" alt="Truck Icon" style="height:24px; width:24px; margin-right:4px;">'+vehicleType;
-					 $(row).find('td:eq(0)').html(imgTag);
-                 }
-                 
-                 else if(vehicleType=="Mini Truck")
-                 {
-				 var imgTag = '<img src="img/truck-icon.png" alt="" class="mr-2">'+vehicleType;
-                 $(row).find('td:eq(0)').html(imgTag);
-                 }
-                 else if(vehicleType=="Hatchback")
-                 {
-				 var imgTag = '<img src="img/car-icon.png" alt="" class="mr-2">'+vehicleType;
-				 $(row).find('td:eq(0)').html(imgTag);
-                 }
-                 else if(vehicleType=="Two-Wheeler")
-                 {
-				 var imgTag = '<img src="img/two-wheeler-icon.webp" alt="" class="mr-2" style="height:24px; width:24px;">'+vehicleType;
-                  $(row).find('td:eq(0)').html(imgTag);
-                 }
-				 else if(vehicleType=="Amb./Spl. Purp")
-                 {
-				 var imgTag = '<img src="img/ambulance.webp" alt="" class="mr-2" style="height:24px; width:24px;">'+vehicleType;
-                  $(row).find('td:eq(0)').html(imgTag);
-                 }
-				 else{
-					var imgTag = '<img src="img/car-icon.png" alt="" class="mr-2">'+vehicleType;
-					 $(row).find('td:eq(0)').html(imgTag);
-				 }				
-              }
-		});									
+            });
         },
         error: function(e) {
-            alert('Failed to fetch JSON data' + e);
+            alert('Failed to fetch JSON data');
+            console.log("inside error blog of getEmployerList()", e);
         }
     });
 }
+
+async function getEmployerList() {
+  $.ajax({
+    type: "GET",
+    url: "/getEmployerList",
+    data: {},
+    success: function (data) {
+      const newData = data;
+      const data1 = jQuery.parseJSON(newData);
+      const data2 = data1.data;
+      let originalData = [...data2]; // preserve original for reset
+	  // Filter only those rows with "Agreement signed"
+	             var filteredData = data2.filter(function(row) {
+	                 return row.activityStatus != "Agreement Signed";
+	             });
+
+      const table = $('#TotalEmplist').DataTable({
+        destroy: true,
+        responsive: true,
+        searching: false,
+        bInfo: false,
+        paging: false,
+        lengthChange: true,
+        autoWidth: false,
+        pageLength: 50,
+        buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"],
+        language: {
+          emptyTable: 'No vehicles have been mapped with the platform yet. Please proceed to the <a href="/vehiclemanagement">Vehicle Management</a> section to onboard vehicles from your fleet.'
+        },
+        aaData: filteredData,
+        aoColumns: [
+          {
+            mData: null,
+            mRender: function (data, type, row) {
+              const orgName = row.organizationName || '';
+              return `<a href="/companyprofile" class="text-primary">${orgName}</a>`;
+            }
+          },
+          { mData: "name" },
+          { mData: "mobile" },
+          {
+            mData: null,
+            mRender: function (data, type, row) {
+              return `<div>${row.companyType || ''}<br>${row.companySize || ''}</div>`;
+            }
+          },
+          { mData: "activityStatus" },
+          {
+            mData: "createdDate",
+            mRender: function (data) {
+              return formatDate(data);
+            }
+          },
+          {
+            mData: "followupDate",
+            mRender: function (data) {
+              return formatDate(data);
+            }
+          },
+          { mData: "leadType" },
+          { mData: "assignedToName" },
+          {
+            mData: null,
+            className: "text-center",
+            orderable: false,
+            mRender: function (data, type, row) {
+              const rowData = encodeURIComponent(JSON.stringify(row));
+              return `
+                <button class="btn p-0" type="button" data-toggle="canvas"
+                  data-target="#bs-canvas-right" aria-expanded="true"
+                  onclick="viewData('${rowData}')" title="Profile">
+                  <i class="fas fa-ellipsis-v fa-sm"></i>
+                </button>`;
+            }
+          }
+        ]
+      });
+
+      // search input filter
+      document.getElementById("searchInput").addEventListener("input", function () {
+        const searchValue = this.value.trim().toLowerCase();
+
+        const filteredData = searchValue
+          ? originalData.filter(row => {
+              return (
+                (row.organizationName || '').toLowerCase().includes(searchValue) ||
+                (row.name || '').toLowerCase().includes(searchValue) ||
+                (row.mobile || '').toLowerCase().includes(searchValue) ||
+                (row.companyType || '').toLowerCase().includes(searchValue) ||
+                (row.companySize || '').toLowerCase().includes(searchValue) ||
+                (row.activityStatus || '').toLowerCase().includes(searchValue) ||
+                (row.leadType || '').toLowerCase().includes(searchValue) ||
+                (row.assignedToName || '').toLowerCase().includes(searchValue)
+              );
+            })
+          : [...originalData];
+
+        table.clear().rows.add(filteredData).draw();
+      });
+    },
+    error: function (e) {
+      alert('Failed to fetch JSON data');
+      console.log("inside error block of getEmployerList()", e);
+    }
+  });
+}
+
 
 
 let voucherData = []; // Global to hold response

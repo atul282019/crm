@@ -22,13 +22,30 @@ public class CompanyServiceImpl implements CompanyService{
 //	public String saveCompany(String token, EncriptResponse employeeProfileRequest) {
 //		return CommonUtility.userRequest(token,MessageConstant.gson.toJson(employeeProfileRequest), applicationConstantConfig.employerServiceBaseUrl+CommonUtils.registerCompany);
 //	}
-
+	
 	@Override
 	public String getEmployerList(String token, EncriptResponse employeeProfileRequest) {
 		// TODO Auto-generated method stub
 		return CommonUtility.userRequest(token,MessageConstant.gson.toJson(employeeProfileRequest), applicationConstantConfig.userServiceBaseUrl+CommonUtils.getEmployerList);
 	}
-
+	@Override
+	public String getActivityTransactionlist(String token, EncriptResponse employeeProfileRequest) {
+		// TODO Auto-generated method stub
+		return CommonUtility.userRequest(token,MessageConstant.gson.toJson(employeeProfileRequest), applicationConstantConfig.crmServiceBaseUrl+CommonUtils.getActivityTransactionlist);
+	}
+	@Override
+	public String getstatusMaster(String token, EncriptResponse employeeProfileRequest) {
+		// TODO Auto-generated method stub
+		return CommonUtility.userRequest(token,MessageConstant.gson.toJson(employeeProfileRequest), applicationConstantConfig.crmServiceBaseUrl+CommonUtils.getstatusMaster);
+	}
+	@Override
+	public String updateEmployerDetailsByCrm(String token, EncriptResponse jsonObject) {
+		return CommonUtility.userRequest(token,MessageConstant.gson.toJson(jsonObject), applicationConstantConfig.userServiceBaseUrl+CommonUtils.updateEmployerDetailsByCrm);
+	}
+	@Override
+	public String addemplActivityTransaction(String token, EncriptResponse jsonObject) {
+		return CommonUtility.userRequest(token,MessageConstant.gson.toJson(jsonObject), applicationConstantConfig.crmServiceBaseUrl+CommonUtils.addemplActivityTransaction);
+	}
 //	@Override
 //	public String getorgsubType(String token, EncriptResponse employeeProfileRequest) {
 //		return CommonUtility.userRequest(token,MessageConstant.gson.toJson(employeeProfileRequest), applicationConstantConfig.masterServiceBaseUrl+CommonUtils.getorgsubType);

@@ -5,7 +5,7 @@
 	
  <th:block th:include="fragments/headerlibs.html :: headerlibs"></th:block> 
 
-<body id="page-top" onload="getEmployerList()">
+<body id="page-top" onload="getEmployerList(),getstatusMaster(),getEmployerList1()">
 
     <div class="bs-canvas-overlay bg-dark position-fixed w-100 h-100"></div>
 
@@ -92,16 +92,21 @@
 				 <div class="upi-voucher-wrap">
 				   <div>
 				     <div>
-				       <!-- Flex container for nav, search, and button -->
+						<input type="hidden" class="form-input" id="createdBy" name="createdBy" th:value="${session.username}">
+						<input type="hidden" id="Id">
+						<input type="hidden" id="employerCode">
+						<input type="hidden" id="selectedStatusCode">
+						
+						<!-- Flex container for nav, search, and button -->
 				       <div class="d-flex justify-content-between align-items-center flex-wrap ">
 
 				         <!-- Nav tabs -->
 						 <ul class="nav nav-underline" id="dashboardTabs" role="tablist">
 						   <li class="nav-item">
-						     <a class="nav-link active" data-toggle="tab" href="#useronboarding" role="tab">User Onboarding</a>
+						     <a class="nav-link active" data-toggle="tab" href="#useronboarding" role="tab">Client Onboarding</a>
 						   </li>
 						   <li class="nav-item">
-						     <a class="nav-link" data-toggle="tab" href="#assignedclients" role="tab">Assigned Clients</a>
+						     <a class="nav-link" data-toggle="tab" href="#assignedclients" role="tab">Clients Onboarded</a>
 						   </li>
 						   <!-- Hidden tab link for Add New -->
 						   <li class="nav-item d-none">
@@ -110,7 +115,7 @@
 						 </ul>
 
 				         <!-- Search box (centered by flex space-between) -->
-						 <div style="width: 250px; height: 44px; border-radius: 10px; padding: 10px; border: 1px solid #EDEDF0;" 
+						 <div style="width: 250px; height: 44px; border-radius: 10px; padding: 10px; border: 1px solid #EDEDF0;margin-left: 400px;" 
 						         class="d-flex align-items-center ms-2">
 						      <img src="img/search.svg" alt="Search" style="margin-right: 6px;">
 						      <input type="text" id="searchInput" placeholder="Search..." 
@@ -155,7 +160,7 @@
 	                                                </tr>
 	                                            </thead>
 												<tbody class="table-bordered">
-									               <tr>
+									              <!--  <tr>
 													<td>
 													  <a href="/companyprofile" class="client-link">Cotodel</a>
 													</td>
@@ -208,7 +213,7 @@
 													 <td class="text-center">
 													 <button class="btn p-0" type="button" data-toggle="canvas" data-target="#bs-canvas-right" aria-expanded="true" aria-controls="bs-canvas-right" onclick="viewData(this)" title="Profile"><i class="fas fa-ellipsis-v fa-sm"></i></button>
 													 </td>			
-		                                        </tr>
+		                                        </tr>-->
                                                    
                                                 </tbody>
 											   </table>
@@ -222,7 +227,7 @@
 											<!-- assignedclients tab-->
 										     <div class="tab-pane fade" id="assignedclients" role="tabpanel">
 												<div class="table-responsive" >
-											   <table class="table table-reimbursements mb-0" id="vouchersTableList" style="border: 1px solid #EAF4EF; border-radius: 10px;font-size: 13px;">
+											   <table class="table table-reimbursements mb-0" id="signedclientTableList" style="border: 1px solid #EAF4EF; border-radius: 10px;font-size: 13px;">
 												<thead>
 	                                                <tr>	
 	                                               		
@@ -235,7 +240,7 @@
 	                                                </tr>
 	                                            </thead>
 												<tbody class="table-bordered">
-									               <tr>
+									              <!-- <tr>
 													<td>
 													  <a href="/companyprofile" class="client-link">Cotodel</a>
 													</td>
@@ -277,7 +282,7 @@
  	 												 <td class="text-center">
  	 												 <button class="btn p-0" type="button" data-toggle="canvas" data-target="#bs-canvas-right" aria-expanded="true" aria-controls="bs-canvas-right" onclick="viewData(this)" title="Profile"><i class="fas fa-ellipsis-v fa-sm"></i></button>
  	 												 </td>			
- 													 </tr>
+ 													 </tr>-->
                                                    
                                                 </tbody>
 											   </table>
@@ -409,45 +414,68 @@
 		
 		  <!-- Company Info -->
 		  <div class="company-info-box mt-4">
-		    <h5 class="fw-bold">Company Name</h5>
+		    <h5 class="fw-bold" id="companyName">Company Name</h5>
 		    <div class="text-muted mt-3" style="font-size: 14px;">
-		      <div><strong>Contact Name</strong> Arsalan</div>
-		      <div><strong>Phone</strong> +91 98122882752</div>
-		      <div><strong>Email</strong> Arsalan@example.com</div>
+		      <div><strong>Contact Name</strong> <span id="contactName">-</span></div>
+		      <div><strong>Phone</strong> <span id="phone">-</span></div>
+		      <div><strong>Email</strong> <span id="email">-</span></div>
 		    </div>
 		  </div>
 		
 		  <!-- Assign Dropdown -->
 		  <div class="form-group mt-4">
-		    <select class="form-control">
-		      <option selected disabled>Assigned To</option>
-		      <option>Vidit</option>
-		      <option>Arsalan</option>
-		      <option>Neha</option>
+		    <select class="form-control" id="assignedTo">
+		      <option value="" selected disabled>Assigned To</option>
+		      <option value="Vidit" >Vidit</option>
+		      <option value="Aviral" >Aviral</option>
+		      <option value="Paras" >Neha</option>
 		    </select>
 		  </div>
-		
+		  
+		  <!-- Lead type Dropdown -->
+		  	  <div class="form-group mt-4">
+		  	    <select class="form-control" id="leadType">
+		  	      <option value="" selected disabled>Lead Type</option>
+		  	      <option value="Hot">Hot </option>
+		  	      <option value="Cold">Cold</option>
+		  	      <option value="Medium">Medium</option>
+		  	    </select>
+		  	  </div>
+			 
+	  
+		  
 		  <!-- Action History -->
 		  <h6 class="mt-4 fw-bold">Action History</h6>
 		  <div class="d-flex gap-2 mb-2">
-		    <select class="form-control w-50">
-		      <option selected disabled>Select Status</option>
-		      <option>Demo Booked</option>
-		      <option>Demo Completed</option>
+		    <select class="form-control w-50" id="activityStatus">
+		      <option value="" selected disabled>Select Status</option>
+		      
 		    </select>
-		    <input type="date" class="form-control w-50" />
+		    <input type="date" class="form-control w-50" id="followupDate"/>
 		  </div>
 		 
 		  <!-- Remark History -->
 		  	  
 		  	  <div class="d-flex gap-2 mb-2">
-		  	    <input class="form-control w-50" placeholder="Contact Person">
-		  	    <input class="form-control w-50" placeholder="Department">
+		  	    <input class="form-control w-50" placeholder="Contact Person" type="text" id="ContactPersonName">
+				
+		  	    <input class="form-control w-50" placeholder="Department" type="text" id="Department">
 		  	  </div>
-		  	  <textarea class="form-control mb-3" placeholder="Enter Remarks"></textarea>
-		  <button class="btn w-100" style="background-color: #3979FF; color: white;">SUBMIT</button>
-		
-		  <!-- Action Cards -->
+			  <input class="form-control mb-3"
+			         placeholder="Contact Person number"
+			         type="text"
+			         id="ContactPersonNumb"
+			         maxlength="10"
+			         inputmode="numeric"
+			         pattern="\d*"
+			         oninput="this.value = this.value.replace(/\D/g, '').slice(0, 10)">
+		  	  <textarea class="form-control mb-3" placeholder="Enter Remarks" id="remarksText"></textarea>
+			  <div class="error-msg" id="commonError" style="color:red"></div>
+		  <button class="btn w-100" style="background-color: #3979FF; color: white;" id="submitBtn" onclick="addemplActivityTransaction()">SUBMIT</button>
+		  <!-- Remark History Cards Container -->
+		  <div id="remarksHistoryContainer"></div>
+
+		  <!-- Action Cards 
 		  <div class="history-card bg-light p-3 mt-3 rounded">
 		    <div class="d-flex justify-content-between">
 		      <div>
@@ -479,9 +507,7 @@
 		  </div>
 		
 		 
-		  <!--<button class="btn w-100" style="background-color: #3979FF; color: white;">SUBMIT</button>-->
-		
-		  <!-- Remarks Cards -->
+
 		  <div class="history-card bg-light p-3 mt-3 rounded">
 		    <div class="row mb-1">
 		      <div class="col-3 text-muted small">Date</div>
@@ -510,7 +536,7 @@
 		      </div>
 		      <div class="small text-muted">Remarks</div>
 		      <div>Good Conversation</div>
-    </div>
+    </div>-->
 </div>
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
@@ -534,6 +560,14 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/datatables-demo.js"></script>
     <script type="text/javascript" src="cotodel-js/dashboard.js"></script>
+	
+	<script>	document.getElementById("activityStatus").addEventListener("change", function () {
+	  const selectedOption = this.selectedOptions[0];
+	  const statusCode = selectedOption.getAttribute("data-status-code");
+	  document.getElementById("selectedStatusCode").value = statusCode;
+	});
+</script>
+	
  <script>
 	function deleteRow(button) {
 	    const tableBody = document.getElementById("voucherTableBody");
@@ -648,7 +682,7 @@
                 return false;
             });
         });
-		function viewData(value){
+		/*function viewData(value){
 				
 				 var row = jQuery(value).closest('tr');
 				 
@@ -694,7 +728,7 @@
 			                return false;
 			            });
 			        });
-			 }
+			 }*/
         </script>
         
 	<script>
@@ -708,21 +742,19 @@
 		        });
 		    });
 		    
-		 function viewData(value){
+		 function viewData(encodedRow){
+			const row = JSON.parse(decodeURIComponent(encodedRow));
+			console.log("Row id is ",row.id);
 			
-			 var row = jQuery(value).closest('tr');
-			 
-			 //var id = row[0].children[0].innerHTML;
-			 //var userDetailsId= row[0].children[1].innerHTML;
-			 var id = row.find('input[name="id"]').val();
-			    var userDetailsId = row.find('input[name="userDetailsId"]').val();
+			document.getElementById("employerCode").value = row.employerCode;
+			document.getElementById("Id").value = row.id;
+			
+			
+			document.getElementById("companyName").innerText = row.organizationName|| '-';
+			document.getElementById("contactName").innerText = row.name || '-';
+			document.getElementById("phone").innerText = row.mobile|| '-';
+			document.getElementById("email").innerText = row.email || '-';
 
-			    // Debugging output
-			    console.log("Extracted ID:", id, "Extracted userDetailsId:", userDetailsId);
-			    
-			    //alert("id = " + id + " userDetailsId = " + userDetailsId);
-			 //pupolateData(id,userDetailsId);
-			
 			 jQuery(document).ready(function($){
 		            var bsOverlay = $('.bs-canvas-overlay');
 		            $('[data-toggle="canvas"]').on('click', function(){
@@ -752,6 +784,7 @@
 		                return false;
 		            });
 		        });
+				getActivityTransactionlist(row.id);
 		 }
 		 
 		</script>
@@ -761,6 +794,11 @@
 
 
     <style>
+		th, td {
+		    white-space: nowrap;
+		    overflow: hidden;
+		    text-overflow: ellipsis;
+		  }
 		.d-flex.gap-2 > * {
 				  margin-right: 8px;
 				}

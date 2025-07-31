@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cotodel.crm.web.properties.ApplicationConstantConfig;
+import com.cotodel.crm.web.response.EmplActivityTransactionRequest;
 //import com.cotodel.crm.web.response.ActiveUserListClass;
 import com.cotodel.crm.web.response.EmployeeProfileRequest;
+import com.cotodel.crm.web.response.EmployerDetailsRequest;
 //import com.cotodel.crm.web.response.ErupiVoucherAmountRequest;
 //import com.cotodel.crm.web.response.ErupiVoucherCreateTransactionRequest;
 //import com.cotodel.crm.web.response.ErupiVoucherPurposeCodeRequest;
@@ -71,6 +73,106 @@ public class DashboardController extends CotoDelBaseController{
 		return profileRes;
 	}
 	
+	@GetMapping(value="/getstatusMaster")
+	public @ResponseBody String getstatusMaster(HttpServletRequest request, ModelMap model,Locale locale,
+			HttpSession session,EmployeeProfileRequest employeeProfileRequest) {
+			logger.info("getCompanyProfileStatus");	
+			String token = (String) session.getAttribute("crm");
+			String profileRes=null;
+		
+			try {
+				String json = EncryptionDecriptionUtil.convertToJson(employeeProfileRequest);
+
+				EncriptResponse jsonObject=EncryptionDecriptionUtil.encriptResponse(json, applicationConstantConfig.apiSignaturePublicPath);
+
+				String encriptResponse = companyService.getstatusMaster(tokengeneration.getToken(), jsonObject);
+
+	   
+				EncriptResponse userReqEnc =EncryptionDecriptionUtil.convertFromJson(encriptResponse, EncriptResponse.class);
+
+				profileRes =  EncryptionDecriptionUtil.decriptResponse(userReqEnc.getEncriptData(), userReqEnc.getEncriptKey(), applicationConstantConfig.apiSignaturePrivatePath);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	   
+		return profileRes;
+	}
+	@GetMapping(value="/getActivityTransactionlist")
+	public @ResponseBody String getActivityTransactionlist(HttpServletRequest request, ModelMap model,Locale locale,
+			HttpSession session,EmplActivityTransactionRequest emplActivityTransactionRequest) {
+			logger.info("getCompanyProfileStatus");	
+			String token = (String) session.getAttribute("crm");
+			String profileRes=null;
+		
+			try {
+				String json = EncryptionDecriptionUtil.convertToJson(emplActivityTransactionRequest);
+
+				EncriptResponse jsonObject=EncryptionDecriptionUtil.encriptResponse(json, applicationConstantConfig.apiSignaturePublicPath);
+
+				String encriptResponse = companyService.getActivityTransactionlist(tokengeneration.getToken(), jsonObject);
+
+	   
+				EncriptResponse userReqEnc =EncryptionDecriptionUtil.convertFromJson(encriptResponse, EncriptResponse.class);
+
+				profileRes =  EncryptionDecriptionUtil.decriptResponse(userReqEnc.getEncriptData(), userReqEnc.getEncriptKey(), applicationConstantConfig.apiSignaturePrivatePath);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	   
+		return profileRes;
+	}
+	@PostMapping(value="/addemplActivityTransaction")
+	public @ResponseBody String addemplActivityTransaction(HttpServletRequest request, ModelMap model,Locale locale,
+			HttpSession session,EmplActivityTransactionRequest emplActivityTransactionRequest) {
+			logger.info("activeInactiveVoucherAmount");	
+			String token = (String) session.getAttribute("crm");
+			String profileRes=null;
+		
+			try {
+				String json = EncryptionDecriptionUtil.convertToJson(emplActivityTransactionRequest);
+
+				EncriptResponse jsonObject=EncryptionDecriptionUtil.encriptResponse(json, applicationConstantConfig.apiSignaturePublicPath);
+
+				String encriptResponse = companyService.addemplActivityTransaction(tokengeneration.getToken(), jsonObject);
+
+	   
+				EncriptResponse userReqEnc =EncryptionDecriptionUtil.convertFromJson(encriptResponse, EncriptResponse.class);
+
+				profileRes =  EncryptionDecriptionUtil.decriptResponse(userReqEnc.getEncriptData(), userReqEnc.getEncriptKey(), applicationConstantConfig.apiSignaturePrivatePath);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	   
+		return profileRes;
+	}
+	@PostMapping(value="/updateEmployerDetailsByCrm")
+	public @ResponseBody String updateEmployerDetailsByCrm(HttpServletRequest request, ModelMap model,Locale locale,
+			HttpSession session,EmployerDetailsRequest employerDetailsRequest) {
+			logger.info("activeInactiveVoucherAmount");	
+			String token = (String) session.getAttribute("crm");
+			String profileRes=null;
+		
+			try {
+				String json = EncryptionDecriptionUtil.convertToJson(employerDetailsRequest);
+
+				EncriptResponse jsonObject=EncryptionDecriptionUtil.encriptResponse(json, applicationConstantConfig.apiSignaturePublicPath);
+
+				String encriptResponse = companyService.updateEmployerDetailsByCrm(tokengeneration.getToken(), jsonObject);
+
+	   
+				EncriptResponse userReqEnc =EncryptionDecriptionUtil.convertFromJson(encriptResponse, EncriptResponse.class);
+
+				profileRes =  EncryptionDecriptionUtil.decriptResponse(userReqEnc.getEncriptData(), userReqEnc.getEncriptKey(), applicationConstantConfig.apiSignaturePrivatePath);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	   
+		return profileRes;
+	}	
 //	@PostMapping(value="/activeInactiveVoucherAmount")
 //	public @ResponseBody String activeInactiveVoucherAmount(HttpServletRequest request, ModelMap model,Locale locale,
 //			HttpSession session,ErupiVoucherAmountRequest employeeProfileRequest) {

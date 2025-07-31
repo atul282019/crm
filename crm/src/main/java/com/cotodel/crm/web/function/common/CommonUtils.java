@@ -21,5 +21,12 @@ public interface CommonUtils {
 	public static String registerUserUrl = "/userServices/Api/add/saveEmployerOnBoardingDetails";
 	//get company details
 	public static String getEmployerList = "/userServices/Api/get/getEmployerList";
+	//for showing status in right side modal on dashboard
+	public static String getstatusMaster = "/erupicrm/Api/get/statusMaster";
 	
+	public static String updateEmployerDetailsByCrm = "/userServices/Api/update/updateEmployerDetailsByCrm";
+	
+	public static String addemplActivityTransaction = "/erupicrm/Api/add/emplActivityTransaction";
+	
+	public static String getActivityTransactionlist = "/erupicrm/Api/get/emplActivityTransList";
 }

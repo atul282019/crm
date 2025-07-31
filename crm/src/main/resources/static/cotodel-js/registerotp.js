@@ -197,21 +197,28 @@ function userRegistration() {
 
   document.getElementById("signinLoader").style.display = "flex";
 
-  const formData = new FormData(document.getElementById("fleetRegistration"));
+  /*const formData = new FormData(document.getElementById("fleetRegistration"));
   formData.append("name", name);
   formData.append("email", email);
   formData.append("mobile", mobile);
   formData.append("organizationName", orgname);
   formData.append("companyType", companyType);
-  formData.append("companySize", companySizeValue);
+  formData.append("companySize", companySizeValue);*/
  // formData.append("consent", privacyCheck);
 
   $.ajax({
     type: "POST",
     url: "/registerUser",
-    data: formData,
-    processData: false,
-    contentType: false,
+    data: { //"orgId": employerId,
+				"name":name,
+				"email":email,
+				"mobile":mobile,
+				"organizationName":orgname,
+				"companyType":companyType,
+				"companySize":companySizeValue,
+				
+			
+		},
     success: function (data) {
       const response = typeof data === 'string' ? JSON.parse(data) : data;
       document.getElementById("signinLoader").style.display = "none";

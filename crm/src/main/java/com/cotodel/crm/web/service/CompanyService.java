@@ -10,8 +10,12 @@ import com.cotodel.crm.web.util.EncriptResponse;
 public interface CompanyService {
 
 //	String saveCompany(String token, EncriptResponse employeeProfileRequest);
-
+	
 	String getEmployerList(String token, EncriptResponse employeeProfileRequest);
+	String getstatusMaster(String token, EncriptResponse employeeProfileRequest);
+	String getActivityTransactionlist(String token, EncriptResponse employeeProfileRequest);
+	String updateEmployerDetailsByCrm(String token, EncriptResponse jsonObject);
+	String addemplActivityTransaction(String token, EncriptResponse jsonObject);
 	//String getorgsubType(String token, EncriptResponse employeeProfileRequest);
 	//String getpayrollDetails(String token, EncriptResponse employeeProfileRequest);
 //
