@@ -5,7 +5,7 @@
 	
  <th:block th:include="fragments/headerlibs.html :: headerlibs"></th:block> 
 
-<body id="page-top" onload="autoFillEmployeeForm(),erupiVoucherCreateListLimit(),getVoucherTransactionList()">
+<body id="page-top" onload="autofillcompanyDetails(),getVoucherTransactionList()">
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -111,7 +111,7 @@
 														  
 														  <!-- Left: Username + Icon -->
 														  <div style="display: flex; align-items: center; margin-bottom: 20px;">
-															<h4 style="margin: 0;">Cotodel</h4>
+															<h4 style="margin: 0;" id="organizationName"></h4>
 														  </div>
 
 														  <!-- Right: Buttons 
@@ -139,23 +139,23 @@
 														<div class="col-12">
 	                                                        <div class="profile-info-wrap">
 	                                                            <div class="profile-info">
-	                                                                <label for="">Adimin Name</label>
-	                                                               <p id="designation"></p>
+	                                                                <label for="">Admin Name</label>
+	                                                               <p id="adminname"></p>
 	                                                            </div>
 	
 	                                                            <div class="profile-info">
-	                                                                <label for="">Emial</label>
-	                                                                <p id="depratment"></p>
+	                                                                <label for="">Email</label>
+	                                                                <p id="email"></p>
 	                                                            </div>
 	
 	                                                            <div class="profile-info">
 	                                                                <label for="">Mobile Number</label>
-	                                                                <p id="mngrName"></p>
+	                                                                <p id="mobno"></p>
 	                                                            </div>
 	
 	                                                            <div class="profile-info">
 	                                                                <label for="">Location</label>
-	                                                                <p id="empType"></p>
+	                                                                <p id="location"></p>
 	                                                            </div>
 	                                                        </div>
 	                                                    </div>
@@ -192,7 +192,7 @@
 										  <div class="d-flex flex-wrap justify-content-start align-items-center p-3 mb-4 gap-4" style="background-color: #e9f6f1; border-radius: 10px;">
 										    <div class="col-6">
 										      <div class="small" style="color: #2F945A;">Type of Services</div>
-										      <strong class="mt-2 d-block" style="color: #2F945A;">Fleet</strong>
+										      <strong class="mt-2 d-block" style="color: #2F945A;" id="companyType">Fleet</strong>
 										    </div>
 											<div class="col-6">
 											  <div class="small" style="color: #2F945A;">No. of Users</div>
@@ -207,13 +207,13 @@
 									      <div class="row">
 											<div class="col-6 mb-3">
 											  <div class="text-muted small">GST</div>
-											  <div class="mt-1" style="color: #1F212C;">07AAACZ4279R1ZF</div>
+											  <div class="mt-1" style="color: #1F212C;" id="gstn">07AAACZ4279R1ZF</div>
 											</div>
 
 
 									        <div class="col-6 mb-3">
 									          <div class="text-muted small">Legal Name Of Business</div>
-									          <div class="mt-1" style="color: #1F212C;">Cotodel Technologies Private Limited</div>
+									          <div class="mt-1" style="color: #1F212C;"id="lglnameofBusiness">Cotodel Technologies Private Limited</div>
 									        </div>
 
 									        <div class="col-6 mb-3">
@@ -222,34 +222,34 @@
 									        </div>
 									        <div class="col-6 mb-3">
 									          <div class="text-muted small">Organization Type</div>
-									          <div class="mt-1" style="color: #1F212C;">Private Limited Company</div>
+									          <div class="mt-1" style="color: #1F212C;" id="orgType">Private Limited Company</div>
 									        </div>
 
 									        <div class="col-6 mb-3">
 									          <div class="text-muted small">Address Field 1</div>
-									          <div class="mt-1" style="color: #1F212C;">Building Name: &amp; Building Number: Floor Number</div>
+									          <div class="mt-1" style="color: #1F212C;" id="address1">Building Name: &amp; Building Number: Floor Number</div>
 									        </div>
 									        <div class="col-6 mb-3">
 									          <div class="text-muted small">Address Field 2</div>
-									          <div class="mt-1" style="color: #1F212C;">Street Name: "Block A, Shivalik Colony, Malviya Nagar</div>
+									          <div class="mt-1" style="color: #1F212C;" id="address2">Street Name: "Block A, Shivalik Colony, Malviya Nagar</div>
 									        </div>
 
 									        <div class="col-6 mb-3">
 									          <div class="text-muted small">District Name</div>
-									          <div class="mt-1" style="color: #1F212C;">South Delhi</div>
+									          <div class="mt-1" style="color: #1F212C;" id="districtName">South Delhi</div>
 									        </div>
 									        <div class="col-6 mb-3">
 									          <div class="text-muted small">Pincode</div>
-									          <div class="mt-1" style="color: #1F212C;">110017</div>
+									          <div class="mt-1" style="color: #1F212C;" id="pincode">110017</div>
 									        </div>
 
 									        <div class="col-6 mb-3">
 									          <div class="text-muted small">State Name</div>
-									          <div class="mt-1" style="color: #1F212C;">Delhi</div>
+									          <div class="mt-1" style="color: #1F212C;" id="stateName">Delhi</div>
 									        </div>
 									        <div class="col-6 mb-3">
 									          <div class="text-muted small">Setup Date</div>
-									          <div class="mt-1" style="color: #1F212C;">20 June 2024</div>
+									          <div class="mt-1" style="color: #1F212C;" id="createdDate">20 June 2024</div>
 									        </div>
 									      </div>
 									    </div>
@@ -344,6 +344,58 @@
                 <!-- /.container-fluid -->
 
             </div>
+			<div class="row tab-pane fade" id="Transactions-History-section">
+				<div class="table-responsive">
+																  <table class="table table-reimbursements mb-0" id="vouchersTableTransactionList" style="border: 1px solid #EAF4EF; border-radius: 10px;font-size: 13px;">
+																	<thead>
+																      <tr>	
+																	  <th><input type="checkbox" id="checkAll" style="margin-left: 24px;"></th>						
+																	  <th>Date & Time<img src="img/Sorting-updown.svg" alt="sorting"></th>
+																      <th>Voucher ID<img src="img/Sorting-updown.svg" alt="sorting"></th>	
+																	  <th>Transaction RRN<img src="img/Sorting-updown.svg" alt="sorting"></th>
+																      <th>Name & Mobile #<img src="img/Sorting-updown.svg" alt="sorting"></th>
+																	  <th>Category<img src="img/Sorting-updown.svg" alt="sorting"></th>	
+																	  <th>Merchant Name<img src="img/Sorting-updown.svg" alt="sorting"></th>	
+																	  <th>Amount<img src="img/Sorting-updown.svg" alt="sorting"></th>	
+																	  <!--<th>Mode of Payment</th>-->
+																	  
+																      </tr>
+																    </thead>
+																    <tbody class="table-bordered" >
+																      <!--<tr>
+														       		  <td>21/04/2024<br>
+																		17:57:13</td>
+																	 <td>ICICI00001145781</td>
+																	 <td>
+																		CDL-0424-003
+																       </td>
+																	   <td>Deepak Kumar<br>9910318405</td>
+																	 <td><img src="img/fuel-grey.png" alt="tiffinbox" style="height:24px; width:24px; margin-right:10px;">Fuel
+																		</td>
+																		<td>Indian Oil</td>
+																		<td style="text-align: right;">16,890</td>
+																		
+																		
+																      </tr>							
+																	  <tr>
+															       		  <td>21/04/2024<br>
+																			17:57:13</td>
+																		 <td>ICICI00001145781</td>
+																		 <td>
+																			CDL-0424-003
+																	       </td>
+																		   <td>Atul Kumar<br>9910318405</td>
+																		 <td><img src="img/food-icon-grey.png" alt="tiffinbox" style="height:24px; width:24px; margin-right:10px;">Food
+																			</td>
+																			<td>Anna Dosa</td>
+																			<td style="text-align: right;">890</td>
+																			
+																			
+																	      </tr>		-->				
+																    </tbody>
+																  </table>
+																</div>	
+			</div>
             <!-- End of Main Content -->
         </div>
         <!-- End of Content Wrapper -->
@@ -373,7 +425,7 @@
 
     <!-- Page level custom scripts -->
     <script src="js/demo/datatables-demo.js"></script>
-	<script type="text/javascript" src="cotodel-js/Profile-Info.js"></script>
+	<script type="text/javascript" src="cotodel-js/companyprofile.js"></script>
 	
 	<style>
 		

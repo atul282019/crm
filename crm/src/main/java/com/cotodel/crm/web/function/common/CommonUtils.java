@@ -29,4 +29,8 @@ public interface CommonUtils {
 	public static String addemplActivityTransaction = "/erupicrm/Api/add/emplActivityTransaction";
 	
 	public static String getActivityTransactionlist = "/erupicrm/Api/get/emplActivityTransList";
+	//for getting employer details 
+	public static String getEmployerDetails = "/userServices/Api/get/getEmployerDetails";
+	
+	public static String  getVoucherTransactionList = "/empService/Api/get/erupiVoucherCreateListRedeem";
 }

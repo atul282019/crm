@@ -16,6 +16,7 @@ public interface CompanyService {
 	String getActivityTransactionlist(String token, EncriptResponse employeeProfileRequest);
 	String updateEmployerDetailsByCrm(String token, EncriptResponse jsonObject);
 	String addemplActivityTransaction(String token, EncriptResponse jsonObject);
+	String getEmployerDetails(String token, EncriptResponse jsonObject);
 	//String getorgsubType(String token, EncriptResponse employeeProfileRequest);
 	//String getpayrollDetails(String token, EncriptResponse employeeProfileRequest);
 //
@@ -33,6 +34,6 @@ public interface CompanyService {
 //
 //	String erupiVoucherCreateListLimit(String token, EncriptResponse jsonObject);
 //
-//	String getVoucherTransactionList(String token, EncriptResponse jsonObject);
+	String getVoucherTransactionList(String token, EncriptResponse jsonObject);
 
 }

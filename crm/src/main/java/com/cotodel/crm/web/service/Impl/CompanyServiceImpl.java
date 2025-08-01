@@ -39,6 +39,10 @@ public class CompanyServiceImpl implements CompanyService{
 		return CommonUtility.userRequest(token,MessageConstant.gson.toJson(employeeProfileRequest), applicationConstantConfig.crmServiceBaseUrl+CommonUtils.getstatusMaster);
 	}
 	@Override
+	public String getEmployerDetails(String token, EncriptResponse jsonObject) {
+		return CommonUtility.userRequest(token,MessageConstant.gson.toJson(jsonObject), applicationConstantConfig.userServiceBaseUrl+CommonUtils.getEmployerDetails);
+	}
+	@Override
 	public String updateEmployerDetailsByCrm(String token, EncriptResponse jsonObject) {
 		return CommonUtility.userRequest(token,MessageConstant.gson.toJson(jsonObject), applicationConstantConfig.userServiceBaseUrl+CommonUtils.updateEmployerDetailsByCrm);
 	}
@@ -95,10 +99,10 @@ public class CompanyServiceImpl implements CompanyService{
 //		return CommonUtility.userRequest(token,MessageConstant.gson.toJson(jsonObject), applicationConstantConfig.employerServiceBaseUrl+CommonUtils.erupiVoucherCreateListLimit);
 //	}
 //
-//	@Override
-//	public String getVoucherTransactionList(String token, EncriptResponse jsonObject) {
-//		return CommonUtility.userRequest(token,MessageConstant.gson.toJson(jsonObject), applicationConstantConfig.employerServiceBaseUrl+CommonUtils.getVoucherTransactionList);
-//	}
+	@Override
+	public String getVoucherTransactionList(String token, EncriptResponse jsonObject) {
+		return CommonUtility.userRequest(token,MessageConstant.gson.toJson(jsonObject), applicationConstantConfig.employerServiceBaseUrl+CommonUtils.getVoucherTransactionList);
+	}
 //	
 
 }

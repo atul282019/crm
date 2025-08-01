@@ -93,7 +93,7 @@ function getActivityTransactionlist(Id) {
 		    <!-- First data row -->
 		    <div class="row mb-2">
 		      <div class="col-3">${itemDate || '-'}</div>
-		      <div class="col-6 text-center">${item.createdby || '-'}</div>
+		      <div class="col-6 text-center">${item.contactpersonName || '-'}</div>
 		      <div class="col-3 text-end">${item.deptName || '-'}</div>
 		    </div>
 
@@ -105,7 +105,7 @@ function getActivityTransactionlist(Id) {
 
 		    <!-- Second data row -->
 		    <div class="row mb-2">
-		      <div class="col-4">${item.assignedToMob || '-'}</div>
+		      <div class="col-4">${item.contactpersonMobile || '-'}</div>
 		      <div class="col-4 text-end">${item.remarks || '-'}</div>
 		    </div>
 		  </div>
@@ -124,11 +124,12 @@ function getActivityTransactionlist(Id) {
 }
 
 function addemplActivityTransaction() {
+	
 	//const employerId = document.getElementById("employerId").value;
 	const Id = document.getElementById("Id").value;
 	const employerCode = document.getElementById("employerCode").value;
 	const selectedStatusCode = document.getElementById("selectedStatusCode").value;
-	const ContactPersonNumb = document.getElementById("ContactPersonNumb").value;
+	const ContactPersonName = document.getElementById("ContactPersonName").value;
 	const remarksText = document.getElementById("remarksText").value;
 	const createdby = document.getElementById("createdBy").value;
 	const Department = document.getElementById("Department").value;
@@ -136,6 +137,7 @@ function addemplActivityTransaction() {
 	const leadType = document.getElementById("leadType").value;
 	 const activityStatusSelect = document.getElementById("activityStatus");
 	 const activityStatus = activityStatusSelect.options[activityStatusSelect.selectedIndex].text;
+	 const ContactPersonNumb = document.getElementById("ContactPersonNumb").value;
 	
 	
 	if (assignedTo === "" ) 
@@ -153,6 +155,7 @@ function addemplActivityTransaction() {
 		        document.getElementById("commonError").textContent = "Please select Status";
 		        return false;
 	    }
+		document.getElementById("submitBtn").disabled = true;
   $.ajax({
     type: "POST",
     url: "/addemplActivityTransaction",
@@ -160,7 +163,8 @@ function addemplActivityTransaction() {
 			"orgId":Id,
 			"employerCode":employerCode,
 			"activityStatusCode":selectedStatusCode,
-			"assignedToMob":ContactPersonNumb,
+			"contactpersonName":ContactPersonName,
+			"contactpersonMobile":ContactPersonNumb,
 			"remarks":remarksText,
 			"createdby":createdby,
 			"deptName":Department,
@@ -191,8 +195,8 @@ function updateEmployerDetailsByCrm() {
    const leadType = document.getElementById("leadType").value;
    const activityStatusSelect = document.getElementById("activityStatus");
    const activityStatus = activityStatusSelect.options[activityStatusSelect.selectedIndex].text;
-   const ContactPersonNumb = document.getElementById("ContactPersonNumb").value;
-   /*const Department = document.getElementById("Department").value;
+   /*const ContactPersonNumb = document.getElementById("ContactPersonNumb").value;
+   const Department = document.getElementById("Department").value;
    const contactPersonName = document.getElementById("ContactPersonName").value;
    const remarksText = document.getElementById("remarksText").value;*/
    const followupDate = document.getElementById("followupDate").value;
@@ -205,7 +209,7 @@ function updateEmployerDetailsByCrm() {
 			"assignedToName":assignedTo,
 			"leadType":leadType,
 			"activityStatus":activityStatus,
-			"assignedToMob":ContactPersonNumb,
+			//"contactpersonMobile":ContactPersonNumb,
 			//"Department":Department,
 			//"contactPersonName":contactPersonName,
 			//"remarks":remarksText,
@@ -219,6 +223,7 @@ function updateEmployerDetailsByCrm() {
         response = JSON.parse(response);
 
         if (response.status === true) {
+			
 			setTimeout(function() {
 								       window.location.href="/dashboard";
 								   }, 1500); // 1500ms = 1.5 seconds
@@ -312,6 +317,7 @@ async function getEmployerList1() {
 }
 
 async function getEmployerList() {
+	document.getElementById("submitBtn").disabled = false;
   $.ajax({
     type: "GET",
     url: "/getEmployerList",
@@ -345,7 +351,8 @@ async function getEmployerList() {
             mData: null,
             mRender: function (data, type, row) {
               const orgName = row.organizationName || '';
-              return `<a href="/companyprofile" class="text-primary">${orgName}</a>`;
+			  const employerId = row.id || '';
+              return `<a href="/companyprofile?employerId=${employerId}" class="text-primary">${orgName}</a>`;
             }
           },
           { mData: "name" },

@@ -20,6 +20,7 @@ import com.cotodel.crm.web.response.EmplActivityTransactionRequest;
 //import com.cotodel.crm.web.response.ActiveUserListClass;
 import com.cotodel.crm.web.response.EmployeeProfileRequest;
 import com.cotodel.crm.web.response.EmployerDetailsRequest;
+import com.cotodel.crm.web.response.ErupiVoucherCreateTransactionRequest;
 //import com.cotodel.crm.web.response.ErupiVoucherAmountRequest;
 //import com.cotodel.crm.web.response.ErupiVoucherCreateTransactionRequest;
 //import com.cotodel.crm.web.response.ErupiVoucherPurposeCodeRequest;
@@ -172,6 +173,32 @@ public class DashboardController extends CotoDelBaseController{
 			}
 	   
 		return profileRes;
+	}
+	
+	@PostMapping(value="/getEmployerDetails")
+	public @ResponseBody String getEmployerDetails(HttpServletRequest request, ModelMap model,Locale locale,
+			HttpSession session,EmployerDetailsRequest employerDetailsRequest) {
+			logger.info("activeInactiveVoucherAmount");	
+			String token = (String) session.getAttribute("crm");
+			String profileRes=null;
+		
+			try {
+				String json = EncryptionDecriptionUtil.convertToJson(employerDetailsRequest);
+
+				EncriptResponse jsonObject=EncryptionDecriptionUtil.encriptResponse(json, applicationConstantConfig.apiSignaturePublicPath);
+
+				String encriptResponse = companyService.getEmployerDetails(tokengeneration.getToken(), jsonObject);
+
+	   
+				EncriptResponse userReqEnc =EncryptionDecriptionUtil.convertFromJson(encriptResponse, EncriptResponse.class);
+
+				profileRes =  EncryptionDecriptionUtil.decriptResponse(userReqEnc.getEncriptData(), userReqEnc.getEncriptKey(), applicationConstantConfig.apiSignaturePrivatePath);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	   
+		return profileRes;
 	}	
 //	@PostMapping(value="/activeInactiveVoucherAmount")
 //	public @ResponseBody String activeInactiveVoucherAmount(HttpServletRequest request, ModelMap model,Locale locale,
@@ -275,29 +302,29 @@ public class DashboardController extends CotoDelBaseController{
 //		return profileRes;
 //	}
 //	
-//	@PostMapping(value="/getVoucherTransactionList")
-//	public @ResponseBody String getVoucherTransactionList(HttpServletRequest request, ModelMap model,Locale locale,
-//			HttpSession session,ErupiVoucherCreateTransactionRequest employeeProfileRequest) {
-//			logger.info("ErupiVoucherCreateTransactionRequest");	
-//			String token = (String) session.getAttribute("crm");
-//			String profileRes=null;
-//		
-//			try {
-//				String json = EncryptionDecriptionUtil.convertToJson(employeeProfileRequest);
-//
-//				EncriptResponse jsonObject=EncryptionDecriptionUtil.encriptResponse(json, applicationConstantConfig.apiSignaturePublicPath);
-//
-//				String encriptResponse = companyService.getVoucherTransactionList(tokengeneration.getToken(), jsonObject);
-//				EncriptResponse userReqEnc =EncryptionDecriptionUtil.convertFromJson(encriptResponse, EncriptResponse.class);
-//
-//				profileRes =  EncryptionDecriptionUtil.decriptResponse(userReqEnc.getEncriptData(), userReqEnc.getEncriptKey(), applicationConstantConfig.apiSignaturePrivatePath);
-//			} catch (Exception e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//	   
-//		return profileRes;
-//	}
+	@PostMapping(value="/getVoucherTransactionList")
+	public @ResponseBody String getVoucherTransactionList(HttpServletRequest request, ModelMap model,Locale locale,
+			HttpSession session,ErupiVoucherCreateTransactionRequest employeeProfileRequest) {
+			logger.info("ErupiVoucherCreateTransactionRequest");	
+			String token = (String) session.getAttribute("crm");
+			String profileRes=null;
+		
+			try {
+				String json = EncryptionDecriptionUtil.convertToJson(employeeProfileRequest);
+
+				EncriptResponse jsonObject=EncryptionDecriptionUtil.encriptResponse(json, applicationConstantConfig.apiSignaturePublicPath);
+
+				String encriptResponse = companyService.getVoucherTransactionList(tokengeneration.getToken(), jsonObject);
+				EncriptResponse userReqEnc =EncryptionDecriptionUtil.convertFromJson(encriptResponse, EncriptResponse.class);
+
+				profileRes =  EncryptionDecriptionUtil.decriptResponse(userReqEnc.getEncriptData(), userReqEnc.getEncriptKey(), applicationConstantConfig.apiSignaturePrivatePath);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	   
+		return profileRes;
+	}
 //	
 //	
 }
