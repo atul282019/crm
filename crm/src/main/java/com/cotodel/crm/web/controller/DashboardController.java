@@ -28,6 +28,8 @@ import com.cotodel.crm.web.service.CompanyService;
 import com.cotodel.crm.web.service.Impl.TokenGenerationImpl;
 import com.cotodel.crm.web.util.EncriptResponse;
 import com.cotodel.crm.web.util.EncryptionDecriptionUtil;
+import com.cotodel.crm.web.response.ErupiTicketSaveRequest;
+import com.cotodel.crm.web.service.TicketSupportService;
 
 @Controller
 @CrossOrigin
@@ -41,6 +43,9 @@ public class DashboardController extends CotoDelBaseController{
 	
 	@Autowired
 	CompanyService companyService;
+	
+	@Autowired
+	public TicketSupportService ticketSupportService;
 
 	@Autowired
 	TokenGenerationImpl tokengeneration;
@@ -199,7 +204,29 @@ public class DashboardController extends CotoDelBaseController{
 			}
 	   
 		return profileRes;
-	}	
+	}
+	@GetMapping(value = "/getTicketListForAction")
+	public @ResponseBody String getTicketListForAction(HttpServletRequest request, ModelMap model, Locale locale,
+			HttpSession session, ErupiTicketSaveRequest erupiTicketSaveRequest) {
+		String profileRes = null;
+		
+		try {
+			String json = EncryptionDecriptionUtil.convertToJson(erupiTicketSaveRequest);
+
+			EncriptResponse jsonObject=EncryptionDecriptionUtil.encriptResponse(json, applicationConstantConfig.apiSignaturePublicPath);
+
+			String encriptResponse =  ticketSupportService.getTicketListForAction(tokengeneration.getToken(), jsonObject);
+  
+			EncriptResponse userReqEnc =EncryptionDecriptionUtil.convertFromJson(encriptResponse, EncriptResponse.class);
+
+			profileRes =  EncryptionDecriptionUtil.decriptResponse(userReqEnc.getEncriptData(), userReqEnc.getEncriptKey(), applicationConstantConfig.apiSignaturePrivatePath);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+   
+    	return profileRes;
+	}
 //	@PostMapping(value="/activeInactiveVoucherAmount")
 //	public @ResponseBody String activeInactiveVoucherAmount(HttpServletRequest request, ModelMap model,Locale locale,
 //			HttpSession session,ErupiVoucherAmountRequest employeeProfileRequest) {

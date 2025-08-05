@@ -141,3 +141,221 @@ function autofillcompanyDetails() {
 			        }
 			    });
 			}
+			async function getSupportTicketActionList() {
+			  var orgId = document.getElementById("employerId").value;
+			  //document.getElementById("signinLoader").style.display="flex";
+			  $.ajax({
+			    type: "GET",
+			    url: "/getTicketListForAction",
+			    data: {
+			      orgId: orgId
+			    },
+			    beforeSend: function (xhr) {},
+			    success: function (data) {
+				  //document.getElementById("signinLoader").style.display="none";
+			      const data1 = jQuery.parseJSON(data);
+			   		var data2 = data1.data;
+			      $('#TicketSupportActionTable').DataTable({
+			        destroy: true,
+			        responsive: true,
+			        searching: false,
+			        bInfo: false,
+			        paging: false,
+			        lengthChange: true,
+			        autoWidth: false,
+			        pagingType: "full_numbers",
+			        pageLength: 50,
+			        buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"],
+			        language: { emptyTable: "No Tickets Found" },
+			        aaData: data2,
+					aoColumns: [
+					 
+					  { mData: "ticketNo" },
+					 
+					 
+					  { mData: "subject" },
+					  { mData: "creationDate"},
+					  {
+					    mData: "status",
+					    render: function (data) {
+					      return data === 0 ? "Submitted" : "Closed";
+					    }
+					  },
+					 
+					 
+					]
+			      });
+			    },
+			    error: function (e) {
+			      alert('Failed to fetch JSON data' + e);
+			    }
+			  });
+			}
+			
+			async function getEmployeeOnboarding() {
+				//document.getElementById("signinLoader").style.display="flex";
+			   // var employeeId = document.getElementById("employeeId").value;
+			   var employeeId="";
+			    var employerId = document.getElementById("employerId").value;
+			    
+				const clientKey = "client-secret-key"; // Extra security measure
+			    const secretKey = "0123456789012345"; // SAME KEY AS BACKEND
+
+			    // Concatenate data (must match backend)
+			    const dataString = employerId+employeeId+clientKey+secretKey;
+
+			    // Generate SHA-256 hash
+			    const encoder = new TextEncoder();
+			    const data = encoder.encode(dataString);
+			    const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+			    const hashArray = Array.from(new Uint8Array(hashBuffer));
+			    const hashHex = hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
+				const requestData = {
+						employerId:employerId,
+						employeeId:employeeId,
+				        key: clientKey,  // Extra key for validation
+				        hash: hashHex
+				    };
+			    $.ajax({
+			        type: "POST",
+			        url: "/getEmployeeOnboarding",
+					contentType: "application/json",
+					data: JSON.stringify(requestData),
+			        beforeSend: function(xhr) {
+			            //xhr.setRequestHeader(header, token);
+			        },
+			        success: function(data) {
+						//document.getElementById("signinLoader").style.display="none";
+			            newData = data;
+			            console.log("Emp onboarding data", newData);
+			            var data1 = jQuery.parseJSON(newData);
+			            var data2 = data1.data;
+			            
+			            // Filter employees with status 1 (Active)
+			            var filteredData = data2.filter(function(employee) {
+			                return employee.status === 1;
+			            });
+						// Save Name and Mobile only for temporary session use
+			            const nameMobileOnly = filteredData.map(emp => ({
+			                name: emp.name,
+			                mobile: emp.mobile
+			            }));
+			            sessionStorage.setItem("nameMobileOnly", JSON.stringify(nameMobileOnly));
+			            
+			            var table = $('#employeeTable').DataTable({
+			                destroy: true,
+			                "responsive": true,
+			                searching: false,
+			                bInfo: false,
+			                paging: false,
+			                "lengthChange": true,
+			                "autoWidth": false,
+			                "pagingType": "full_numbers",
+			                "pageLength": 50,
+			                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+			                "language": {"emptyTable": "No Active Employees Found"},
+			                
+			                // Use the filtered data instead of original data
+			                "aaData": filteredData,
+			                "aoColumns": [
+			                    { "mData": null, "render": function(data, type, row, meta) { return meta.row + 1; } },
+			                    { "mData": "id", "render": function(data1, type, row) {
+			                        return '<input type="hidden" class="form-input" id="id" name="id" value="' + data1 + '">';
+			                    }},
+			                    { "mData": "userDetailsId", "render": function(data1, type, row) {
+			                        return '<input type="hidden" class="form-input" id="userDetailsId" name="userDetailsId" value="' + data1 + '">';
+			                    }},
+			                    { "mData": "name" },
+			                    { "mData": "mobile", "className": "text-left"},
+			                    { "mData": "email" , "className": "text-left"},
+			                    { "mData": "empOrCont" },
+			                    { "mData": "status", "render": function(data, type, row) {
+			                        return 'Active'; // Since we're only showing Active employees
+			                    }},
+			                   
+			                ]
+			            });
+			        },
+			        error: function(e) {
+			            alert('Failed to fetch JSON data' + e);
+			        }
+			    });
+			}
+
+			async function getLinkedBankDetail() {
+			   var employerid = document.getElementById("employerId").value;
+			    const clientKey = "client-secret-key"; 
+			    const secretKey = "0123456789012345"; 
+			    const dataString = employerid + clientKey + secretKey;
+
+			    // Generate SHA-256 hash
+			    const encoder = new TextEncoder();
+			    const data = encoder.encode(dataString);
+			    const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+			    const hashArray = Array.from(new Uint8Array(hashBuffer));
+			    const hashHex = hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
+
+			    $.ajax({
+			        type: "POST",
+			        url: "/getErupiLinkDlinkAccountDetail",
+			        data: {
+			            "orgId": employerid,
+			            "clientKey": clientKey,
+			            "hash": hashHex
+			        },
+			        success: function (data) {
+			            newData = data;
+			            var data1 = jQuery.parseJSON(newData);
+			            var data2 = data1.data;
+
+			            if (data2.length === 0) {
+			                $("#linkaccbankform").show();
+			                $("#linkedbnkacntsctn").hide();
+			            } else {
+			                $("#linkaccbankform").hide();
+			                $("#linkedbnkacntsctn").show();
+			            }
+
+			            const wrapper = document.getElementById('data-wrapper');
+			            wrapper.innerHTML = '';
+
+			            // Render only specific fields
+			            data1.data.forEach(item => {
+			                const container = document.createElement('div');
+			                container.className = 'data-container';
+
+			                const fieldsToDisplay = [
+			                    "bankName", "accountHolderName", "acNumber", "accountType", "ifsc", 
+			                    "mobile", "merchentIid", "submurchentid", "payerva"
+			                ];
+
+			                const fieldLabels = {
+			                    bankName: "Bank Name",
+			                    accountHolderName: "Account Holder Name",
+			                    acNumber: "Account Number",
+			                    accountType: "Account Type",
+			                    ifsc: "IFSC",
+			                    mobile: "Mobile",
+			                    merchentIid: "Merchant Id",
+			                    submurchentid: "Sub Merchant Id",
+			                    payerva: "Payerva",
+			                };
+
+			                fieldsToDisplay.forEach(key => {
+			                    const fieldDiv = document.createElement('div');
+			                    fieldDiv.className = 'field';
+			                    fieldDiv.innerHTML = `<span class="label">${fieldLabels[key]}:</span> ${item[key] ?? 'N/A'}`;
+			                    container.appendChild(fieldDiv);
+			                });
+
+			                // ❌ Removed "Set As Primary" button
+			                // ❌ Removed "De-Link / Link Bank A/C" button
+
+			                wrapper.appendChild(container);
+			            });
+			        },
+			        error: function (e) {
+			            alert('Error: ' + e);
+			        }
+			    });
+			}

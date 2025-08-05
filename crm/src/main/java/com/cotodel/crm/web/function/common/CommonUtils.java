@@ -33,4 +33,10 @@ public interface CommonUtils {
 	public static String getEmployerDetails = "/userServices/Api/get/getEmployerDetails";
 	
 	public static String  getVoucherTransactionList = "/empService/Api/get/erupiVoucherCreateListRedeem";
+	
+	public static String getAdminTicketForAction = "/empService/Api/get/allTicketAdmin";
+
+	public static String getEmployeeOnboarding ="/empService/Api/get/empOnboardingList";
+	
+	public static String getErupiLinkAccountDetail  ="/empService/Api/get/erupiLinkAccountList";
 }
