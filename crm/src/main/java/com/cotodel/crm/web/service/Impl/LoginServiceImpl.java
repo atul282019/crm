@@ -36,6 +36,16 @@ public class LoginServiceImpl implements LoginService {
 	public ApplicationConstantConfig applicationConstantConfig;
 	
 	//private static final Logger logger = LogManager.getLogger(LoginServiceImpl.class);
+	@Override
+	public String sendWhatsupMessage(String token, EncriptResponse jsonObject) {
+		return CommonUtility.userRequest(token,MessageConstant.gson.toJson(jsonObject), applicationConstantConfig.userServiceBaseUrl+CommonUtils.sendWhatsApp);
+
+	}
+	
+	@Override
+	public String sendOtpWith2Factor(String token, EncriptResponse jsonObject) {
+		return CommonUtility.userRequest(token,MessageConstant.gson.toJson(jsonObject),  applicationConstantConfig.userServiceBaseUrl +CommonUtils.sendOtp2FactorWithTemplateId);
+	}
 	
 	@Override
 	public String sendOtp(String token, EncriptResponse userForm) {	

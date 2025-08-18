@@ -5,6 +5,7 @@ import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,15 +17,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cotodel.crm.web.properties.ApplicationConstantConfig;
+import com.cotodel.crm.web.response.ActivateEmployer;
 import com.cotodel.crm.web.response.EmplActivityTransactionRequest;
 //import com.cotodel.crm.web.response.ActiveUserListClass;
 import com.cotodel.crm.web.response.EmployeeProfileRequest;
 import com.cotodel.crm.web.response.EmployerDetailsRequest;
 import com.cotodel.crm.web.response.ErupiVoucherCreateTransactionRequest;
+import com.cotodel.crm.web.response.UserForm;
+import com.cotodel.crm.web.response.WhatsAppRequest;
 //import com.cotodel.crm.web.response.ErupiVoucherAmountRequest;
 //import com.cotodel.crm.web.response.ErupiVoucherCreateTransactionRequest;
 //import com.cotodel.crm.web.response.ErupiVoucherPurposeCodeRequest;
 import com.cotodel.crm.web.service.CompanyService;
+import com.cotodel.crm.web.service.LoginService;
+import com.cotodel.crm.web.service.Impl.EmailServiceImpl;
 import com.cotodel.crm.web.service.Impl.TokenGenerationImpl;
 import com.cotodel.crm.web.util.EncriptResponse;
 import com.cotodel.crm.web.util.EncryptionDecriptionUtil;
@@ -43,6 +49,11 @@ public class DashboardController extends CotoDelBaseController{
 	
 	@Autowired
 	CompanyService companyService;
+	@Autowired
+	LoginService loginservice;
+	
+	@Autowired
+	EmailServiceImpl emailService;
 	
 	@Autowired
 	public TicketSupportService ticketSupportService;
@@ -354,4 +365,106 @@ public class DashboardController extends CotoDelBaseController{
 	}
 //	
 //	
+	
+	@PostMapping(value="/activateEmployer")
+	public @ResponseBody String activateEmployer(HttpServletRequest request, ActivateEmployer employerDetailsRequest) {
+	    String profileRes = null;
+	    JSONObject profileJsonRes = null;
+	    // String captchaSecurity = "";
+	    JSONObject responseJson = new JSONObject();
+
+	    // captchaSecurity = (String) session.getAttribute("CAPTCHA");
+	    // if(request.getSession(true).getAttribute("CAPTCHA") != null){
+	    //     captchaSecurity = (String) request.getSession(true).getAttribute("CAPTCHA");
+	    // }
+
+	    // logger.info("Session Captcha==" + captchaSecurity);
+	    // logger.info("User Enter Captcha==" + userForm.getCaptcha());
+
+	    try {
+	        // if (validateCaptcha(request, userForm.getCaptcha(), captchaSecurity)) {
+	        // --- CAPTCHA check is disabled, proceeding without validation ---
+
+	        // 1 - convert object to json string
+	        String json = EncryptionDecriptionUtil.convertToJson(employerDetailsRequest);
+
+	        // 2 - json string data encrypt
+	        EncriptResponse jsonObject = EncryptionDecriptionUtil.encriptResponse(json, applicationConstantConfig.apiSignaturePublicPath);
+
+	        String encriptResponse = companyService.activateEmployer(tokengeneration.getToken(), jsonObject);
+
+	        // 3 - decrypt data convert to object            
+	        EncriptResponse userReqEnc = EncryptionDecriptionUtil.convertFromJson(encriptResponse, EncriptResponse.class);
+
+	        // 4 - object data decrypt to json
+	        profileRes = EncryptionDecriptionUtil.decriptResponse(userReqEnc.getEncriptData(), userReqEnc.getEncriptKey(), applicationConstantConfig.apiSignaturePrivatePath);
+	        profileJsonRes = new JSONObject(profileRes);
+
+	        if (profileJsonRes.getBoolean("status")) {
+	            // loginservice.sendEmailToEmployee(userForm);
+	        	
+                // Start SMS and Email service
+                UserForm userForm = new UserForm();
+                userForm.setMobile(employerDetailsRequest.getMobile());
+                userForm.setTemplate("Cotodel Voucher Activity");
+                try {
+                String userFormjson = EncryptionDecriptionUtil.convertToJson(userForm);
+
+    			EncriptResponse userFormjsonObject=EncryptionDecriptionUtil.encriptResponse(userFormjson, applicationConstantConfig.apiSignaturePublicPath);
+
+    			String encriptResponse1 = loginservice.sendOtpWith2Factor(tokengeneration.getToken(), userFormjsonObject);
+
+       
+    			EncriptResponse userFornReqEnc =EncryptionDecriptionUtil.convertFromJson(encriptResponse1, EncriptResponse.class);
+
+    			String smsResponse =  EncryptionDecriptionUtil.decriptResponse(userFornReqEnc.getEncriptData(), userFornReqEnc.getEncriptKey(), applicationConstantConfig.apiSignaturePrivatePath);
+    			String emailRequest =	emailService.sendEmail(employerDetailsRequest.getEmail());
+    			
+    			WhatsAppRequest whatsapp = new WhatsAppRequest();
+                whatsapp.setSource("new-landing-page form");
+                whatsapp.setCampaignName("Voucher_Issuance");
+                whatsapp.setFirstName(employerDetailsRequest.getName());
+                //whatsapp.setAmount(Integer.toString(root.data.order.order_amount));
+                //whatsapp.setCategory(item.getVoucherDesc());
+                whatsapp.setMobile(employerDetailsRequest.getMobile());
+                whatsapp.setOrganizationName("Cotodel");
+                //whatsapp.setValidity(item.getValidity());
+                //whatsapp.setType(item.getRedemtionType());
+                whatsapp.setUserName("Cotodel Communications");
+    			String whatsappJson = EncryptionDecriptionUtil.convertToJson(whatsapp);
+
+    			EncriptResponse whatsappJsonObject=EncryptionDecriptionUtil.encriptResponse(whatsappJson, applicationConstantConfig.apiSignaturePublicPath);
+
+    			String whatsappEncriptResponse =  loginservice.sendWhatsupMessage(tokengeneration.getToken(), whatsappJsonObject);
+       
+    			EncriptResponse whatsappReqEnc =EncryptionDecriptionUtil.convertFromJson(whatsappEncriptResponse, EncriptResponse.class);
+
+    			String whatsappRes =  EncryptionDecriptionUtil.decriptResponse(whatsappReqEnc.getEncriptData(), whatsappReqEnc.getEncriptKey(), applicationConstantConfig.apiSignaturePrivatePath);
+
+    			
+                } catch (Exception e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		}
+	        	
+	        	
+	        }
+
+	        return profileRes;
+
+	        // } else {
+	        //     responseJson.put("status", false);
+	        //     responseJson.put("message", "Wrong captcha entered");
+	        //     System.out.println("Inside wrong captcha");
+	        // }
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        responseJson.put("status", false);
+	        responseJson.put("message", "An error occurred while processing the request");
+	    }
+
+	    return responseJson.toString();
+	}
+
 }

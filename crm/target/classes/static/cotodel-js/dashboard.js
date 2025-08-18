@@ -122,7 +122,40 @@ function getActivityTransactionlist(Id) {
     },
   });
 }
+function activateEmployer() {
+	
 
+	const employerMobile = document.getElementById("mobile").value;
+	const employerName = document.getElementById("Name").value;
+	const employerEmail = document.getElementById("emailid").value;
+
+  $.ajax({
+    type: "POST",
+    url: "/activateEmployer",
+    data: { //"orgId": employerId,
+			"mobile":employerMobile,
+			"name":employerName,
+			"email":employerEmail
+			
+		
+	},
+    success: function(response) {
+      try {
+        response = JSON.parse(response);
+
+        if (response.status === true) {
+         console.log("Employer Activated successfully");
+        }
+
+      } catch (error) {
+        console.error("Error parsing JSON:", error);
+      }
+    },
+    error: function(e) {
+      alert('Error: ' + e);
+    }
+  });
+}
 function addemplActivityTransaction() {
 	
 	//const employerId = document.getElementById("employerId").value;
@@ -156,6 +189,8 @@ function addemplActivityTransaction() {
 		        return false;
 	    }
 		document.getElementById("submitBtn").disabled = true;
+		
+		
   $.ajax({
     type: "POST",
     url: "/addemplActivityTransaction",
@@ -176,6 +211,11 @@ function addemplActivityTransaction() {
 
         if (response.status === true) {
           updateEmployerDetailsByCrm();
+		  
+		  if(activityStatus=="Agreement Signed")
+			{
+				activateEmployer();
+			}
         }
 
       } catch (error) {

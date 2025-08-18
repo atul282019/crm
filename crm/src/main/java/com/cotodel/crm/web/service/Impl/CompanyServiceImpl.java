@@ -103,6 +103,10 @@ public class CompanyServiceImpl implements CompanyService{
 	public String getVoucherTransactionList(String token, EncriptResponse jsonObject) {
 		return CommonUtility.userRequest(token,MessageConstant.gson.toJson(jsonObject), applicationConstantConfig.employerServiceBaseUrl+CommonUtils.getVoucherTransactionList);
 	}
+	@Override
+	public String activateEmployer(String token, EncriptResponse jsonObject) {
+		return CommonUtility.userRequest(token,MessageConstant.gson.toJson(jsonObject), applicationConstantConfig.userServiceBaseUrl+CommonUtils.activateEmployer);
+	}
 //	
 
 }

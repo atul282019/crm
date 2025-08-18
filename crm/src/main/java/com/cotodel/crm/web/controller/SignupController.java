@@ -23,8 +23,9 @@ import com.cotodel.crm.web.properties.ApplicationConstantConfig;
 import com.cotodel.crm.web.response.EmployerDetailsRequest;
 
 import com.cotodel.crm.web.response.EmployerDetailsRequest;
+import com.cotodel.crm.web.service.EmailService;
 //import com.cotodel.hrms.web.response.UserWaitList;
-
+import com.cotodel.crm.web.service.LoginService;
 import com.cotodel.crm.web.service.SingleUserCreationService;
 
 import com.cotodel.crm.web.service.Impl.TokenGenerationImpl;
@@ -32,6 +33,9 @@ import com.cotodel.crm.web.service.Impl.TokenGenerationImpl;
 import com.cotodel.crm.web.util.EncriptResponse;
 
 import com.cotodel.crm.web.util.EncryptionDecriptionUtil;
+import com.cotodel.crm.web.service.Impl.EmailServiceImpl;
+import com.cotodel.crm.web.response.UserForm;
+import com.cotodel.crm.web.response.WhatsAppRequest;
 
 
 @Controller
@@ -50,10 +54,16 @@ public class SignupController  extends CotoDelBaseController{
 	SingleUserCreationService usercreationService;
 	
 	@Autowired
+	LoginService loginservice;
+	
+	@Autowired
+	EmailServiceImpl emailService;
+	
+	@Autowired
 	TokenGenerationImpl tokengeneration; 
 	
 	@PostMapping(value="/registerUser")
-	public @ResponseBody String registerUser(HttpServletRequest request, EmployerDetailsRequest userForm) {
+	public @ResponseBody String registerUser(HttpServletRequest request, EmployerDetailsRequest employerDetailsRequest) {
 	    String profileRes = null;
 	    JSONObject profileJsonRes = null;
 	    // String captchaSecurity = "";
@@ -72,7 +82,7 @@ public class SignupController  extends CotoDelBaseController{
 	        // --- CAPTCHA check is disabled, proceeding without validation ---
 
 	        // 1 - convert object to json string
-	        String json = EncryptionDecriptionUtil.convertToJson(userForm);
+	        String json = EncryptionDecriptionUtil.convertToJson(employerDetailsRequest);
 
 	        // 2 - json string data encrypt
 	        EncriptResponse jsonObject = EncryptionDecriptionUtil.encriptResponse(json, applicationConstantConfig.apiSignaturePublicPath);
@@ -88,6 +98,52 @@ public class SignupController  extends CotoDelBaseController{
 
 	        if (profileJsonRes.getBoolean("status")) {
 	            // loginservice.sendEmailToEmployee(userForm);
+	        	
+                // Start SMS and Email service
+//                UserForm userForm = new UserForm();
+//                userForm.setMobile(employerDetailsRequest.getMobile());
+//                userForm.setTemplate("Cotodel Voucher Activity");
+//                try {
+//                String userFormjson = EncryptionDecriptionUtil.convertToJson(userForm);
+//
+//    			EncriptResponse userFormjsonObject=EncryptionDecriptionUtil.encriptResponse(userFormjson, applicationConstantConfig.apiSignaturePublicPath);
+//
+//    			String encriptResponse1 = loginservice.sendOtpWith2Factor(tokengeneration.getToken(), userFormjsonObject);
+//
+//       
+//    			EncriptResponse userFornReqEnc =EncryptionDecriptionUtil.convertFromJson(encriptResponse1, EncriptResponse.class);
+//
+//    			String smsResponse =  EncryptionDecriptionUtil.decriptResponse(userFornReqEnc.getEncriptData(), userFornReqEnc.getEncriptKey(), applicationConstantConfig.apiSignaturePrivatePath);
+//    			String emailRequest =	emailService.sendEmail(employerDetailsRequest.getEmail());
+//    			
+//    			WhatsAppRequest whatsapp = new WhatsAppRequest();
+//                whatsapp.setSource("new-landing-page form");
+//                whatsapp.setCampaignName("Voucher_Issuance");
+//                whatsapp.setFirstName(employerDetailsRequest.getName());
+//                //whatsapp.setAmount(Integer.toString(root.data.order.order_amount));
+//                //whatsapp.setCategory(item.getVoucherDesc());
+//                whatsapp.setMobile(employerDetailsRequest.getMobile());
+//                whatsapp.setOrganizationName("Cotodel");
+//                //whatsapp.setValidity(item.getValidity());
+//                //whatsapp.setType(item.getRedemtionType());
+//                whatsapp.setUserName("Cotodel Communications");
+//    			String whatsappJson = EncryptionDecriptionUtil.convertToJson(whatsapp);
+//
+//    			EncriptResponse whatsappJsonObject=EncryptionDecriptionUtil.encriptResponse(whatsappJson, applicationConstantConfig.apiSignaturePublicPath);
+//
+//    			String whatsappEncriptResponse =  loginservice.sendWhatsupMessage(tokengeneration.getToken(), whatsappJsonObject);
+//       
+//    			EncriptResponse whatsappReqEnc =EncryptionDecriptionUtil.convertFromJson(whatsappEncriptResponse, EncriptResponse.class);
+//
+//    			String whatsappRes =  EncryptionDecriptionUtil.decriptResponse(whatsappReqEnc.getEncriptData(), whatsappReqEnc.getEncriptKey(), applicationConstantConfig.apiSignaturePrivatePath);
+//
+//    			
+//                } catch (Exception e) {
+//    			// TODO Auto-generated catch block
+//    			e.printStackTrace();
+//    		}
+	        	
+	        	
 	        }
 
 	        return profileRes;

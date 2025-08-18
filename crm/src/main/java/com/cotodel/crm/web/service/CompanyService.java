@@ -35,5 +35,6 @@ public interface CompanyService {
 //	String erupiVoucherCreateListLimit(String token, EncriptResponse jsonObject);
 //
 	String getVoucherTransactionList(String token, EncriptResponse jsonObject);
+	String activateEmployer(String token, EncriptResponse jsonObject);
 
 }

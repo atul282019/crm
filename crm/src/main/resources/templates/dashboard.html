@@ -96,6 +96,9 @@
 						<input type="hidden" id="Id">
 						<input type="hidden" id="employerCode">
 						<input type="hidden" id="selectedStatusCode">
+						<input type="hidden" id="mobile" name="mobile">
+						<input type="hidden" id="Name" name="Name">
+						<input type="hidden" id="emailid" name="emailid">
 						
 						<!-- Flex container for nav, search, and button -->
 				       <div class="d-flex justify-content-between align-items-center flex-wrap ">
@@ -752,8 +755,14 @@
 			
 			document.getElementById("companyName").innerText = row.organizationName|| '-';
 			document.getElementById("contactName").innerText = row.name || '-';
+			
 			document.getElementById("phone").innerText = row.mobile|| '-';
 			document.getElementById("email").innerText = row.email || '-';
+			
+			
+			document.getElementById("Name").value = row.name ;
+			document.getElementById("mobile").value = row.mobile;
+			document.getElementById("emailid").value = row.email;
 
 			 jQuery(document).ready(function($){
 		            var bsOverlay = $('.bs-canvas-overlay');

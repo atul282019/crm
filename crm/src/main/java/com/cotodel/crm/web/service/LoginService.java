@@ -16,5 +16,8 @@ public interface LoginService {
 	String getReputeToken(String token, EncriptResponse jsonObjectRepute);
 	String otpWithOutRegister(String token, EncriptResponse jsonObject);
 	String verifyOtpWithOutRegister(String token, EncriptResponse jsonObject);
+	String sendOtpWith2Factor(String token, EncriptResponse jsonObject);
+	String sendWhatsupMessage(String token, EncriptResponse jsonObject);
+	
 
 }

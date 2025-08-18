@@ -39,4 +39,12 @@ public interface CommonUtils {
 	public static String getEmployeeOnboarding ="/empService/Api/get/empOnboardingList";
 	
 	public static String getErupiLinkAccountDetail  ="/empService/Api/get/erupiLinkAccountList";
+	
+	public static String sendOtp2FactorWithTemplateId = "/userServices/Api/get/sendOtp";
+	
+	public static String sendWhatsApp ="/userServices/Api/get/sendWhatsApp";
+	
+	public static String  activateEmployer = "/userServices/Api/update/userActive";
+	
+	
 }

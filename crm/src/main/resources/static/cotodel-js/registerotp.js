@@ -228,7 +228,7 @@ function userRegistration() {
         document.getElementById("otmsgdiv").style.display = "block";
         $('#otmsgdiv').delay(5000).fadeOut(400);
         localStorage.setItem("userName", mobile);
-        window.location.href = "/signin";
+        window.location.href = "/dashboard";
       } else {
         document.getElementById("otfailmsg").innerHTML = response.message;
         document.getElementById("otfailmsgDiv").style.display = "block";
