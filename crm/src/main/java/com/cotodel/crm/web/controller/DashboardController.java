@@ -406,7 +406,8 @@ public class DashboardController extends CotoDelBaseController{
                 // Start SMS and Email service
                 UserForm userForm = new UserForm();
                 userForm.setMobile(employerDetailsRequest.getMobile());
-                userForm.setTemplate("Cotodel Voucher Activity");
+                //userForm.setTemplate("Cotodel Voucher Activity");
+                userForm.setTemplate("Welcome Message User SignUp");
                 try {
                 String userFormjson = EncryptionDecriptionUtil.convertToJson(userForm);
 
